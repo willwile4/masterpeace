@@ -16,7 +16,7 @@ TEXT_TYPES = [('POETRY', 'poetry'),
 
 
 # Create your models here.
-class Messages(models.Model):
+class Message(models.Model):
     message_text = models.CharField(max_length=500)
     timestamp = models.DateTimeField(auto_now_add=True)
     has_seen = models.BooleanField(default=False)
@@ -32,7 +32,7 @@ class UserProfile(models.Model):
     dob = models.DateField(auto_now_add=False)
     allow_messages = models.BooleanField(default=False)
     followers = models.ManyToManyField('self', symmetrical=False)
-    messages = models.ManyToManyField(Messages)
+    messages = models.ManyToManyField(Message)
 
 
 class ImageMP(models.Model):

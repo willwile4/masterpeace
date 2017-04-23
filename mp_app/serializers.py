@@ -1,7 +1,5 @@
-from rest_framework import Response
 from rest_framework import serializers
-from .models import UserProfile, Messages, ImageMP, TextMP, ImageFeedback, TextFeedback,
-ImageTag, TextTag
+from .models import UserProfile, Message, ImageMP, TextMP, ImageFeedback, TextFeedback, ImageTag, TextTag
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -9,7 +7,7 @@ class MessageSerializer(serializers.ModelSerializer):
         extra_kwargs = {
 	           'message_text': {'write_only': True}
                 }
-        model = Messages
+        model = Message
         fields = ('message_text', 'timestamp', 'has_seen')
     # make message_text hidden!
 

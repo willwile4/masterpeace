@@ -15,10 +15,23 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-
 from mp_app import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'message', views.MessageViewSet)
+router.register(r'profile', views.UserProfileViewSet)
+router.register(r'image_mp', views.ImageMPViewSet)
+router.register(r'text_mp', views.TextMPViewSet)
+router.register(r'image_feedback', views.ImageFeedbackViewSet)
+router.register(r'text_feedback', views.TextFeedbackViewSet)
+router.register(r'image_tag', views.ImageTagViewSet)
+router.register(r'text_tag', views.TextTagViewSet)
+
 
 urlpatterns = [
-    url(r'^', views.index, name="index"),
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^$', views.index, name="index"),
     url(r'^admin/', admin.site.urls),
 ]

@@ -1,3 +1,11 @@
 from django.contrib import admin
+from .models import UserProfile, Message, ImageMP, TextMP, ImageFeedback, TextFeedback, ImageTag, TextTag
 
-# Register your models here.
+admin.site.register(Message)
+admin.site.register(UserProfile)
+admin.site.register(ImageMP)
+admin.site.register(TextMP)
+admin.site.register(ImageFeedback)
+admin.site.register(TextFeedback)
+admin.site.register(ImageTag)
+admin.site.register(TextTag)
