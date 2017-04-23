@@ -29,8 +29,8 @@ SECRET_KEY = 'ro^&4l_e^h8gw#=8yxcx($v%0)xrmg5(taiohjd_5ot2ia#cow'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1:8000',
-    'https://radiant-reef-31793.herokuapp.com/',
+    '127.0.0.1',
+    'https://masterpeace.herokuapp.com/',
 ]
 
 
