@@ -1,0 +1,20 @@
+
+{% load static %}
+<header id='nav'>
+
+  <div id='logo'>
+    <a href='/'>
+      <img src='{% static "base_images/logo.png" %}' alt='MasterPeace' height='42' width='124'/>
+    </a>
+  </div>
+
+  {% if user.is_authenticated %}
+  <div id='account'>
+    Welcome, {{user}} | <a class='navbutton' href='/logout'>Logout</a>
+  </div>
+  {% else %}
+  <div id='account'>
+    <a class='navbutton' href='/login'>Login</a> | <a class='navbutton' href='/signup'>Signup</a>
+  </div>
+  {% endif %}
+</header>

@@ -1,0 +1,28 @@
+header#nav{
+  height:40px;
+  overflow: hidden;
+  position: relative;
+  background-color: #327d6d;
+  text-align: center;
+}
+
+div#logo{
+  height: 40px;
+  float: left;
+  line-height: 40px;
+  display: inline-block;
+}
+
+div#account{
+  height: 40px;
+  line-height: 40px;
+  padding-right: 20px;
+  float: right;
+  vertical-align: middle;
+  font-weight: 100;
+  color: white;
+}
+
+body{
+  margin: 0;
+}

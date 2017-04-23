@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>MasterPeace</title>
+      {% load static %}
+      <meta charset="utf-8">
+      <title>{% block title %}MasterPeace{% endblock title %}</title>
+      <link rel="icon" href="{% static 'base_images/icon.png' %}" type="image/png" sizes="16x16">
+      {% block extra_head_content %}{% endblock %}
     </head>
-    <body>
-        hey everybody
 
+    <body>
+      {% block content %}
+      {% endblock %}
+
+
+      {% block javascript %}
+      {% endblock %}
     </body>
+
 </html>
