@@ -1,58 +1,70 @@
 from rest_framework import serializers
-from .models import UserProfile, Message, ImageMP, TextMP, ImageFeedback, TextFeedback, ImageTag, TextTag
+from .models import UserProfile, Message, ImageMP, TextMP, ImageFeedback, TextFeedback, ImageTag, TextTag, Artform
 
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         extra_kwargs = {
-	           'message_text': {'write_only': True}
+                'message_text': {'write_only': True}
                 }
         model = Message
-        fields = ('message_text', 'timestamp', 'has_seen')
+        fields = ('content', 'created', 'read', 'to_user', 'from_user')
     # make message_text hidden!
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    user = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='username'
+    )
+
     class Meta:
         extra_kwargs = {
-	           'dob': {'write_only': True}
-               }
+                        'dob': {'write_only': True}
+                        }
         model = UserProfile
-        fields = ('username', 'pic', 'bio', 'dob', 'fb_link', 'insta_link',
+        fields = ('user', 'pic', 'bio', 'dob', 'fb_link', 'insta_link',
                   'twitter_link', 'allow_messages', 'followers')
 
 
 class ImageMPSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageMP
-        fields = ('owner', 'allow_feedback', 'title', 'caption', 'image', 'created', 'updated', 'artform')
+        fields = ('tag', 'owner', 'allow_feedback', 'title', 'caption', 'image', 'created', 'updated', 'artform')
 
 
 class TextMPSerializer(serializers.ModelSerializer):
     class Meta:
         model = TextMP
-        fields = ('owner', 'allow_feedback', 'title', 'text', 'created', 'updated', 'artform')
+        fields = ('tag', 'owner', 'allow_feedback', 'title', 'text', 'created', 'updated', 'artform')
 
 
 class ImageFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageFeedback
-        fields = ('author', 'masterpeace', 'icon', 'has_seen')
+        fields = ('critic', 'masterpeace', 'icon', 'read', 'created')
 
 
 class TextFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = TextFeedback
-        fields = ('author', 'masterpeace', 'icon', 'has_seen')
+        fields = ('critic', 'masterpeace', 'icon', 'read', 'created')
 
 
 class ImageTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageTag
-        fields = ('title', 'image')
+        fields = ('title',)
 
 
 class TextTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = TextTag
-        fields = ('title', 'text')
+        fields = ('title',)
+
+
+class ArtformSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artform
+        fields = ('title',)

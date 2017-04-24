@@ -27,6 +27,9 @@ SECRET_KEY = 'ro^&4l_e^h8gw#=8yxcx($v%0)xrmg5(taiohjd_5ot2ia#cow'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+CORS_ORIGIN_ALLOW_ALL = True
+
+LOGIN_REDIRECT_URL = '/'
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -44,7 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken'
     "mp_app.apps.MpAppConfig",
+    'oauth2_provider',
+    'corsheaders'
 ]
 
 REST_FRAMEWORK = {
@@ -56,6 +62,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -93,7 +100,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'MasterPeace',
-        'USER': 'Friese',
+        'USER': 'willwarren',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',
@@ -165,7 +172,7 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "masterpeace.settings")
 
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
