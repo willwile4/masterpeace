@@ -101,7 +101,8 @@ class FeedbackType(models.Model):
 
 class ImageFeedback(models.Model):
     critic = models.ForeignKey(User, on_delete=models.CASCADE)
-    masterpeace = models.ForeignKey(ImageMP, on_delete=models.CASCADE)  # look into inheritence and polymorphism
+    masterpeace = models.ForeignKey(ImageMP, on_delete=models.CASCADE)
+    # look into inheritence and polymorphism
     icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE)
     read = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -112,7 +113,8 @@ class ImageFeedback(models.Model):
 
 class TextFeedback(models.Model):
     critic = models.ForeignKey(User, on_delete=models.CASCADE)
-    masterpeace = models.ForeignKey(TextMP, on_delete=models.CASCADE)  # look into inheritence and polymorphism
+    masterpeace = models.ForeignKey(TextMP, on_delete=models.CASCADE)
+    # look into inheritence and polymorphism
     icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE)
     read = models.BooleanField()
     created = models.DateTimeField(auto_now_add=True)
