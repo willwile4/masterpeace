@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from oauth2client.contrib.django_orm import FlowField
 
 
 # Create your models here.
@@ -17,7 +16,7 @@ class Message(models.Model):
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    pic = models.ImageField(upload_to="mp_app/static/user_images/", blank=True, null=True)
+    pic = models.ImageField(upload_to="masterpeace/static/user_images/", blank=True, null=True)
     bio = models.CharField(max_length=500)
     fb_link = models.URLField(null=True, blank=True)
     insta_link = models.URLField(null=True, blank=True)
@@ -107,8 +106,3 @@ class TextFeedback(models.Model):
 
     def __str__(self):
         return '{}, {}'.format(self.critic, self.icon)
-
-
-class FlowModel(models.Model):
-    flow_id = models.ForeignKey(User, primary_key=True)
-    flow = FlowField()
