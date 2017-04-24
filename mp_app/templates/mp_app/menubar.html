@@ -4,13 +4,13 @@
 
   <div id='logo'>
     <a href='/'>
-      <img src='{% static "base_images/logo.png" %}' alt='MasterPeace' height='42' width='124'/>
+      <img src='{% static "base_images/logo.png" %}' alt='MasterPeace' height='72' width='204'/>
     </a>
   </div>
 
   {% if user.is_authenticated %}
   <div id='account'>
-    Welcome, {{user}} | <a class='navbutton' href='/logout'>Logout</a>
+    Welcome, <a href='/'>{{user}}</a><a class='navbutton' href='/'><i class="fa fa-plus-square-o fa-4x"></i></a>
   </div>
   {% else %}
   <div id='account'>

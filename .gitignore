@@ -3,3 +3,4 @@ db.sqlite3
 .envrc
 __pycache__
 *.pyc
+.DS_Store

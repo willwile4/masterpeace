@@ -1,28 +1,29 @@
 header#nav{
-  height:40px;
+  height:4em;
   overflow: hidden;
   position: relative;
-  background-color: #327d6d;
+  background-color: #ce8b8b;
   text-align: center;
+  padding-right: 1em;
 }
 
 div#logo{
-  height: 40px;
+  height: 4em;
   float: left;
-  line-height: 40px;
+  line-height: 4em;
   display: inline-block;
 }
 
 div#account{
-  height: 40px;
-  line-height: 40px;
-  padding-right: 20px;
+  height: 4em;
+  line-height: 4em;
   float: right;
   vertical-align: middle;
   font-weight: 100;
   color: white;
 }
 
-body{
-  margin: 0;
+.navbutton{
+  float: right;
+  margin-left: 1em;
 }
