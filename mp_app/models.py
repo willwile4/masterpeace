@@ -1,18 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-# # default choices ----> TODO: convert to model
-# IMG_TYPES = [('PAINT', 'paint'),
-#              ('DRAW', 'draw'),
-#              ('SCULPTURE', 'sculpture'),
-#              ('PHOTO', 'photo'),
-#              ('MIXED', 'mixed media'),
-#              ('DIGITAL', 'digital')]
-#
-# TEXT_TYPES = [('POETRY', 'poetry'),
-#               ('SHORT STORY', 'short story'),
-#               ('HUMOR', 'humor'),
-#               ('ASCII', 'ascii')]
+from oauth2client.contrib.django_orm import FlowField
 
 
 # Create your models here.
@@ -29,17 +17,17 @@ class Message(models.Model):
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    pic = models.ImageField(upload_to="static/user_images/")
+    pic = models.ImageField(upload_to="mp_app/static/user_images/", blank=True, null=True)
     bio = models.CharField(max_length=500)
-    fb_link = models.URLField()
-    insta_link = models.URLField()
-    twitter_link = models.URLField()
+    fb_link = models.URLField(null=True, blank=True)
+    insta_link = models.URLField(null=True, blank=True)
+    twitter_link = models.URLField(null=True, blank=True)
     dob = models.DateField(auto_now_add=False)
     allow_messages = models.BooleanField(default=False)
-    followers = models.ManyToManyField('self', symmetrical=False)
+    followers = models.ManyToManyField('self', symmetrical=False, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class ImageTag(models.Model):
@@ -102,7 +90,7 @@ class FeedbackType(models.Model):
 class ImageFeedback(models.Model):
     critic = models.ForeignKey(User, on_delete=models.CASCADE)
     masterpeace = models.ForeignKey(ImageMP, on_delete=models.CASCADE)  # look into inheritence and polymorphism
-    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE)
+    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE, null=True, blank=True)
     read = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -113,9 +101,14 @@ class ImageFeedback(models.Model):
 class TextFeedback(models.Model):
     critic = models.ForeignKey(User, on_delete=models.CASCADE)
     masterpeace = models.ForeignKey(TextMP, on_delete=models.CASCADE)  # look into inheritence and polymorphism
-    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE)
+    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE, null=True, blank=True)
     read = models.BooleanField()
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return '{}, {}'.format(self.critic, self.icon)
+
+
+class FlowModel(models.Model):
+    flow_id = models.ForeignKey(User, primary_key=True)
+    flow = FlowField()

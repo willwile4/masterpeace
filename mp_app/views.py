@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Message, UserProfile, ImageMP, TextMP, ImageFeedback, TextFeedback, ImageTag, TextTag
-from .serializers import MessageSerializer, UserProfileSerializer, ImageMPSerializer, TextMPSerializer, ImageFeedbackSerializer, TextFeedbackSerializer, ImageTagSerializer, TextTagSerializer
+from .models import Message, UserProfile, ImageMP, TextMP, ImageFeedback, TextFeedback, ImageTag, TextTag, Artform
+from .serializers import MessageSerializer, UserProfileSerializer, ImageMPSerializer, TextMPSerializer, ImageFeedbackSerializer, TextFeedbackSerializer, ImageTagSerializer, TextTagSerializer, ArtformSerializer
 
 
 class MessageViewSet(viewsets.ModelViewSet):
@@ -42,6 +42,10 @@ class ImageTagViewSet(viewsets.ModelViewSet):
 class TextTagViewSet(viewsets.ModelViewSet):
     queryset = TextTag.objects.all()
     serializer_class = TextTagSerializer
+
+class ArtformViewSet(viewsets.ModelViewSet):
+    queryset = Artform.objects.all()
+    serializer_class = ArtformSerializer
 
 def index(request):
     return render(request, 'mp_app/index.html')

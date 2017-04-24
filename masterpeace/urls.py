@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from mp_app import views
 from rest_framework import routers
+from django.contrib.auth import views as auth_views
 
 router = routers.DefaultRouter()
 router.register(r'message', views.MessageViewSet)
@@ -27,6 +28,7 @@ router.register(r'image_feedback', views.ImageFeedbackViewSet)
 router.register(r'text_feedback', views.TextFeedbackViewSet)
 router.register(r'image_tag', views.ImageTagViewSet)
 router.register(r'text_tag', views.TextTagViewSet)
+router.register(r'artform', views.ArtformViewSet)
 
 
 urlpatterns = [
@@ -34,4 +36,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', views.index, name="index"),
     url(r'^admin/', admin.site.urls),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
 ]
