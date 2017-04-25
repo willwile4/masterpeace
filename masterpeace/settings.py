@@ -29,6 +29,7 @@ SECRET_KEY = 'ro^&4l_e^h8gw#=8yxcx($v%0)xrmg5(taiohjd_5ot2ia#cow'
 DEBUG = True
 
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
