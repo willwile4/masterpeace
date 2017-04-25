@@ -1,7 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework import viewsets
-from .models import Message, UserProfile, ImageMP, TextMP, ImageFeedback, TextFeedback, ImageTag, TextTag, Artform
-from .serializers import MessageSerializer, UserProfileSerializer, ImageMPSerializer, TextMPSerializer, ImageFeedbackSerializer, TextFeedbackSerializer, ImageTagSerializer, TextTagSerializer, ArtformSerializer
+from django.contrib.auth import login, authenticate
+from .forms import SignUpForm
+
+from .models import (Message, UserProfile, ImageMP,
+                     TextMP, ImageFeedback, TextFeedback,
+                     ImageTag, TextTag, Artform)
+from .serializers import (MessageSerializer, UserProfileSerializer,
+                          ImageMPSerializer, TextMPSerializer,
+                          ImageFeedbackSerializer, TextFeedbackSerializer,
+                          ImageTagSerializer, TextTagSerializer,
+                          ArtformSerializer)
+
+
+def index(request):
+    return render(request, 'mp_app/index.html')
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form': form})
 
 
 class MessageViewSet(viewsets.ModelViewSet):
@@ -43,9 +71,7 @@ class TextTagViewSet(viewsets.ModelViewSet):
     queryset = TextTag.objects.all()
     serializer_class = TextTagSerializer
 
+
 class ArtformViewSet(viewsets.ModelViewSet):
     queryset = Artform.objects.all()
     serializer_class = ArtformSerializer
-
-def index(request):
-    return render(request, 'mp_app/index.html')
