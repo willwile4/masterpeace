@@ -8,6 +8,12 @@
 
 {% include 'mp_app/menubar.html' %}
 
+<h2>{{ user.get_full_name }}</h2>
+<ul>
+  <li>Username: {{ user }}</li>
+  <li>Birth Date: {{ user. }}</li>
+</ul>
+
 {% csrf_token %}
 
 {% endblock %}
