@@ -34,10 +34,11 @@ router.register(r'artform', views.ArtformViewSet)
 urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^$', views.index, name="index"),
+    url(r'^$', include('mp_app.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r"^soc/", include("social_django.urls", namespace="social")),
+    url(r'^profile/(?P<profile_id>[0-9]+)', views.profile, name='profile'),
 ]

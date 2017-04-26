@@ -1,5 +1,5 @@
 {% extends 'mp_app/base.html' %}
-
+{% load staticfiles %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
@@ -9,6 +9,6 @@
     {{ form.as_p }}
     <button type="submit">Login</button>
     <input type="hidden" name="next" value="{{ next }}" />
-    <a href="{% url "social:begin" "google-oauth2" %}">Google+</a>
+    <a href="{% url "social:begin" "google-oauth2" %}"><img src="{% static 'base_images/googlesignin.png' %}" alt='Google+'/></a>
   </form>
 {% endblock %}

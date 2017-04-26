@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
-
+from django.contrib.auth.models import User
 from .models import (Message, UserProfile, ImageMP,
                      TextMP, ImageFeedback, TextFeedback,
                      ImageTag, TextTag, Artform)
@@ -30,6 +30,18 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+def profile(request, profile_id):
+    user_profile = UserProfile.objects.get(id=profile_id)
+    info = user_profile.__dict__
+    user = User.objects.get(id=user_profile.user_id)
+    info['username'] = user.username
+    info['first_name'] = user.first_name
+    info['last_name'] = user.last_name
+    info['email'] = user.email
+    info['date_joined'] = user.date_joined
+    return render(request, 'mp_app/profile.html', {'profile': info})
 
 
 class MessageViewSet(viewsets.ModelViewSet):

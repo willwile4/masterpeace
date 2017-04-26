@@ -1,0 +1,23 @@
+{% extends 'mp_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block extra_head_content %}
+<link rel='stylesheet' type="text/css" href="{% static 'css/profile.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<ul>
+{% for key, values in profile.items %}
+{% if key != '_state' %}
+   <li>{{ key }}:  {{values}}</li>
+{% endif %}
+  {% endfor %}
+ </ul>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}
