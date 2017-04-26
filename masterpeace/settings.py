@@ -14,6 +14,7 @@ import os
 import dj_database_url
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
+from django.cors.middleware import corsheaders
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -92,7 +93,8 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',
     'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.google.GoogleOAuth',)
+    'social_core.backends.google.GoogleOAuth',
+    'oauth2_provider.backends.OAuth2Backend',)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -126,6 +128,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 ]
 
 ROOT_URLCONF = 'masterpeace.urls'
