@@ -104,7 +104,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     "mp_app.apps.MpAppConfig",
-    'social_django'
+    'social_django',
+    'oauth2_provider',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {

@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r"^soc/", include("social_django.urls", namespace="social")),
     url(r'^profile/(?P<profile_id>[0-9]+)', views.profile, name='profile'),
 ]

@@ -10,7 +10,8 @@
 
   {% if user.is_authenticated %}
   <div id='account'>
-    Welcome, <a href='/'>{{user}}</a><a class='navbutton' href='/'><i class="fa fa-plus-square-o fa-4x"></i></a>
+    Welcome, <a href='/'>{{user}}</a><a class='navbutton' href='/profile'><i class="fa fa-plus-square-o fa-4x"></i></a>
+    <a id='logout' href="/logout">Logout</a>
   </div>
   {% else %}
   <div id='account'>
