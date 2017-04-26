@@ -2,14 +2,13 @@
 {% load staticfiles %}
 
 {% block extra_head_content %}
-{% static 'css/dunder.css' %}
+<link rel='stylesheet' type='text/css' href="{% static 'css/dunder.css' %}"/>
 {% endblock %}
 
 {% block content %}
-{% include "mp_app/menubar.html" %}
 <div id="splash">
-<img src="{% static 'base_images/icon.png' %}" alt="masterpeace"/>
-<h1>__dunderconstruction__()</h1>
+    <img src="{% static 'base_images/icon.png' %}" alt="masterpeace"/><br>
+    <h1>__construction__()</h1>
+    <h1><a href='https://github.com/willwile4/masterpeace'>Check us out on Github</a></h1>
 </div>
-
 {% endblock %}

@@ -2,6 +2,23 @@
 
 #splash {
     width: auto;
-    margin-left: 50%;
+    margin-left: 37%;
     margin-right: 50%;
+    padding-top: 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+#splash img {
+    width: 250px;
+    margin-left: 7%
+    height: auto;
+    padding-top: 5%;
+}
+
+#splash h1 {
+    padding-top: 5%;
+
 }
