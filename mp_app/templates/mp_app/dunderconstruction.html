@@ -1,0 +1,15 @@
+{% extends "mp_app/base.html" %}
+{% load staticfiles %}
+
+{% block extra_head_content %}
+{% static 'css/dunder.css' %}
+{% endblock %}
+
+{% block content %}
+{% include "mp_app/menubar.html" %}
+<div id="splash">
+<img src="{% static 'base_images/icon.png' %}" alt="masterpeace"/>
+<h1>__dunderconstruction__()</h1>
+</div>
+
+{% endblock %}
