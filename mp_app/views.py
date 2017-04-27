@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from django.contrib.auth import login, authenticate
-from .forms import SignUpForm
+from .forms import SignUpForm, CreateTextMPForm
 from django.contrib.auth.models import User
 from .models import (Message, UserProfile, ImageMP,
                      TextMP, ImageFeedback, TextFeedback,
@@ -44,6 +44,33 @@ def profile(request, profile_id):
     return render(request, 'mp_app/profile.html', {'profile': info})
 
 
+def create_textMP(request):
+    if request.method == 'POST':
+        f = CreateTextMPForm(request.POST)
+        if f.is_valid():
+            owner = User.objects.get(pk=request.user.id)
+            title = f.cleaned_data.get('title')
+            text = f.cleaned_data.get('text')
+            allow_feedback = f.cleaned_data.get('allow_feedback')
+            artform = f.cleaned_data.get('artform')
+
+            textMP = TextMP(owner=owner, title=title, text=text,
+                            allow_feedback=allow_feedback, artform=artform)
+            textMP.save()
+            # 
+            # tag = [t for t in f.cleaned_data.get('tag')]
+            # print('coastal elite', tag, type(tag))
+            # for t in tag:
+            #     t.save()
+            #
+            # textMP.tag.copy(tag)
+            # textMP.save()
+            return redirect('/')
+    else:
+        f = CreateTextMPForm()
+    return render(request, 'mp_app/create.html', {'form': f})
+
+
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
@@ -62,6 +89,17 @@ class ImageMPViewSet(viewsets.ModelViewSet):
 class TextMPViewSet(viewsets.ModelViewSet):
     queryset = TextMP.objects.all()
     serializer_class = TextMPSerializer
+
+    # def create(self, request):
+    #     if self.request.method == 'POST':
+    #         f = CreateTextMPForm(request.POST)
+    #         if f.is_valid():
+    #             f = f.cleaned_data()
+    #             f.save()
+    #             return redirect('/')
+    #     else:
+    #         f = CreateTextMPForm()
+    #     return render(request, 'mp_app/create.html', {'form': f})
 
 
 class ImageFeedbackViewSet(viewsets.ModelViewSet):
