@@ -8,16 +8,36 @@
 
 {% block content %}
 
-<ul>
-{% for key, values in profile.items %}
-{% if key != '_state' %}
-   <li>{{ key }}:  {{values}}</li>
-{% endif %}
+{% include 'mp_app/menubar.html' %}
+<div class='profile'>
+  <ul>
+  {% for key, values in profile.items %}
+    {% if key != '_state' %}
+      <li>{{ key }}: {{values}}</li>
+    {% endif %}
   {% endfor %}
- </ul>
+  </ul>
+</div>
+
+<div class='user_gallery'>
+{% for image in image_mps %}
+  <div class='posts' id='image_{{image.id}}'>
+    <img class='masterpeace' src="/media/{{image.image}}">
+    {{image.title}}</br>
+    {{image.caption}}</br>
+    {{image.tags}}</br>
+  </div>
+{% endfor %}
+</div>
 
 {% endblock %}
 
 {% block javascript %}
-
+<script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous">
+</script>
+<script src="{% static 'js/magnific-popup.js' %}"></script>
+<script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

@@ -34,14 +34,16 @@ def signup(request):
 
 def profile(request, profile_id):
     user_profile = UserProfile.objects.get(id=profile_id)
-    info = user_profile.__dict__
     user = User.objects.get(id=user_profile.user_id)
+    image_mps = ImageMP.objects.all()
+    text_mps = TextMP.objects.all()
+    info = user_profile.__dict__
     info['username'] = user.username
     info['first_name'] = user.first_name
     info['last_name'] = user.last_name
     info['email'] = user.email
     info['date_joined'] = user.date_joined
-    return render(request, 'mp_app/profile.html', {'profile': info})
+    return render(request, 'mp_app/profile.html', {'profile': info, 'image_mps': image_mps, 'text_mps': text_mps})
 
 
 class MessageViewSet(viewsets.ModelViewSet):

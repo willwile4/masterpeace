@@ -2,13 +2,8 @@
 
 #splash {
     width: auto;
-    margin-left: 37%;
-    margin-right: 50%;
+    margin: 0 auto;
     padding-top: 5%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-content: space-between;
 }
 
 #splash img {
@@ -20,5 +15,4 @@
 
 #splash h1 {
     padding-top: 5%;
-
 }

@@ -1,5 +1,8 @@
+{% load staticfiles %}
 
-{% load static %}
+{% block extra_head_content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
+{% endblock %}
 <header id='nav'>
 
   <div id='logo'>
@@ -10,11 +13,11 @@
 
   {% if user.is_authenticated %}
   <div id='account'>
-    Welcome, <a href='/'>{{user}}</a><a class='navbutton' href='/'><i class="fa fa-plus-square-o fa-4x"></i></a>
+    Welcome, <a href='profile/{{user.userprofile.id}}'>{{user}}</a><a class='navbutton' href='/logout'>Logout</a><a class='navbutton' href='/'><i class="fa fa-plus-square-o fa-4x"></i></a>
   </div>
   {% else %}
   <div id='account'>
-    <a class='navbutton' href='/login'>Login</a> | <a class='navbutton' href='/signup'>Signup</a>
+    <a class='navbutton' href='/login'>Login</a><a class='navbutton' href='/signup'>Signup</a>
   </div>
   {% endif %}
 </header>

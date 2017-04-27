@@ -134,6 +134,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.media',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -155,7 +156,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'MasterPeace',
-        'USER': 'willwarren',
+        'USER': 'Friese',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',
@@ -226,6 +227,9 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "masterpeace.settings")
 
