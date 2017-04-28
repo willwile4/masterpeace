@@ -7,6 +7,7 @@ function createProfile(e) {
                       'allow_messages': false, //$('#allowMessages').val(),
                       'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
                       'user': $('#user_id').val(),
+                      'user_id': $('#user_id').val(),
         };
     console.log(post_data);
     var settings = {

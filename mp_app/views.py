@@ -33,7 +33,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('/')
+            return redirect('/profile/{}'.format(user.id))
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -44,7 +44,7 @@ def profile(request, user_id):
         user_profile = UserProfile.objects.get(user_id=user_id)
         info = user_profile.__dict__
         user = User.objects.get(id=user_id)
-        info['username'] = user.username
+        info['user_id'] = user.user_id
         info['first_name'] = user.first_name
         info['last_name'] = user.last_name
         info['email'] = user.email
@@ -131,7 +131,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
     def submit_form(self, request):
         if request.method == 'POST':
-            username = request.form['username']
+            user_id = request.form['user_id']
             first_name = request.form['first_name']
             last_name = request.form['last_name']
             password = request.form['password']
@@ -145,9 +145,11 @@ class UserProfileViewSet(viewsets.ModelViewSet):
             twitter = request.form['Twitterlink']
             allow_messages = request.form['allow_messages']
 
-            self.update(username, first_name, last_name, password,
+            u = UserProfile(user_id, first_name, last_name, password,
                         confirm_password, email, avatar_url, dob, bio, fb,
                         insta, twitter, allow_messages)
+            print("cool")
+            u.save()
 
         return HttpResponseRedirect('/profile/')
 

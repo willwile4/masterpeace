@@ -20,10 +20,10 @@ class MessageSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(
-        many=False,
-        read_only=True,
-    )
+    # user = serializers.PrimaryKeyRelatedField(
+    #     many=False,
+    #     read_only=True,
+    # )
 
     class Meta:
         extra_kwargs = {
