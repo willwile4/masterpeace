@@ -1,0 +1,33 @@
+{% extends 'mp_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block extra_head_content %}
+{% endblock %}
+
+{% block content %}
+
+<ul>
+{% for key, values in profile.items %}
+{% if key != '_state' %}
+   <li>{{ key }}:  {{values}}</li>
+{% endif %}
+  {% endfor %}
+ </ul>
+
+<div class='createProfileForm'>
+    <form name='createProfile' method='post'>
+        {% csrf_token %}
+        <input id='user_id' type='text' name='user_id' value='{{user.id}}' style='display:none'>
+
+        Bio:<input id='bio' type='text' name='name'>
+        Allow Messages:<input id='allowMessages' type='checkbox' name='AllowMessages' placeholder="Allow Messages">
+        <button id='create_profile'>Submit</button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/createProfile.js' %}"></script>
+{% endblock %}

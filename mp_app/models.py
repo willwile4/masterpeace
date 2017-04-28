@@ -17,7 +17,8 @@ class Message(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    pic = models.ImageField(upload_to="masterpeace/static/user_images/", blank=True, null=True)
+    pic = models.ImageField(upload_to="masterpeace/static/user_images/",
+                            blank=True, null=True)
     bio = models.CharField(max_length=500)
     fb_link = models.URLField(null=True, blank=True)
     insta_link = models.URLField(null=True, blank=True)
@@ -29,13 +30,14 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-    @receiver(post_save, sender=User)
-    def create_profile(sender, instance, created, **kwargs):
-        if created:
-            UserProfile.objects.create(user=instance)
-
-    def save_user_profile(sender, instance, **kwargs):
-        instance.UserProfile.save()
+    # @receiver(post_save, sender=User)
+    # def create_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         UserProfile.objects.create(user=instance)
+    #
+    # # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #         instance.UserProfile.save()
 
 
 class ImageTag(models.Model):
