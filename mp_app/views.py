@@ -84,7 +84,7 @@ def create_textMP(request):
             # textMP.tag.copy(tag)
             # textMP.save()
             return redirect('/')
->>>>>>> c293dccfaeea3ebe1ee1bead506dc7bb7da0df11
+
     else:
         user = User.objects.get(id=user_id)
         info = user.__dict__
