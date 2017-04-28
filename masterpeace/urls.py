@@ -44,6 +44,7 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
     url(r"^soc/", include("social_django.urls", namespace="social")),
     url(r'^profile/(?P<profile_id>[0-9]+)', views.profile, name='profile'),
+    url(r'^create_textMP/$', views.create_textMP, name="create")
 ]
 
 if settings.DEBUG:
