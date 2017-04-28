@@ -7,7 +7,31 @@
 
 {% csrf_token %}
 
-{% include 'mp_app/dunderconstruction.html' %}
+<div class='gallery'>
+  {% for image in image_mps %}
+    <div class='posts_img' id='image_{{image.id}}'>
+      <div class='image_itself'>
+        <img class='masterpeace' src="/media/{{image.image}}">
+      </div>
+      <div class='image_info'>
+        <span class='image_title'>{{image.title}}</span></br>
+        {{image.caption}}</br>
+        {{image.tags}}</br>
+        <!-- <a href='/profile/{{image.owner_id.user_profile}}'></a> -->
+        Posted by: {{image.owner_id}} <!-- okay so this doens't work, let's try harder... -->
+      </div>
+    </div>
+  {% endfor %}
+
+  {% for text in text_mps %}
+    <div class='posts_txt' id='text_{{text.id}}'>
+      {{text.title}}</br>
+      {{text.text}}</br>
+      {{text.tags}}</br>
+      Posted by: {{text.owner_id}}
+    </div>
+  {% endfor %}
+</div>
 
 {% endblock %}
 

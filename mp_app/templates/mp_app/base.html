@@ -7,7 +7,6 @@
       <link rel="icon" href="{% static 'base_images/icon.png' %}" type="image/png" sizes="16x16">
       <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
       <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
-      <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
       <link async rel="import" href="https://raw.githubusercontent.com/rcaferati/awesome-button/master/awesome-button.html"/>
 
       {% block extra_head_content %}{% endblock %}
@@ -17,14 +16,13 @@
       {% block content %}
       {% endblock %}
 
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
       {% block javascript %}
 
-      <script
-        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-        crossorigin="anonymous">
+
       <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/webcomponents.min.js"></script>
+
       {% endblock %}
     </body>
 

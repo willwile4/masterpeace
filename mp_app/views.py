@@ -14,7 +14,13 @@ from .serializers import (MessageSerializer, UserProfileSerializer,
 
 
 def index(request):
-    return render(request, 'mp_app/index.html')
+    image_mps = ImageMP.objects.all().order_by('-created')
+    text_mps = TextMP.objects.all().order_by('-created')
+    user_profiles = UserProfile.objects.all()
+    return render(request, 'mp_app/index.html', {
+                                           'image_mps': image_mps,
+                                           'text_mps': text_mps,
+                                           'user_profiles': user_profiles})
 
 
 def signup(request):
@@ -29,21 +35,24 @@ def signup(request):
             return redirect('/')
     else:
         form = SignUpForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(request, 'registration/typeform_signup.html', {'form': form})
 
 
 def profile(request, profile_id):
     user_profile = UserProfile.objects.get(id=profile_id)
     user = User.objects.get(id=user_profile.user_id)
-    image_mps = ImageMP.objects.all()
-    text_mps = TextMP.objects.all()
+    image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
+    text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
     info = user_profile.__dict__
     info['username'] = user.username
     info['first_name'] = user.first_name
     info['last_name'] = user.last_name
     info['email'] = user.email
     info['date_joined'] = user.date_joined
-    return render(request, 'mp_app/profile.html', {'profile': info, 'image_mps': image_mps, 'text_mps': text_mps})
+    return render(request, 'mp_app/profile.html', {
+                                        'profile': info,
+                                        'image_mps': image_mps,
+                                        'text_mps': text_mps})
 
 
 class MessageViewSet(viewsets.ModelViewSet):

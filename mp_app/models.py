@@ -17,7 +17,8 @@ class Message(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    pic = models.ImageField(upload_to="masterpeace/static/user_images/", blank=True, null=True)
+    pic = models.ImageField(upload_to="masterpeace/static/user_images/",
+                            blank=True, null=True)
     bio = models.CharField(max_length=500)
     fb_link = models.URLField(null=True, blank=True)
     insta_link = models.URLField(null=True, blank=True)
@@ -97,8 +98,10 @@ class FeedbackType(models.Model):
 
 class ImageFeedback(models.Model):
     critic = models.ForeignKey(User, on_delete=models.CASCADE)
-    masterpeace = models.ForeignKey(ImageMP, on_delete=models.CASCADE)  # look into inheritence and polymorphism
-    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE, null=True, blank=True)
+    masterpeace = models.ForeignKey(ImageMP, on_delete=models.CASCADE)
+    # look into inheritence and polymorphism
+    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE,
+                             null=True, blank=True)
     read = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -108,8 +111,10 @@ class ImageFeedback(models.Model):
 
 class TextFeedback(models.Model):
     critic = models.ForeignKey(User, on_delete=models.CASCADE)
-    masterpeace = models.ForeignKey(TextMP, on_delete=models.CASCADE)  # look into inheritence and polymorphism
-    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE, null=True, blank=True)
+    masterpeace = models.ForeignKey(TextMP, on_delete=models.CASCADE)
+    # look into inheritence and polymorphism
+    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE,
+                             null=True, blank=True)
     read = models.BooleanField()
     created = models.DateTimeField(auto_now_add=True)
 

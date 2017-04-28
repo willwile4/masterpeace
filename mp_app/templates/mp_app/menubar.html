@@ -7,13 +7,13 @@
 
   <div id='logo'>
     <a href='/'>
-      <img src='{% static "base_images/logo.png" %}' alt='MasterPeace' height='72' width='204'/>
+      <img src='{% static "base_images/logo.png" %}' alt='MasterPeace' height='72' width='214'/>
     </a>
   </div>
 
   {% if user.is_authenticated %}
   <div id='account'>
-    Welcome, <a href='profile/{{user.userprofile.id}}'>{{user}}</a><a class='navbutton' href='/logout'>Logout</a><a class='navbutton' href='/'><i class="fa fa-plus-square-o fa-4x"></i></a>
+    Welcome, <a href='/profile/{{user.userprofile.id}}'>{{user}}</a><a class='navbutton' href='/logout'>Logout</a><a class='navbutton' href='/'><i class="fa fa-plus-square-o fa-4x"></i></a>
   </div>
   {% else %}
   <div id='account'>
