@@ -1,13 +1,17 @@
 {% extends 'mp_app/base.html' %}
-
+{% load staticfiles %}
 {% block content %}
+<div class='registration' id='signup'>
+  </br>
+  <img src="{% static 'base_images/icon.png' %}" type="image/png" width='60' height='60'>
   <h2>Sign up</h2>
+  <span id='registered'>Already registered? <a href='/login'>Login</a></span>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
       <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
+        {{ field.label_tag }}</br>
+        {{ field }}<br></br>
         {% if field.help_text %}
           <small style="color: grey">{{ field.help_text|safe }}</small>
         {% endif %}
@@ -18,4 +22,5 @@
     {% endfor %}
     <button type="submit">Sign up</button>
   </form>
+</div>
 {% endblock %}

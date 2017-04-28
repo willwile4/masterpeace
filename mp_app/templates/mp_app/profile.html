@@ -4,20 +4,54 @@
 
 {% block extra_head_content %}
 <link rel='stylesheet' type="text/css" href="{% static 'css/profile.css' %}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.css"
+                       integrity="sha256-/vM/tv5uT2eM8uXkH815piWGPGwWjok2VlMWJ++2BEk="
+                       crossorigin="anonymous" />
+
 {% endblock %}
 
 {% block content %}
 
-<ul>
-{% for key, values in profile.items %}
-{% if key != '_state' %}
-   <li>{{ key }}:  {{values}}</li>
-{% endif %}
-  {% endfor %}
- </ul>
+{% include 'mp_app/menubar.html' %}
+
+<div class='profile'>
+  <div class='profile_pic'>
+    <img src='/media/{{profile.pic}}'/>
+  </div>
+  <div class='profile_info'>
+    @<span class='username'>{{profile.username}}</span></br>
+    <span class='bio'>{{profile.bio}}</span>
+
+    {% if user.is_authenticated and profile.user_id == user.id %}
+      <span class='edit_profile'>Edit profile</span>
+    {% endif %}
+  </div>
+</div>
+
+<div class='user_gallery'>
+{% for image in image_mps %}
+  <div class='posts_img' id='img_{{image.id}}'>
+    <a href="/media/{{image.image}}" data-fancybox="gallery" data-caption="{{image.caption}}">
+      <img class='masterpeace' src="/media/{{image.image}}" alt="" /></a>
+      <span class='username'>{{image.title}}</span></br>
+      {{image.tags}}</br>
+  </div>
+{% endfor %}
+
+{% for text in text_mps %}
+  <div class='posts_txt' id='text_{{text.id}}'>
+    <span class='username'>{{text.title}}</span>
+    {{text.text}}</br>
+    {{text.tags}}</br>
+  </div>
+{% endfor %}
+</div>
 
 {% endblock %}
 
 {% block javascript %}
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.js"
+        integrity="sha256-lGYI9J+diJJWwLLMD35V79cLhrxo7MYzNQImKJntuL0="
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

@@ -32,10 +32,10 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 ALLOWED_HOSTS = [
+    'localhost',
     '127.0.0.1',
     'masterpeace.herokuapp.com',
 ]
-
 
 # Application definition
 
@@ -95,6 +95,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth',)
 
 INSTALLED_APPS = [
+    "mp_app.apps.MpAppConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -103,7 +104,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    "mp_app.apps.MpAppConfig",
     'social_django'
 ]
 
@@ -138,6 +138,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.media',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -159,7 +160,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'MasterPeace',
-        'USER': 'willwarren',
+        'USER': 'Friese',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',
@@ -230,6 +231,9 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "masterpeace.settings")
 

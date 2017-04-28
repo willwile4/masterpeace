@@ -21,7 +21,13 @@ import boto3
 
 
 def index(request):
-    return render(request, 'mp_app/index.html')
+    image_mps = ImageMP.objects.all().order_by('-created')
+    text_mps = TextMP.objects.all().order_by('-created')
+    user_profiles = UserProfile.objects.all()
+    return render(request, 'mp_app/index.html', {
+                                           'image_mps': image_mps,
+                                           'text_mps': text_mps,
+                                           'user_profiles': user_profiles})
 
 
 def signup(request):
@@ -36,7 +42,7 @@ def signup(request):
             return redirect('/profile/{}'.format(user.id))
     else:
         form = SignUpForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(request, 'registration/typeform_signup.html', {'form': form})
 
 
 def profile(request, user_id):
@@ -44,12 +50,41 @@ def profile(request, user_id):
         user_profile = UserProfile.objects.get(user_id=user_id)
         info = user_profile.__dict__
         user = User.objects.get(id=user_id)
+        image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
+        text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
         info['user_id'] = user.user_id
         info['first_name'] = user.first_name
         info['last_name'] = user.last_name
         info['email'] = user.email
         info['date_joined'] = user.date_joined
-        return render(request, 'mp_app/profile.html', {'profile': info})
+        return render(request, 'mp_app/profile.html', {'profile': info,
+                                                       'image_mps': image_mps,
+                                                       'text_mps': text_mps})
+
+
+def create_textMP(request):
+    if request.method == 'POST':
+        f = CreateTextMPForm(request.POST)
+        if f.is_valid():
+            owner = User.objects.get(pk=request.user.id)
+            title = f.cleaned_data.get('title')
+            text = f.cleaned_data.get('text')
+            allow_feedback = f.cleaned_data.get('allow_feedback')
+            artform = f.cleaned_data.get('artform')
+
+            textMP = TextMP(owner=owner, title=title, text=text,
+                            allow_feedback=allow_feedback, artform=artform)
+            textMP.save()
+            #
+            # tag = [t for t in f.cleaned_data.get('tag')]
+            # print('coastal elite', tag, type(tag))
+            # for t in tag:
+            #     t.save()
+            #
+            # textMP.tag.copy(tag)
+            # textMP.save()
+            return redirect('/')
+>>>>>>> c293dccfaeea3ebe1ee1bead506dc7bb7da0df11
     else:
         user = User.objects.get(id=user_id)
         info = user.__dict__

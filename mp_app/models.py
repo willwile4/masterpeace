@@ -67,7 +67,7 @@ class ImageMP(models.Model):
     allow_feedback = models.BooleanField(default=False)
     title = models.CharField(max_length=50)
     caption = models.CharField(max_length=144)
-    image = models.ImageField(upload_to="static/mp_images/")
+    image = models.ImageField(upload_to="mp_images/")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     artform = models.ForeignKey(Artform, on_delete=models.CASCADE)
@@ -99,8 +99,10 @@ class FeedbackType(models.Model):
 
 class ImageFeedback(models.Model):
     critic = models.ForeignKey(User, on_delete=models.CASCADE)
-    masterpeace = models.ForeignKey(ImageMP, on_delete=models.CASCADE)  # look into inheritence and polymorphism
-    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE, null=True, blank=True)
+    masterpeace = models.ForeignKey(ImageMP, on_delete=models.CASCADE)
+    # look into inheritence and polymorphism
+    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE,
+                             null=True, blank=True)
     read = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -110,8 +112,10 @@ class ImageFeedback(models.Model):
 
 class TextFeedback(models.Model):
     critic = models.ForeignKey(User, on_delete=models.CASCADE)
-    masterpeace = models.ForeignKey(TextMP, on_delete=models.CASCADE)  # look into inheritence and polymorphism
-    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE, null=True, blank=True)
+    masterpeace = models.ForeignKey(TextMP, on_delete=models.CASCADE)
+    # look into inheritence and polymorphism
+    icon = models.ForeignKey(FeedbackType, on_delete=models.CASCADE,
+                             null=True, blank=True)
     read = models.BooleanField()
     created = models.DateTimeField(auto_now_add=True)
 
