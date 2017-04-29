@@ -45,6 +45,7 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
     url(r"^soc/", include("social_django.urls", namespace="social")),
     url(r'^profile/(?P<user_id>[0-9]+)', views.profile, name='profile'),
+    url(r'^edit_profile/', views.edit_profile, name="edit_profile"),
     url(r'^privacy/', views.privacy, name="privacy"),
     url(r'^account/', views.account, name='account'),
 ]

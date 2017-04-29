@@ -1,7 +1,8 @@
+from django.http import Http404
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from django.contrib.auth import login, authenticate
-from .forms import SignUpForm, CreateTextMPForm
+from .forms import SignUpForm, CreateTextMPForm, EditProfile
 from django.contrib.auth.models import User
 from .models import (Message, UserProfile, ImageMP,
                      TextMP, ImageFeedback, TextFeedback,
@@ -28,6 +29,29 @@ def index(request):
                                            'image_mps': image_mps,
                                            'text_mps': text_mps,
                                            'user_profiles': user_profiles})
+
+
+def edit_profile(request):
+    user = request.user
+    try:
+        profile = UserProfile.objects.get(user_id=user.id)
+    except UserProfile.DoesNotExist:
+        raise Http404("Profile does not exist")
+
+    if request.method == 'POST':
+        form = EditProfile(request.POST, request.FILES, instance=profile)
+        if not profile.pic:
+            profile.pic = request.FILES['pic']
+        if form.is_valid():
+            profile.pic = profile.pic
+            profile = form.save(commit=True)
+            profile.save()
+            return redirect('/profile/{}'.format(user.id), pk=profile.pk)
+
+    else:
+        form = EditProfile(instance=profile)
+    return render(request, 'mp_app/edit_profile.html', {'form': form,
+                                                        'profile': profile})
 
 
 def signup(request):
