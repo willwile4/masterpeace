@@ -24,10 +24,14 @@ def index(request):
     image_mps = ImageMP.objects.all().order_by('-created')
     text_mps = TextMP.objects.all().order_by('-created')
     user_profiles = UserProfile.objects.all()
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
     return render(request, 'mp_app/index.html', {
                                            'image_mps': image_mps,
                                            'text_mps': text_mps,
-                                           'user_profiles': user_profiles})
+                                           'user_profiles': user_profiles,
+                                           'messages': messages,
+                                           'unread_messages': u_m})
 
 
 def signup(request):
@@ -47,13 +51,28 @@ def signup(request):
 
 def profile(request, user_id):
     # if len(UserProfile.objects.filter(user_id=user_id)) > 0:
-    user_profile = UserProfile.objects.get(user_id=user_id)
+    # user_profile = UserProfile.objects.get(user_id=user_id)
     user = User.objects.get(id=user_id)
+    messages = Message.objects.filter(to_user_id=user_id, read=False)
+    u_m = len(messages)
     image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
     text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
-    return render(request, 'mp_app/profile.html', {'profile': user_profile,
+    return render(request, 'mp_app/profile.html', {
+                                                   # 'profile': user_profile,
                                                    'image_mps': image_mps,
-                                                   'text_mps': text_mps})
+                                                   'text_mps': text_mps,
+                                                   'messages': messages,
+                                                   'unread_messages': u_m})
+
+
+def messages(request):
+    all_messages = Message.objects.filter(to_user_id=request.user.id)
+    unread_messages = Message.objects.filter(to_user_id=request.user.id,
+                                             read=False)
+    u_m = len(unread_messages) > 0
+    return render(request, 'mp_app/messages.html', {'messages': all_messages,
+                                                    'unread_messages': u_m})
+
 
 
 def create_textMP(request):
