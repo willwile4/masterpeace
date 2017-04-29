@@ -1,19 +1,33 @@
-console.log('js works here');
 
 function createProfile(e) {
     e.preventDefault();
-    console.log('hi mom');
-    var post_data = { 'bio': $('#bio').val(),
-                      'allow_messages': false, //$('#allowMessages').val(),
-                      'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-                      'user': $('#user_id').val(),
-                      'user_id': $('#user_id').val(),
-        };
-    console.log(post_data);
+    let $form = {
+        'file': $('[name="file"]').val(),
+        "user_id": $('[name="user_id"]').val(),
+        'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
+        'pic': $('[name="pic"]').val(),
+        'bio': $('[name="bio"]').val(),
+        'fb_link': $('[name="fb_link"]').val(),
+        'insta_link': $('[name="insta_link"]').val(),
+        'twitter_link': $('[name="twitter_link"]').val(),
+        'allow_messages': $('[name="allow_messages"]').val(),
+    };
+    console.log($('#createProfile :input'));
+    // var $post_data = $("#createProfile :input");
+
+    // for(var i = 0; i < $post_data.length; i++) {
+    //     console.log($post_data);
+    // //     if(!$post_data[i].attr('id', '#create_profile')) {
+    // //         $form[$post_data[i].name] = $post_data[i].value
+    // //   }
+    console.log($form);
     var settings = {
         method: "POST",
         url: '/api/profile/',
-        data: post_data,
+        data: $form,
+        success: function(result) {
+            console.log('success')
+    }
     }
     $.ajax(settings);
 };

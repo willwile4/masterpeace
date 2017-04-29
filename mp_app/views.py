@@ -42,7 +42,7 @@ def signup(request):
             return redirect('/profile/{}'.format(user.id))
     else:
         form = SignUpForm()
-    return render(request, 'registration/typeform_signup.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form})
 
 
 def profile(request, user_id):
@@ -60,6 +60,8 @@ def profile(request, user_id):
         return render(request, 'mp_app/profile.html', {'profile': info,
                                                        'image_mps': image_mps,
                                                        'text_mps': text_mps})
+    else:
+        return render(request, 'mp_app/create_profile.html')
 
 
 def create_textMP(request):
