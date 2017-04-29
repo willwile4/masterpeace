@@ -1,3 +1,5 @@
+//js file to create a user's profile upon registration.
+//known bugs: any user can create a profile for user's without a profile.
 
 function createProfile(e) {
     e.preventDefault();
@@ -11,15 +13,7 @@ function createProfile(e) {
         'twitter_link': $('[name="twitter_link"]').val(),
         'allow_messages': $('[name="allow_messages"]').val(),
     };
-    console.log($('#createProfile :input'));
-    // var $post_data = $("#createProfile :input");
 
-    // for(var i = 0; i < $post_data.length; i++) {
-    //     console.log($post_data);
-    // //     if(!$post_data[i].attr('id', '#create_profile')) {
-    // //         $form[$post_data[i].name] = $post_data[i].value
-    // //   }
-    console.log($form);
     var settings = {
         method: "POST",
         url: '/api/profile/',
