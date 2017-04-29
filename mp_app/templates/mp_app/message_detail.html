@@ -1,0 +1,16 @@
+{% extends 'mp_app/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+{% include 'mp_app/menubar.html' %}
+
+{% csrf_token %}
+<div id='message_detail'>
+  <ul>
+    <li>{{message.content}}</li>
+    <li>From: {{message.from_user_id}}</li>
+    <li>{{message.created}}</li>
+</ul>
+</div>
+{% endblock %}

@@ -15,9 +15,9 @@
   <div id='account'>
     Welcome, <a href='/profile/{{user.id}}'>{{user.username}}</a>
     {% if unread_messages > 0 %}
-    <a class='messages' href='messages'><img src="{% static 'base_images/envelope_new_message.png' %}" height='50px' width='auto'></a>
+    <a class='messages' href='/messages'><img src="{% static 'base_images/envelope_new_message.png' %}" height='50px' width='auto'></a>
     {% else %}
-    <a class='messages' href='messages'><img src="{% static 'base_images/envelope.png' %}" height='50px' width='auto'></a>
+    <a class='messages' href='/messages'><img src="{% static 'base_images/envelope.png' %}" height='50px' width='auto'></a>
     {% endif %}
     <a class='navbutton' href='/logout'>Logout</a><a class='navbutton' href='/'><i class="fa fa-plus-square-o fa-4x"></i></a>
   </div>

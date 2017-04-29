@@ -12,7 +12,7 @@ from .serializers import (UserSerializer, MessageSerializer,
                           ImageFeedbackSerializer, TextFeedbackSerializer,
                           ImageTagSerializer, TextTagSerializer,
                           ArtformSerializer)
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
 import os
@@ -24,13 +24,11 @@ def index(request):
     image_mps = ImageMP.objects.all().order_by('-created')
     text_mps = TextMP.objects.all().order_by('-created')
     user_profiles = UserProfile.objects.all()
-    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
-    u_m = len(messages)
+    u_m = len(Message.objects.filter(to_user_id=request.user.id, read=False))
     return render(request, 'mp_app/index.html', {
                                            'image_mps': image_mps,
                                            'text_mps': text_mps,
                                            'user_profiles': user_profiles,
-                                           'messages': messages,
                                            'unread_messages': u_m})
 
 
@@ -50,6 +48,8 @@ def signup(request):
 
 
 def profile(request, user_id):
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
     if len(UserProfile.objects.filter(user_id=user_id)) > 0:
         user_profile = UserProfile.objects.get(user_id=user_id)
         user = User.objects.get(id=user_id)
@@ -57,7 +57,8 @@ def profile(request, user_id):
         text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
         return render(request, 'mp_app/profile.html', {'profile': user_profile,
                                                        'image_mps': image_mps,
-                                                       'text_mps': text_mps})
+                                                       'text_mps': text_mps,
+                                                       'unread_messages': u_m})
     else:
         user = User.objects.get(id=user_id)
         return render(request, 'mp_app/create_profile.html', {'user': user})
@@ -67,13 +68,21 @@ def messages(request):
     all_messages = Message.objects.filter(to_user_id=request.user.id)
     unread_messages = Message.objects.filter(to_user_id=request.user.id,
                                              read=False)
-    u_m = len(unread_messages) > 0
+    u_m = len(unread_messages)
     return render(request, 'mp_app/messages.html', {'messages': all_messages,
                                                     'unread_messages': u_m})
 
 
 def message_detail(request, message_id):
-    pass
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
+    message = Message.objects.get(id=message_id)
+    if request.user.id == message.to_user_id:
+        return render(request, 'mp_app/message_detail.html',
+                      {'unread_messages': u_m,
+                       'message': message})
+    else:
+        return HttpResponse("You don't have access to this page")
 
 
 def create_textMP(request):
