@@ -19,7 +19,7 @@
     <img src='/media/{{profile.pic}}'/>
   </div>
   <div class='profile_info'>
-    @<span class='username'>{{profile.username}}</span></br>
+    @<span class='username'>{{profile.user.username}}</span></br>
     <span class='bio'>{{profile.bio}}</span>
 
     {% if user.is_authenticated and profile.user_id == user.id %}

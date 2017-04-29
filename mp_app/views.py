@@ -46,22 +46,14 @@ def signup(request):
 
 
 def profile(request, user_id):
-    if len(UserProfile.objects.filter(user_id=user_id)) > 0:
-        user_profile = UserProfile.objects.get(user_id=user_id)
-        info = user_profile.__dict__
-        user = User.objects.get(id=user_id)
-        image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
-        text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
-        info['user_id'] = user.id
-        info['first_name'] = user.first_name
-        info['last_name'] = user.last_name
-        info['email'] = user.email
-        info['date_joined'] = user.date_joined
-        return render(request, 'mp_app/profile.html', {'profile': info,
-                                                       'image_mps': image_mps,
-                                                       'text_mps': text_mps})
-    else:
-        return render(request, 'mp_app/create_profile.html')
+    # if len(UserProfile.objects.filter(user_id=user_id)) > 0:
+    user_profile = UserProfile.objects.get(user_id=user_id)
+    user = User.objects.get(id=user_id)
+    image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
+    text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
+    return render(request, 'mp_app/profile.html', {'profile': user_profile,
+                                                   'image_mps': image_mps,
+                                                   'text_mps': text_mps})
 
 
 def create_textMP(request):
@@ -183,8 +175,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
             allow_messages = request.form['allow_messages']
 
             u = UserProfile(user_id, first_name, last_name, password,
-                        confirm_password, email, avatar_url, dob, bio, fb,
-                        insta, twitter, allow_messages)
+                            confirm_password, email, avatar_url, dob, bio, fb,
+                            insta, twitter, allow_messages)
             print("cool")
             u.save()
 
@@ -196,7 +188,6 @@ class ImageMPViewSet(viewsets.ModelViewSet):
     serializer_class = ImageMPSerializer
     permission_classes = [IsAuthenticated]
     parser_classes = (FormParser, MultiPartParser)
-
 
     def sign_s3(self, request):
         S3_BUCKET = os.environ.get('S3_BUCKET')
@@ -221,7 +212,6 @@ class ImageMPViewSet(viewsets.ModelViewSet):
             'data': presigned_post,
             'url': 'https://{}.s3.amazonaws.com/{}'.format(S3_BUCKET, file_name)
         })
-
 
     def submit_form(self, request):
         if request.method == 'POST':
