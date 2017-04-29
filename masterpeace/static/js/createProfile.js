@@ -1,19 +1,26 @@
-console.log('js works here');
+//js file to create a user's profile upon registration.
+//known bugs: any user can create a profile for user's without a profile.
 
 function createProfile(e) {
     e.preventDefault();
-    console.log('hi mom');
-    var post_data = { 'bio': $('#bio').val(),
-                      'allow_messages': false, //$('#allowMessages').val(),
-                      'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-                      'user': $('#user_id').val(),
-                      'user_id': $('#user_id').val(),
-        };
-    console.log(post_data);
+    let $form = {
+        "user": $('[name="user_id"]').val(),
+        'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
+        'pic': $('[name="pic"]').val(),
+        'bio': $('[name="bio"]').val(),
+        'fb_link': $('[name="fb_link"]').val(),
+        'insta_link': $('[name="insta_link"]').val(),
+        'twitter_link': $('[name="twitter_link"]').val(),
+        'allow_messages': $('[name="allow_messages"]').val(),
+    };
+
     var settings = {
         method: "POST",
         url: '/api/profile/',
-        data: post_data,
+        data: $form,
+        success: function(result) {
+            console.log('success')
+    }
     }
     $.ajax(settings);
 };
