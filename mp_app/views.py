@@ -52,7 +52,7 @@ def profile(request, user_id):
         user = User.objects.get(id=user_id)
         image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
         text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
-        info['user_id'] = user.user_id
+        info['user_id'] = user.id
         info['first_name'] = user.first_name
         info['last_name'] = user.last_name
         info['email'] = user.email
