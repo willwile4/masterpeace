@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^profile/(?P<user_id>[0-9]+)', views.profile, name='profile'),
     url(r'^privacy/', views.privacy, name="privacy"),
     url(r'^account/', views.account, name='account'),
+    url(r'^create_textMP/$', views.create_textMP, name='create_textMP'),
 ]
 
 if settings.DEBUG:
