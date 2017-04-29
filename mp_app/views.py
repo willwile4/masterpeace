@@ -25,12 +25,14 @@ def index(request):
     image_mps = ImageMP.objects.all().order_by('-created')
     text_mps = TextMP.objects.all().order_by('-created')
     user_profiles = UserProfile.objects.all()
+    text_tags = TextTag.objects.all()
     messages = Message.objects.filter(to_user_id=request.user.id, read=False)
     u_m = len(messages)
     return render(request, 'mp_app/index.html', {
                                            'image_mps': image_mps,
                                            'text_mps': text_mps,
                                            'user_profiles': user_profiles,
+                                           'text_tags': text_tags})
                                            'messages': messages,
                                            'unread_messages': u_m})
 
@@ -56,7 +58,6 @@ def edit_profile(request):
         form = EditProfile(instance=profile)
     return render(request, 'mp_app/edit_profile.html', {'form': form,
                                                         'profile': profile})
-
 
 def signup(request):
     if request.method == 'POST':
@@ -99,47 +100,19 @@ def create_textMP(request):
     if request.method == 'POST':
         f = CreateTextMPForm(request.POST)
         if f.is_valid():
-            owner = User.objects.get(pk=request.user.id)
-            title = f.cleaned_data.get('title')
-            text = f.cleaned_data.get('text')
-            allow_feedback = f.cleaned_data.get('allow_feedback')
-            artform = f.cleaned_data.get('artform')
-
-            textMP = TextMP(owner=owner, title=title, text=text,
-                            allow_feedback=allow_feedback, artform=artform)
+            textMP = f.save(commit=False)
+            textMP.owner = User.objects.get(pk=request.user.id)
+            textMP.title = f.cleaned_data.get('title')
+            textMP.text = f.cleaned_data.get('text')
+            textMP.allow_feedback = f.cleaned_data.get('allow_feedback')
+            textMP.artform = f.cleaned_data.get('artform')
             textMP.save()
+            textMP.tag = f.cleaned_data.get('tag')
+            f.save_m2m()
             return redirect('/')
-
     else:
-        user = User.objects.get(id=user_id)
-        info = user.__dict__
-        return render(request, 'mp_app/create_profile.html', info)
-
-# def create_textMP(request):
-#     if request.method == 'POST':
-#         f = CreateTextMPForm(request.POST)
-#         if f.is_valid():
-#             owner = User.objects.get(pk=request.user.id)
-#             title = f.cleaned_data.get('title')
-#             text = f.cleaned_data.get('text')
-#             allow_feedback = f.cleaned_data.get('allow_feedback')
-#             artform = f.cleaned_data.get('artform')
-#
-#             textMP = TextMP(owner=owner, title=title, text=text,
-#                             allow_feedback=allow_feedback, artform=artform)
-#             textMP.save()
-#             #
-#             # tag = [t for t in f.cleaned_data.get('tag')]
-#             # print(tag, type(tag))
-#             # for t in tag:
-#             #     t.save()
-#             #
-#             # textMP.tag.copy(tag)
-#             # textMP.save()
-#             return redirect('/')
-#     else:
-#         f = CreateTextMPForm()
-#     return render(request, 'mp_app/create.html', {'form': f})
+        f = CreateTextMPForm()
+    return render(request, 'mp_app/create.html', {'form': f})
 
 
 def privacy(request):

@@ -48,7 +48,9 @@ urlpatterns = [
     url(r'^edit_profile/', views.edit_profile, name="edit_profile"),
     url(r'^privacy/', views.privacy, name="privacy"),
     url(r'^account/', views.account, name='account'),
+    url(r'^create_textMP/$', views.create_textMP, name='create_textMP'),
     url(r'^messages/$', views.messages, name='messages'),
+
 ]
 
 if settings.DEBUG:
