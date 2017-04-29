@@ -23,7 +23,7 @@ from django.contrib.auth import views as auth_views
 
 router = routers.DefaultRouter()
 router.register(r'user', views.UserViewSet)
-router.register(r'message', views.MessageViewSet)
+# router.register(r'message', views.MessageViewSet)
 router.register(r'profile', views.UserProfileViewSet)
 router.register(r'image_mp', views.ImageMPViewSet)
 router.register(r'text_mp', views.TextMPViewSet)
@@ -45,9 +45,12 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
     url(r"^soc/", include("social_django.urls", namespace="social")),
     url(r'^profile/(?P<user_id>[0-9]+)', views.profile, name='profile'),
+    url(r'^edit_profile/', views.edit_profile, name="edit_profile"),
     url(r'^privacy/', views.privacy, name="privacy"),
     url(r'^account/', views.account, name='account'),
     url(r'^create_textMP/$', views.create_textMP, name='create_textMP'),
+    url(r'^messages/$', views.messages, name='messages'),
+
 ]
 
 if settings.DEBUG:
