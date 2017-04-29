@@ -2,8 +2,7 @@
 function createProfile(e) {
     e.preventDefault();
     let $form = {
-        'file': $('[name="file"]').val(),
-        "user_id": $('[name="user_id"]').val(),
+        "user": $('[name="user_id"]').val(),
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
         'pic': $('[name="pic"]').val(),
         'bio': $('[name="bio"]').val(),

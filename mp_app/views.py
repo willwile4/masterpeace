@@ -46,14 +46,17 @@ def signup(request):
 
 
 def profile(request, user_id):
-    # if len(UserProfile.objects.filter(user_id=user_id)) > 0:
-    user_profile = UserProfile.objects.get(user_id=user_id)
-    user = User.objects.get(id=user_id)
-    image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
-    text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
-    return render(request, 'mp_app/profile.html', {'profile': user_profile,
-                                                   'image_mps': image_mps,
-                                                   'text_mps': text_mps})
+    if len(UserProfile.objects.filter(user_id=user_id)) > 0:
+        user_profile = UserProfile.objects.get(user_id=user_id)
+        user = User.objects.get(id=user_id)
+        image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
+        text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
+        return render(request, 'mp_app/profile.html', {'profile': user_profile,
+                                                       'image_mps': image_mps,
+                                                       'text_mps': text_mps})
+    else:
+        user = User.objects.get(id=user_id)
+        return render(request, 'mp_app/create_profile.html', {'user': user})
 
 
 def create_textMP(request):
@@ -69,14 +72,6 @@ def create_textMP(request):
             textMP = TextMP(owner=owner, title=title, text=text,
                             allow_feedback=allow_feedback, artform=artform)
             textMP.save()
-            #
-            # tag = [t for t in f.cleaned_data.get('tag')]
-            # print('coastal elite', tag, type(tag))
-            # for t in tag:
-            #     t.save()
-            #
-            # textMP.tag.copy(tag)
-            # textMP.save()
             return redirect('/')
 
     else:
