@@ -48,6 +48,8 @@ urlpatterns = [
     url(r'^privacy/', views.privacy, name="privacy"),
     url(r'^account/', views.account, name='account'),
     url(r'^messages/$', views.messages, name='messages'),
+    url(r'^messages/(?P<message_id>[0-9]+)',
+        views.message_detail, name='message_detail'),
 ]
 
 if settings.DEBUG:

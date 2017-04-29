@@ -72,13 +72,9 @@ def messages(request):
                                                     'unread_messages': u_m})
 
 
-def messages(request):
-    all_messages = Message.objects.filter(to_user_id=request.user.id)
-    unread_messages = Message.objects.filter(to_user_id=request.user.id,
-                                             read=False)
-    u_m = len(unread_messages) > 0
-    return render(request, 'mp_app/messages.html', {'messages': all_messages,
-                                                    'unread_messages': u_m})
+def message_detail(request, message_id):
+    pass
+
 
 def create_textMP(request):
     if request.method == 'POST':
