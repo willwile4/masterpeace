@@ -1,3 +1,21 @@
+.profile_editor{
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 1em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: .5em;
+  -webkit-box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
+  -moz-box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
+  box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
+  overflow: auto;
+  white-space: nowrap;
+}
+
 .profile{
   border-bottom: .1em solid black;
   display:flex;
@@ -12,6 +30,11 @@
   position: relative;
   -webkit-transition-duration: .7s; /* Safari */
   transition-duration: .7s;
+}
+
+#profile_pic{
+  max-width: 5em;
+  height: auto;
 }
 
 .profile_pic:hover{

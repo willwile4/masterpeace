@@ -16,14 +16,19 @@
 
 <div class='profile'>
   <div class='profile_pic'>
-    <img src='/media/{{profile.pic}}'/>
+    {% if profile.pic %}
+    <img id='profile_pic' src='/media/{{profile.pic}}'/>
+    {% else %}
+    <img id='profile_pic' src='{% static "base_images/icon.png" %}'/>
+    {% endif %}
   </div>
+
   <div class='profile_info'>
     @<span class='username'>{{profile.user.username}}</span></br>
-    <span class='bio'>{{profile.bio}}</span>
+    <span class='bio'>{{profile.bio}}</span></br>
 
     {% if user.is_authenticated and profile.user_id == user.id %}
-      <span class='edit_profile'>Edit profile</span>
+      <span class='edit_profile'><a href='/edit_profile'>Edit profile</a></span>
     {% endif %}
   </div>
 </div>
