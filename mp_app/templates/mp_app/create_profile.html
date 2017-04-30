@@ -8,19 +8,19 @@
 {% block content %}
 
 <div class='createProfileForm'>
-    <form name='createProfile' method='post'>
+    <form name='createProfile' id='createProfile' method='post'>
         {% csrf_token %}
         <input id='user_id' type='text' name='user_id' value='{{user.id}}' style='display:none'>
-        <input type='file' id='file_input'/>
+        <input type='file' id='file_input' name="file"/>
         <p id='status'>Please select a file</p>
         <img id='preview' src="{% static 'base_images/user.svg' %}" width=10% height=auto/>
-        <input type='hidden' id='avatar-url' name='avatar-url' value='/static/user.svg'><br>
-        Bio:<input type='text' name="Bio" placeholder="Bio"><br>
-        Facebook:<input type='url' name="FBlink" placeholder="Link to Facebook"><br>
-        Instagram:<input type='url' name="Instalink" placeholder="Link to Instagram"><br>
-        Twitter:<input type='url' name="Twitterlink" placeholder="Link to Twitter"><br>
-        Allow Messages:<input type='checkbox' name='AllowMsgs' placeholder="Allow Messages"><br>
-        <input type='submit' id="btn" value='Update profile'>
+        <input type='hidden' id='avatar-url' name='pic' value='/static/user.svg'><br>
+        Bio:<input type='text' name="bio" placeholder="Bio"><br>
+        Facebook:<input type='url' name="fb_link" placeholder="Link to Facebook"><br>
+        Instagram:<input type='url' name="insta_link" placeholder="Link to Instagram"><br>
+        Twitter:<input type='url' name="twitter_link" placeholder="Link to Twitter"><br>
+        Allow Messages:<input type='checkbox' name='allow_messages' placeholder="Allow Messages"><br>
+        <input type='submit' id="create_profile" value='Update profile'>
     </form>
 </div>
 

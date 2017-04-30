@@ -1,7 +1,8 @@
+from django.http import Http404
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from django.contrib.auth import login, authenticate
-from .forms import SignUpForm, CreateTextMPForm
+from .forms import SignUpForm, CreateTextMPForm, EditProfile
 from django.contrib.auth.models import User
 from .models import (Message, UserProfile, ImageMP,
                      TextMP, ImageFeedback, TextFeedback,
@@ -25,12 +26,38 @@ def index(request):
     text_mps = TextMP.objects.all().order_by('-created')
     user_profiles = UserProfile.objects.all()
     text_tags = TextTag.objects.all()
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
     return render(request, 'mp_app/index.html', {
                                            'image_mps': image_mps,
                                            'text_mps': text_mps,
                                            'user_profiles': user_profiles,
                                            'text_tags': text_tags})
+                                           'messages': messages,
+                                           'unread_messages': u_m})
 
+
+def edit_profile(request):
+    user = request.user
+    try:
+        profile = UserProfile.objects.get(user_id=user.id)
+    except UserProfile.DoesNotExist:
+        raise Http404("Profile does not exist")
+
+    if request.method == 'POST':
+        form = EditProfile(request.POST, request.FILES, instance=profile)
+        if not profile.pic:
+            profile.pic = request.FILES['pic']
+        if form.is_valid():
+            profile.pic = profile.pic
+            profile = form.save(commit=True)
+            profile.save()
+            return redirect('/profile/{}'.format(user.id), pk=profile.pk)
+
+    else:
+        form = EditProfile(instance=profile)
+    return render(request, 'mp_app/edit_profile.html', {'form': form,
+                                                        'profile': profile})
 
 def signup(request):
     if request.method == 'POST':
@@ -48,15 +75,26 @@ def signup(request):
 
 
 def profile(request, user_id):
-    # if len(UserProfile.objects.filter(user_id=user_id)) > 0:
-    user_profile = UserProfile.objects.get(user_id=user_id)
-    user = User.objects.get(id=user_id)
-    image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
-    text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
-    return render(request, 'mp_app/profile.html', {'profile': user_profile,
-                                                   'image_mps': image_mps,
-                                                   'text_mps': text_mps})
+    if len(UserProfile.objects.filter(user_id=user_id)) > 0:
+        user_profile = UserProfile.objects.get(user_id=user_id)
+        user = User.objects.get(id=user_id)
+        image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
+        text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
+        return render(request, 'mp_app/profile.html', {'profile': user_profile,
+                                                       'image_mps': image_mps,
+                                                       'text_mps': text_mps})
+    else:
+        user = User.objects.get(id=user_id)
+        return render(request, 'mp_app/create_profile.html', {'user': user})
 
+
+def messages(request):
+    all_messages = Message.objects.filter(to_user_id=request.user.id)
+    unread_messages = Message.objects.filter(to_user_id=request.user.id,
+                                             read=False)
+    u_m = len(unread_messages) > 0
+    return render(request, 'mp_app/messages.html', {'messages': all_messages,
+                                                    'unread_messages': u_m})
 
 def create_textMP(request):
     if request.method == 'POST':

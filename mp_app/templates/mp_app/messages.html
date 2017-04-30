@@ -1,0 +1,30 @@
+{% extends 'mp_app/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+{% include 'mp_app/menubar.html' %}
+
+{% csrf_token %}
+
+<div id='messages'>
+  <ul>
+  {% for message in messages %}
+    <li>
+      {{message}}
+      <ul>
+        <li>From: {{message.from_user_id}}</li>
+        <li>{{message.created}}</li>
+        <li>
+          {% if message.read %}
+            READ
+          {% else %}
+            UNREAD
+          {% endif %}
+        </li>
+      </ul>
+    </li>
+  {% endfor %}
+</ul>
+</div>
+{% endblock %}

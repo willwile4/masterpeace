@@ -13,7 +13,13 @@
 
   {% if user.is_authenticated %}
   <div id='account'>
-    Welcome, <a href='/profile/{{user.id}}'>{{user.username}}</a><a class='navbutton' href='/logout'>Logout</a><a class='navbutton' href='/'><i class="fa fa-plus-square-o fa-4x"></i></a>
+    Welcome, <a href='/profile/{{user.id}}'>{{user.username}}</a> |
+    <a class='navbutton' href='/logout'>Logout</a><a class='navbutton' href='/'><i class="fa fa-plus-square-o fa-4x"></i></a>
+      {% if unread_messages > 0 %}
+        <a class='messages' href='messages'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i> {{unread_messages}}</a> |
+      {% else %}
+        <a class='messages' href='messages'><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true"></i></a> |
+      {% endif %}
   </div>
   {% else %}
   <div id='account'>
