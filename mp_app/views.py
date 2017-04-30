@@ -59,7 +59,7 @@ def profile(request, user_id):
         return render(request, 'mp_app/create_profile.html', {'user': user})
 
 
-def create_textMP(request):
+def create_textMP(request, user_id):
     if request.method == 'POST':
         f = CreateTextMPForm(request.POST)
         if f.is_valid():
@@ -79,39 +79,39 @@ def create_textMP(request):
         info = user.__dict__
         return render(request, 'mp_app/create_profile.html', info)
 
-# def create_textMP(request):
-#     if request.method == 'POST':
-#         f = CreateTextMPForm(request.POST)
-#         if f.is_valid():
-#             owner = User.objects.get(pk=request.user.id)
-#             title = f.cleaned_data.get('title')
-#             text = f.cleaned_data.get('text')
-#             allow_feedback = f.cleaned_data.get('allow_feedback')
-#             artform = f.cleaned_data.get('artform')
-#
-#             textMP = TextMP(owner=owner, title=title, text=text,
-#                             allow_feedback=allow_feedback, artform=artform)
-#             textMP.save()
-#             #
-#             # tag = [t for t in f.cleaned_data.get('tag')]
-#             # print(tag, type(tag))
-#             # for t in tag:
-#             #     t.save()
-#             #
-#             # textMP.tag.copy(tag)
-#             # textMP.save()
-#             return redirect('/')
-#     else:
-#         f = CreateTextMPForm()
-#     return render(request, 'mp_app/create.html', {'form': f})
-
 
 def privacy(request):
     return render(request, 'mp_app/privacypolicy.html')
 
 
 def account(request):
-    return render(request, 'mp_app/account.html')
+    return render(request, 'mp_app/s3_test.html')
+
+
+def sign_s3(request):
+    # S3_BUCKET = os.environ.get('S3_BUCKET')
+    S3_BUCKET = 'masterpeace'
+    file_name = request.GET.get('file_name')
+    file_type = request.GET.get('file_type')
+    print(file_name, file_type)
+
+    s3 = boto3.client('s3')
+
+    presigned_post = s3.generate_presigned_post(
+        Bucket=S3_BUCKET,
+        Key=file_name,
+        Fields={'acl': "public-read", "Content-Type": file_type},
+        Conditions=[
+            {'acl': 'public-read'},
+            {'Content-Type': file_type}
+        ],
+        ExpiresIn=3600
+    )
+
+    return json.dumps({
+        'data': presigned_post,
+        'url': 'https://{}.s3.amazonaws.com/{}'.format(S3_BUCKET, file_name)
+    })
 
 
 class UserViewSet(viewsets.ModelViewSet):

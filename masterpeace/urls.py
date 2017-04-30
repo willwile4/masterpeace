@@ -40,13 +40,14 @@ urlpatterns = [
         namespace='rest_framework')),
     url(r'^$', include('mp_app.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^login/$', auth_views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, name='logout'),
-    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^login/', auth_views.login, name='login'),
+    url(r'^logout/', auth_views.logout, name='logout'),
+    url(r'^signup/', views.signup, name='signup'),
     url(r"^soc/", include("social_django.urls", namespace="social")),
     url(r'^profile/(?P<user_id>[0-9]+)', views.profile, name='profile'),
     url(r'^privacy/', views.privacy, name="privacy"),
-    url(r'^account/', views.account, name='account'),
+    url(r'^s3_test/', views.account, name='account'),
+    url(r'^sign_s3', views.sign_s3, name='sign_s3')
 ]
 
 if settings.DEBUG:
