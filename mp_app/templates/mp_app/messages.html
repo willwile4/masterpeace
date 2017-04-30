@@ -9,20 +9,9 @@
 
 <div id='messages'>
   <ul>
-  {% for message in messages %}
+  {% for user in convos %}
     <li>
-      {{message}}
-      <ul>
-        <li>From: {{message.from_user_id}}</li>
-        <li>{{message.created}}</li>
-        <li>
-          {% if message.read %}
-            READ
-          {% else %}
-            UNREAD
-          {% endif %}
-        </li>
-      </ul>
+      <a href='/messages/{{user.id}}'>{{user.username}}</a>
     </li>
   {% endfor %}
 </ul>

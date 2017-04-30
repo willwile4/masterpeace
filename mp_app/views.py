@@ -15,6 +15,7 @@ from .serializers import (UserSerializer, MessageSerializer,
 from django.http import HttpResponseRedirect, HttpResponse
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
+from django.db.models import Q
 import os
 import json
 import boto3
@@ -50,7 +51,7 @@ def signup(request):
 def profile(request, user_id):
     messages = Message.objects.filter(to_user_id=request.user.id, read=False)
     u_m = len(messages)
-    if len(UserProfile.objects.filter(user_id=user_id)) > 0:
+    if UserProfile.objects.filter(user_id=user_id).exists():
         user_profile = UserProfile.objects.get(user_id=user_id)
         user = User.objects.get(id=user_id)
         image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
@@ -65,24 +66,29 @@ def profile(request, user_id):
 
 
 def messages(request):
-    all_messages = Message.objects.filter(to_user_id=request.user.id)
+    convo_users = [User.objects.get(id=user_id) for user_id in set([message.to_user_id if message.from_user_id == request.user.id else message.from_user_id for message in Message.objects.filter(Q(from_user_id=request.user.id) | Q(to_user_id=request.user.id))])]
+    # all_messages = Message.objects.filter(to_user_id=request.user.id)
+    last_messages = (Message.objects.filter(from_user_id=user.id).order_by('created')[0] for user in convo_users)
     unread_messages = Message.objects.filter(to_user_id=request.user.id,
                                              read=False)
     u_m = len(unread_messages)
-    return render(request, 'mp_app/messages.html', {'messages': all_messages,
-                                                    'unread_messages': u_m})
+    return render(request, 'mp_app/messages.html', {
+                                                    # 'messages': all_messages,
+                                                    'unread_messages': u_m,
+                                                    'last_messages': last_messages,
+                                                    'convos': convo_users})
 
 
-def message_detail(request, message_id):
-    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
-    u_m = len(messages)
-    message = Message.objects.get(id=message_id)
-    if request.user.id == message.to_user_id:
-        return render(request, 'mp_app/message_detail.html',
-                      {'unread_messages': u_m,
-                       'message': message})
-    else:
-        return HttpResponse("You don't have access to this page")
+def message_detail(request, user_id):
+    messages = Message.objects.filter(Q(from_user_id=user_id, to_user_id=request.user.id) | Q(to_user_id=user_id, from_user_id=request.user.id)).order_by('created')
+    for message in messages:
+        message.read = True
+        message.save()
+    u_m = len(Message.objects.filter(to_user_id=request.user.id, read=False))
+    return render(request, 'mp_app/message_detail.html',
+                  {'unread_messages': u_m,
+                   'messages': messages,
+                   'user': User.objects.get(id=user_id)})
 
 
 def create_textMP(request):

@@ -6,11 +6,18 @@
 {% include 'mp_app/menubar.html' %}
 
 {% csrf_token %}
-<div id='message_detail'>
+<h1>{{user.username}}</h1>
+<div id='convo_detail'>
   <ul>
-    <li>{{message.content}}</li>
-    <li>From: {{message.from_user_id}}</li>
-    <li>{{message.created}}</li>
+    {% for message in messages %}
+    <li>
+      {{message.content}}
+      <ul>
+        <li>{{message.created}}</li>
+      </ul>
+    </li>
+    {% endfor %}
 </ul>
 </div>
+<a href='/messages'>Back to Messages</a>
 {% endblock %}
