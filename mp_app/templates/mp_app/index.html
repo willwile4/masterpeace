@@ -27,7 +27,9 @@
     <div class='posts_txt' id='text_{{text.id}}'>
       {{text.title}}</br>
       {{text.text}}</br>
-      {{text.tags}}</br>
+      {% for tag in text.tag.all %}
+      {{ tag }}</br>
+      {% endfor %}
       Posted by: {{text.owner_id}}
     </div>
   {% endfor %}
