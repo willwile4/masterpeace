@@ -24,7 +24,11 @@
   </div>
 
   <div class='profile_info'>
-    @<span class='username'>{{profile.user.username}}</span></br>
+    @<span class='username'>{{profile.user.username}}</span>
+    {% if profile.allow_messages %}
+    <a href='/messages/{{profile.user_id}}'>Send a message</a>
+    {% endif %}
+    </br>
     <span class='bio'>{{profile.bio}}</span></br>
 
     {% if user.is_authenticated and profile.user_id == user.id %}

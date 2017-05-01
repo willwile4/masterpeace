@@ -1,6 +1,10 @@
 {% extends 'mp_app/base.html' %}
 {% load staticfiles %}
 
+{% block extra_head_content %}
+<link rel='stylesheet' type='text/css' href="{% static 'css/messages.css' %}"/>
+{% endblock %}
+
 {% block content %}
 
 {% include 'mp_app/menubar.html' %}
@@ -9,19 +13,12 @@
 
 <div id='messages'>
   <ul>
-  {% for message in messages %}
-    <li>
-      {{message}}
+  {% for convo in convos %}
+    <li {% if convo.unread %} class='unread' {% endif %}>
+      <a href='/messages/{{convo.other.id}}'>{{convo.other.username}}</a>
       <ul>
-        <li>From: {{message.from_user_id}}</li>
-        <li>{{message.created}}</li>
-        <li>
-          {% if message.read %}
-            READ
-          {% else %}
-            UNREAD
-          {% endif %}
-        </li>
+        <li>{{convo.latest_message}}</li>
+        <li>{{convo.latest_message.created}}</li>
       </ul>
     </li>
   {% endfor %}

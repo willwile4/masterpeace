@@ -16,6 +16,7 @@ from .serializers import (UserSerializer, MessageSerializer,
 from django.http import HttpResponseRedirect
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
+from django.db.models import Q
 import os
 import json
 import boto3
@@ -32,8 +33,7 @@ def index(request):
                                            'image_mps': image_mps,
                                            'text_mps': text_mps,
                                            'user_profiles': user_profiles,
-                                           'text_tags': text_tags})
-                                           'messages': messages,
+                                           'text_tags': text_tags,
                                            'unread_messages': u_m})
 
 
@@ -59,6 +59,7 @@ def edit_profile(request):
     return render(request, 'mp_app/edit_profile.html', {'form': form,
                                                         'profile': profile})
 
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -75,26 +76,55 @@ def signup(request):
 
 
 def profile(request, user_id):
-    if len(UserProfile.objects.filter(user_id=user_id)) > 0:
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
+    if UserProfile.objects.filter(user_id=user_id).exists():
         user_profile = UserProfile.objects.get(user_id=user_id)
         user = User.objects.get(id=user_id)
         image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
         text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
         return render(request, 'mp_app/profile.html', {'profile': user_profile,
                                                        'image_mps': image_mps,
-                                                       'text_mps': text_mps})
+                                                       'text_mps': text_mps,
+                                                       'unread_messages': u_m})
     else:
         user = User.objects.get(id=user_id)
         return render(request, 'mp_app/create_profile.html', {'user': user})
 
 
+class Conversation:
+    def __init__(self, user_id, other):
+        self.id = user_id
+        self.other = other
+        self.messages = [message for message in Message.objects.filter(Q(from_user_id=other.id, to_user_id=user_id) | Q(to_user_id=other.id, from_user_id=user_id)).order_by('created')]
+        self.unread = Message.objects.filter(to_user_id=user_id, from_user_id=other.id, read=False).exists()
+        if self.messages:
+            self.latest_message = self.messages[-1]
+
+
 def messages(request):
-    all_messages = Message.objects.filter(to_user_id=request.user.id)
+    convo_users = [User.objects.get(id=user_id) for user_id in set([message.to_user_id if message.from_user_id == request.user.id else message.from_user_id for message in Message.objects.filter(Q(from_user_id=request.user.id) | Q(to_user_id=request.user.id))])]
+    conversations = [Conversation(request.user.id, user) for user in convo_users][::-1]
     unread_messages = Message.objects.filter(to_user_id=request.user.id,
                                              read=False)
-    u_m = len(unread_messages) > 0
-    return render(request, 'mp_app/messages.html', {'messages': all_messages,
-                                                    'unread_messages': u_m})
+    u_m = len(unread_messages)
+    return render(request, 'mp_app/messages.html', {'unread_messages': u_m,
+                                                    'convos': conversations})
+
+
+def message_detail(request, user_id):
+    conversation = Conversation(request.user.id, User.objects.get(id=user_id))
+    for message in conversation.messages:
+        if message.to_user_id == request.user.id:
+            message.read = True
+            message.save()
+    u_m = len(Message.objects.filter(to_user_id=request.user.id, read=False))
+    return render(request, 'mp_app/message_detail.html',
+                  {'unread_messages': u_m,
+                   'conversation': conversation,
+                   'other_user': User.objects.get(id=user_id),
+                   'user': request.user})
+
 
 def create_textMP(request):
     if request.method == 'POST':
