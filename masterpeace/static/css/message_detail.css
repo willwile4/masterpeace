@@ -1,5 +1,25 @@
-.sent {
+span.sent {
   color: white;
   background-color: #4386a8;
+}
+
+span {
+  background-color: #eee;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin-bottom: 2px;
+}
+
+li.sent {
   text-align: right;
+}
+
+div.main {
+  width: 45%;
+  margin: auto;
 }
