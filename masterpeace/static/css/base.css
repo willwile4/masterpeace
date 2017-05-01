@@ -12,6 +12,46 @@ a, a:visited{
   color: #4386a8;
 }
 
+.signup_splash{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.splash{
+  width: 65%;
+  height: 65%;
+  object-fit: contain;
+}
+
+.info_splash{
+  position: fixed;
+  padding: 2em;
+  list-style: none;
+}
+
+.signup_button{
+  text-transform: uppercase;
+  width: 100%;
+  height: 5%;
+  margin: 1em;
+  width: auto;
+  font-size: 2em;
+  top: 50%;
+  padding: 1em 2em 1em;
+  border-radius: 1em;
+  background-color: #ccc;
+  -webkit-box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
+  -moz-box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
+  box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
+  transition: .2s ease;
+  position: absolute;
+}
+
+.signup_button:active{
+  background-color: #74C19D;
+  transition: .2s ease;
+}
+
 .registration{
   width: 40%;
   margin: 0 auto;
@@ -108,14 +148,23 @@ img.masterpeace{
 }
 
 .feedback_bar{
-  width: 70%;
-  display: none;
+  padding: .5em;
+  min-width: 5em;
+  max-width: 6em;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
   border: .1em solid black;
 }
 
 .feedback:hover .feedback_bar{
-  content: '';
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.1s, opacity 0.1s linear;
   display: flex;
   justify-content: space-around;
+}
+
+.feedback_button:hover{
+  color: red;
 }

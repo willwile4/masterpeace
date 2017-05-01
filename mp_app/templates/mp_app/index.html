@@ -5,6 +5,7 @@
 
 {% include 'mp_app/menubar.html' %}
 
+{% if user.is_authenticated %}
 <div class='gallery'>
   {% for text in text_mps %}
     <div class='posts_txt' id='text_{{text.id}}'>
@@ -18,6 +19,28 @@
         <span class='edit_text'><a href='/edit_text/{{text.id}}'>Edit</a></span>
       {% else %}
         Posted by: <a href='/profile/{{text.owner_id}}'>{{text.owner}}</a></br>
+      {% endif %}
+      </br></br>
+      {% if text.allow_feedback %}
+        <div class='feedback'>
+          <table class='feedback_bar'>
+            <td>
+              <a class='feedback_button' href='#'><i class="fa fa-quora" aria-hidden="true"></i></a>
+            </td>
+            <td>
+              <a class='feedback_button' href='#'><i class="fa fa-meetup" aria-hidden="true"></i></a>
+            </td>
+            <td>
+              <a class='feedback_button' href='#'><i class="fa fa-superpowers" aria-hidden="true"></i></a>
+            </td>
+            <td>
+              <a class='feedback_button' href='#'><i class="fa fa-microchip" aria-hidden="true"></i></a>
+            </td>
+            <td>
+              <a class='feedback_button' href='#'><i class="fa fa-anchor" aria-hidden="true"></i></a>
+            </td>
+          </table>
+        </div>
       {% endif %}
     </div>
   {% endfor %}
@@ -44,11 +67,21 @@
         {% if image.allow_feedback %}
           <div class='feedback'>
             <table class='feedback_bar'>
-              <td><i class="fa fa-anchor" aria-hidden="true"></i></td>
-              <td><i class="fa fa-anchor" aria-hidden="true"></i></td>
-              <td><i class="fa fa-anchor" aria-hidden="true"></i></td>
-              <td><i class="fa fa-anchor" aria-hidden="true"></i></td>
-              <td><i class="fa fa-anchor" aria-hidden="true"></i></td>
+              <td>
+                <a class='feedback_button' href='#'><i class="fa fa-quora" aria-hidden="true"></i></a>
+              </td>
+              <td>
+                <a class='feedback_button' href='#'><i class="fa fa-meetup" aria-hidden="true"></i></a>
+              </td>
+              <td>
+                <a class='feedback_button' href='#'><i class="fa fa-superpowers" aria-hidden="true"></i></a>
+              </td>
+              <td>
+                <a class='feedback_button' href='#'><i class="fa fa-microchip" aria-hidden="true"></i></a>
+              </td>
+              <td>
+                <a class='feedback_button' href='#'><i class="fa fa-anchor" aria-hidden="true"></i></a>
+              </td>
             </table>
           </div>
         {% endif %}
@@ -56,6 +89,22 @@
     </div>
   {% endfor %}
 </div>
+{% else %}
+<div class='info_splash'>
+  <ul>
+    <li>a</li>
+    <li>a</li>
+    <li>a</li>
+    <li>a</li>
+  </ul>
+</div>
+
+<div class='signup_splash'>
+  <img class='splash' src="{% static 'base_images/bob.png' %}">
+</div>
+
+<a class='signup_button' href='/signup'>Sign up and post your masterpeace!</a>
+{% endif %}
 
 
 {% endblock %}
