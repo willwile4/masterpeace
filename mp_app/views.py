@@ -187,6 +187,18 @@ def create_textMP(request):
     return render(request, 'mp_app/create.html', {'form': f})
 
 
+def filter_text_tags(request, tag_id):
+    texttags = TextTag.objects.filter(id=tag_id)
+    context = {'texttags': texttags}
+    return render(request, 'filter_text_tags.html', context)
+
+
+def filter_image_tags(request, tag_id):
+    imagetags = ImageTag.objects.filter(id=tag_id)
+    context = {'imagetags': imagetags}
+    return render(request, 'filter_image_tags.html', context)
+
+
 def privacy(request):
     return render(request, 'mp_app/privacypolicy.html')
 

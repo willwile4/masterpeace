@@ -1,0 +1,18 @@
+{% extends 'mp_app/base.html' %}
+{% load staticfiles %}
+{% block extra_head_content %}
+<link rel='stylesheet' type="text/css" href="{% static 'css/profile.css' %}"/>
+{% endblock %}
+{% block content %}
+{% include 'mp_app/menubar.html' %}
+{% for tag in imagetags %}
+  {% for imagemp in tag.imagemp_set.all %}
+    {{ imagemp }}
+      {% endfor %}
+{% endfor %}
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}
