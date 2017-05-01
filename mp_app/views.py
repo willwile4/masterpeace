@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from django.contrib.auth import login, authenticate
-from .forms import SignUpForm, CreateTextMPForm, EditProfile
+from .forms import SignUpForm, CreateTextMPForm, EditProfile, EditImage, EditText
 from django.contrib.auth.models import User
 from .models import (Message, UserProfile, ImageMP,
                      TextMP, ImageFeedback, TextFeedback,
@@ -28,13 +28,12 @@ def index(request):
     text_tags = TextTag.objects.all()
     messages = Message.objects.filter(to_user_id=request.user.id, read=False)
     u_m = len(messages)
-    return render(request, 'mp_app/index.html', {
-                                           'image_mps': image_mps,
-                                           'text_mps': text_mps,
-                                           'user_profiles': user_profiles,
-                                           'text_tags': text_tags})
-                                           'messages': messages,
-                                           'unread_messages': u_m})
+    return render(request, 'mp_app/index.html', {'image_mps': image_mps,
+                                                 'text_mps': text_mps,
+                                                 'user_profiles': user_profiles,
+                                                 'text_tags': text_tags,
+                                                 'messages': messages,
+                                                 'unread_messages': u_m})
 
 
 def edit_profile(request):
@@ -46,8 +45,7 @@ def edit_profile(request):
 
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES, instance=profile)
-        if not profile.pic:
-            profile.pic = request.FILES['pic']
+
         if form.is_valid():
             profile.pic = profile.pic
             profile = form.save(commit=True)
@@ -58,6 +56,49 @@ def edit_profile(request):
         form = EditProfile(instance=profile)
     return render(request, 'mp_app/edit_profile.html', {'form': form,
                                                         'profile': profile})
+
+
+def edit_image(request, id):
+    user = request.user
+    try:
+        image = ImageMP.objects.get(id=id)
+    except ImageMP.DoesNotExist:
+        raise Http404("Image does not exist")
+
+    if request.method == 'POST':
+        form = EditImage(request.POST, request.FILES, instance=image)
+
+        if form.is_valid():
+            image = form.save(commit=True)
+            image.save()
+            return redirect('/profile/{}'.format(user.id), pk=image.pk)
+
+    else:
+        form = EditImage(instance=image)
+    return render(request, 'mp_app/edit_image.html', {'form': form,
+                                                      'image': image})
+
+
+def edit_text(request, id):
+    user = request.user
+    try:
+        text = TextMP.objects.get(id=id)
+    except TextMP.DoesNotExist:
+        raise Http404("Image does not exist")
+
+    if request.method == 'POST':
+        form = EditText(request.POST, request.FILES, instance=text)
+
+        if form.is_valid():
+            text = form.save(commit=True)
+            text.save()
+            return redirect('/profile/{}'.format(user.id), pk=text.pk)
+
+    else:
+        form = EditText(instance=text)
+    return render(request, 'mp_app/edit_text.html', {'form': form,
+                                                     'text': text})
+
 
 def signup(request):
     if request.method == 'POST':

@@ -40,6 +40,9 @@
       <img class='masterpeace' src="/media/{{image.image}}" alt="" /></a>
       <span class='username'>{{image.title}}</span></br>
       {{image.tags}}</br>
+      {% if user.is_authenticated and profile.user_id == user.id %}
+        <span class='edit_image'><a href='/edit_image/{{image.id}}'>Edit</a></span>
+      {% endif %}
   </div>
 {% endfor %}
 
@@ -48,6 +51,9 @@
     <span class='username'>{{text.title}}</span>
     {{text.text}}</br>
     {{text.tags}}</br>
+    {% if user.is_authenticated and profile.user_id == user.id %}
+      <span class='edit_text'><a href='/edit_text/{{text.id}}'>Edit</a></span>
+    {% endif %}
   </div>
 {% endfor %}
 </div>

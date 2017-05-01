@@ -5,30 +5,55 @@
 
 {% include 'mp_app/menubar.html' %}
 
-{% csrf_token %}
-
 <div class='gallery'>
+  {% for text in text_mps %}
+    <div class='posts_txt' id='text_{{text.id}}'>
+      <span class='post_title'>{{text.title}}</span></br>
+      {{text.text}}</br></br>
+      {% for tag in text.tag.all %}
+      <span class='tag'>#{{tag}}</span>
+      {% endfor %}
+      {% if user.is_authenticated and text.owner_id == user.id %}
+        Posted by:<a href='/profile/{{text.owner_id}}'>You</a></br>
+        <span class='edit_text'><a href='/edit_text/{{text.id}}'>Edit</a></span>
+      {% else %}
+        Posted by: <a href='/profile/{{text.owner_id}}'>{{text.owner}}</a></br>
+      {% endif %}
+    </div>
+  {% endfor %}
+
   {% for image in image_mps %}
     <div class='posts_img' id='image_{{image.id}}'>
       <div class='image_itself'>
         <img class='masterpeace' src="/media/{{image.image}}">
       </div>
       <div class='image_info'>
-        <span class='image_title'>{{image.title}}</span></br>
+        <span class='post_title'>{{image.title}}</span></br>
         {{image.caption}}</br>
-        {{image.tags}}</br>
-        <!-- <a href='/profile/{{image.owner_id.user_profile}}'></a> -->
-        Posted by: {{image.owner_id}} <!-- okay so this doens't work, let's try harder... -->
-      </div>
-    </div>
-  {% endfor %}
+        {% for tag in image.tag.all %}
+        <span class='tag'>#{{tag}}</span>
+        {% endfor %}
+        </br></br>
+        {% if user.is_authenticated and image.owner_id == user.id %}
+          Posted by: <a href='/profile/{{image.owner_id}}'>You</a></br>
+          <span class='edit_image'><a href='/edit_image/{{image.id}}'>Edit</a></span>
+        {% else %}
+          Posted by: <a href='/profile/{{image.owner_id}}'>{{image.owner}}</a></br>
+        {% endif %}
+        </br></br>
 
-  {% for text in text_mps %}
-    <div class='posts_txt' id='text_{{text.id}}'>
-      {{text.title}}</br>
-      {{text.text}}</br>
-      {{text.tags}}</br>
-      Posted by: {{text.owner_id}}
+        {% if image.allow_feedback %}
+          <div class='feedback'>
+            <table class='feedback_bar'>
+              <td><i class="fa fa-anchor" aria-hidden="true"></i></td>
+              <td><i class="fa fa-anchor" aria-hidden="true"></i></td>
+              <td><i class="fa fa-anchor" aria-hidden="true"></i></td>
+              <td><i class="fa fa-anchor" aria-hidden="true"></i></td>
+              <td><i class="fa fa-anchor" aria-hidden="true"></i></td>
+            </table>
+          </div>
+        {% endif %}
+      </div>
     </div>
   {% endfor %}
 </div>

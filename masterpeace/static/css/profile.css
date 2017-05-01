@@ -66,12 +66,13 @@
   display: flex;
   flex-flow: wrap row;
   justify-content: flex-start;
-  padding-left: 7em;
+  padding-left: 5em;
 }
 
 .posts_img{
-  min-height: 80%;
-  width: 20%;
+  max-height: 20em;
+  min-height: 1em;
+  width: 27%;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -82,11 +83,12 @@
 }
 
 .posts_txt{
-  min-height: 50%;
+  max-height: 20em;
+  min-height: 1em;
   min-width: 20%;
-  width: 20%;
+  width: 27%;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   align-items: flex-start;
   border: .1em solid black;
   margin: 1em;
