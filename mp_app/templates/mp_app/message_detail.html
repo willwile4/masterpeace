@@ -1,0 +1,38 @@
+{% extends 'mp_app/base.html' %}
+{% load staticfiles %}
+
+{% block extra_head_content %}
+<link rel='stylesheet' type="text/css" href="{% static 'css/message_detail.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+{% include 'mp_app/menubar.html' %}
+
+<h1>
+  <a href='/profile/{{other_user.id}}'>{{other_user.username}}</a>
+</h1>
+<div id='convo_detail'>
+  <ul>
+    {% for message in conversation.messages %}
+      <li {% if user.id == message.from_user_id %}class='sent'{% endif %}>
+      {{message.content}}
+    </li>
+    {% endfor %}
+</ul>
+</div>
+<div class='createMessageForm'>
+  <form name='createMessage' id='createMessage' method='post'>
+    {% csrf_token %}
+    <input id='from_user' type='text' name='from_user' value='{{user.id}}' style='display:none'>
+    <input id='to_user' type='text' name='to_user' value='{{other_user.id}}' style='display:none'>
+    <input id='content' type='text' name="content" placeholder="Write your message here">
+    <input type='submit' id="create_message" value='Send'>
+  </form>
+</div>
+<a href='/messages'>Back to Messages</a>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/createMessage.js' %}"></script>
+{% endblock %}
