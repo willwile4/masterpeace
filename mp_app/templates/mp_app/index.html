@@ -6,7 +6,12 @@
 {% include 'mp_app/menubar.html' %}
 
 {% if user.is_authenticated %}
-<div class='gallery'>
+  <div class='gallery'>
+
+    <div class='right_arrow'>
+      <i class="fa fa-long-arrow-right fa-5x" aria-hidden="true"></i>
+    </div>
+
   {% for text in text_mps %}
     <div class='posts_txt' id='text_{{text.id}}'>
       <span class='post_title'>{{text.title}}</span></br>
@@ -14,11 +19,12 @@
       {% for tag in text.tag.all %}
       <span class='tag'>#{{tag}}</span>
       {% endfor %}
+      </br>
       {% if user.is_authenticated and text.owner_id == user.id %}
-        Posted by:<a href='/profile/{{text.owner_id}}'>You</a></br>
-        <span class='edit_text'><a href='/edit_text/{{text.id}}'>Edit</a></span>
+        <p>Posted by: <a href='/profile/{{text.owner_id}}'>You</a>, {{text.created}}</p>
+        <span class='edit_text'><a href='/edit_text/{{text.id}}'>edit</a></span>
       {% else %}
-        Posted by: <a href='/profile/{{text.owner_id}}'>{{text.owner}}</a></br>
+        <p>Posted by: <a href='/profile/{{text.owner_id}}'>{{text.owner}}</a>, {{text.created}}</p>
       {% endif %}
       </br></br>
       {% if text.allow_feedback %}
@@ -52,16 +58,16 @@
       </div>
       <div class='image_info'>
         <span class='post_title'>{{image.title}}</span></br>
-        {{image.caption}}</br>
+        {{image.caption}}</br></br>
         {% for tag in image.tag.all %}
-        <span class='tag'>#{{tag}}</span>
+        <span class='tag'>#{{tag}}</span></br>
         {% endfor %}
-        </br></br>
+        </br>
         {% if user.is_authenticated and image.owner_id == user.id %}
-          Posted by: <a href='/profile/{{image.owner_id}}'>You</a></br>
-          <span class='edit_image'><a href='/edit_image/{{image.id}}'>Edit</a></span>
+          <p>Posted by: <a href='/profile/{{image.owner_id}}'>You</a>, {{image.created}}</p>
+          <span class='edit_image'><a href='/edit_image/{{image.id}}'>edit</a></span>
         {% else %}
-          Posted by: <a href='/profile/{{image.owner_id}}'>{{image.owner}}</a></br>
+          <p>Posted by: <a href='/profile/{{image.owner_id}}'>{{image.owner}}</a>, {{image.created}}</p>
         {% endif %}
         </br></br>
         {% if image.allow_feedback %}
@@ -88,22 +94,25 @@
       </div>
     </div>
   {% endfor %}
-</div>
-{% else %}
-<div class='info_splash'>
-  <ul>
-    <li>a</li>
-    <li>a</li>
-    <li>a</li>
-    <li>a</li>
-  </ul>
-</div>
 
-<div class='signup_splash'>
-  <img class='splash' src="{% static 'base_images/bob.png' %}">
-</div>
+  </div>
 
-<a class='signup_button' href='/signup'>Sign up and post your masterpeace!</a>
+  {% else %}
+  <div class='info_splash'>
+    <ul>
+      <li>a</li>
+      <li>a</li>
+      <li>a</li>
+      <li>a</li>
+    </ul>
+  </div>
+
+  <div class='signup_splash'>
+    <img class='splash' src="{% static 'base_images/bob.png' %}">
+  </div>
+
+  <a class='signup_button' href='/signup'>Sign up and post your masterpeace!</a>
+
 {% endif %}
 
 
