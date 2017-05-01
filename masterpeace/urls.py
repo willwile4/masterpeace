@@ -23,7 +23,7 @@ from django.contrib.auth import views as auth_views
 
 router = routers.DefaultRouter()
 router.register(r'user', views.UserViewSet)
-# router.register(r'message', views.MessageViewSet)
+router.register(r'message', views.MessageViewSet)
 router.register(r'profile', views.UserProfileViewSet)
 router.register(r'image_mp', views.ImageMPViewSet)
 router.register(r'text_mp', views.TextMPViewSet)

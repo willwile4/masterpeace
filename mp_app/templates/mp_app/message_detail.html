@@ -9,8 +9,7 @@
 
 {% include 'mp_app/menubar.html' %}
 
-{% csrf_token %}
-<h1>{{user.username}}</h1>
+<h1>{{other_user.username}}</h1>
 <div id='convo_detail'>
   <ul>
     {% for message in conversation.messages %}
@@ -20,5 +19,18 @@
     {% endfor %}
 </ul>
 </div>
+<div class='createMessageForm'>
+  <form name='createMessage' id='createMessage' method='post'>
+    {% csrf_token %}
+    <input id='from_user' type='text' name='from_user' value='{{user.id}}' style='display:none'>
+    <input id='to_user' type='text' name='to_user' value='{{other_user.id}}' style='display:none'>
+    <input id='content' type='text' name="content" placeholder="Write your message here">
+    <input type='submit' id="create_message" value='Send'>
+  </form>
+</div>
 <a href='/messages'>Back to Messages</a>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/createMessage.js' %}"></script>
 {% endblock %}

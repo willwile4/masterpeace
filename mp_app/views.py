@@ -12,7 +12,7 @@ from .serializers import (UserSerializer, MessageSerializer,
                           ImageFeedbackSerializer, TextFeedbackSerializer,
                           ImageTagSerializer, TextTagSerializer,
                           ArtformSerializer)
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
 from django.db.models import Q
@@ -77,28 +77,25 @@ class Conversation:
 def messages(request):
     convo_users = [User.objects.get(id=user_id) for user_id in set([message.to_user_id if message.from_user_id == request.user.id else message.from_user_id for message in Message.objects.filter(Q(from_user_id=request.user.id) | Q(to_user_id=request.user.id))])]
     conversations = [Conversation(request.user.id, user) for user in convo_users][::-1]
-    # all_messages = Message.objects.filter(to_user_id=request.user.id)
-    last_messages = (Message.objects.filter(from_user_id=user.id).order_by('created')[0] for user in convo_users)
     unread_messages = Message.objects.filter(to_user_id=request.user.id,
                                              read=False)
     u_m = len(unread_messages)
-    return render(request, 'mp_app/messages.html', {
-                                                    # 'messages': all_messages,
-                                                    'unread_messages': u_m,
-                                                    'last_messages': last_messages,
+    return render(request, 'mp_app/messages.html', {'unread_messages': u_m,
                                                     'convos': conversations})
 
 
 def message_detail(request, user_id):
     conversation = Conversation(request.user.id, User.objects.get(id=user_id))
     for message in conversation.messages:
-        message.read = True
-        message.save()
+        if message.to_user_id == request.user.id:
+            message.read = True
+            message.save()
     u_m = len(Message.objects.filter(to_user_id=request.user.id, read=False))
     return render(request, 'mp_app/message_detail.html',
                   {'unread_messages': u_m,
                    'conversation': conversation,
-                   'user': User.objects.get(id=user_id)})
+                   'other_user': User.objects.get(id=user_id),
+                   'user': request.user})
 
 
 def create_textMP(request):
