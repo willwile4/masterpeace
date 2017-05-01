@@ -90,14 +90,14 @@ def messages(request):
 
 
 def message_detail(request, user_id):
-    messages = Message.objects.filter(Q(from_user_id=user_id, to_user_id=request.user.id) | Q(to_user_id=user_id, from_user_id=request.user.id)).order_by('created')
-    for message in messages:
+    conversation = Conversation(request.user.id, User.objects.get(id=user_id))
+    for message in conversation.messages:
         message.read = True
         message.save()
     u_m = len(Message.objects.filter(to_user_id=request.user.id, read=False))
     return render(request, 'mp_app/message_detail.html',
                   {'unread_messages': u_m,
-                   'messages': messages,
+                   'conversation': conversation,
                    'user': User.objects.get(id=user_id)})
 
 
