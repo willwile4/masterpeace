@@ -9,7 +9,9 @@
 
 {% include 'mp_app/menubar.html' %}
 
-<h1>{{other_user.username}}</h1>
+<h1>
+  <a href='/profile/{{other_user.id}}'>{{other_user.username}}</a>
+</h1>
 <div id='convo_detail'>
   <ul>
     {% for message in conversation.messages %}

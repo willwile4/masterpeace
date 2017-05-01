@@ -119,10 +119,11 @@ def message_detail(request, user_id):
             message.read = True
             message.save()
     u_m = len(Message.objects.filter(to_user_id=request.user.id, read=False))
+    other_user = User.objects.get(id=user_id)
     return render(request, 'mp_app/message_detail.html',
                   {'unread_messages': u_m,
                    'conversation': conversation,
-                   'other_user': User.objects.get(id=user_id),
+                   'other_user': other_user,
                    'user': request.user})
 
 
