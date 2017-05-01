@@ -128,7 +128,7 @@ def profile(request, user_id):
                                                        'image_mps': image_mps,
                                                        'text_mps': text_mps,
                                                        'unread_messages': u_m})
-    else:
+    elif request.user.id == user_id:
         user = User.objects.get(id=user_id)
         return render(request, 'mp_app/create_profile.html', {'user': user})
 
@@ -145,7 +145,7 @@ class Conversation:
 
 def messages(request):
     convo_users = [User.objects.get(id=user_id) for user_id in set([message.to_user_id if message.from_user_id == request.user.id else message.from_user_id for message in Message.objects.filter(Q(from_user_id=request.user.id) | Q(to_user_id=request.user.id))])]
-    conversations = [Conversation(request.user.id, user) for user in convo_users][::-1]
+    conversations = sorted([Conversation(request.user.id, user) for user in convo_users], key=lambda conversation: conversation.latest_message.created)[::-1]
     unread_messages = Message.objects.filter(to_user_id=request.user.id,
                                              read=False)
     u_m = len(unread_messages)
@@ -161,11 +161,13 @@ def message_detail(request, user_id):
             message.save()
     u_m = len(Message.objects.filter(to_user_id=request.user.id, read=False))
     other_user = User.objects.get(id=user_id)
-    return render(request, 'mp_app/message_detail.html',
-                  {'unread_messages': u_m,
-                   'conversation': conversation,
-                   'other_user': other_user,
-                   'user': request.user})
+    context = {'unread_messages': u_m,
+     'conversation': conversation,
+     'other_user': other_user,
+     'user': request.user}
+    if UserProfile.objects.filter(user_id=user_id).exists():
+        context['profile'] = UserProfile.objects.get(user_id=user_id)
+    return render(request, 'mp_app/message_detail.html', context)
 
 
 def create_textMP(request):

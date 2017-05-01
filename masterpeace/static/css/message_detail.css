@@ -4,6 +4,12 @@ span.sent {
   background-color: #4386a8;
 }
 
+.avi {
+  height: 50px;
+  width: auto;
+  border-radius: 50%;
+}
+
 span {
   border-radius: 5px 5px 5px 0px;
   background-color: #eee;
