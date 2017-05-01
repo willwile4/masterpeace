@@ -11,13 +11,13 @@
 
 {% csrf_token %}
 
-<div id='messages'>
+<div class='messages'>
   <ul>
   {% for convo in convos %}
-    <li {% if convo.unread %} class='unread' {% endif %}>
+    <li {% if convo.unread %} class='unread' {% endif %} class='message'>
       <a href='/messages/{{convo.other.id}}'>{{convo.other.username}}</a>
       <ul>
-        <li>{{convo.latest_message}}</li>
+        <li class='message_preview'>{{convo.latest_message}}</li>
         <li>{{convo.latest_message.created}}</li>
       </ul>
     </li>
