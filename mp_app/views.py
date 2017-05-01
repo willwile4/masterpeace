@@ -71,7 +71,8 @@ class Conversation:
         self.other = other
         self.messages = [message for message in Message.objects.filter(Q(from_user_id=other.id, to_user_id=user_id) | Q(to_user_id=other.id, from_user_id=user_id)).order_by('created')]
         self.unread = Message.objects.filter(to_user_id=user_id, from_user_id=other.id, read=False).exists()
-        self.latest_message = self.messages[-1]
+        if self.messages:
+            self.latest_message = self.messages[-1]
 
 
 def messages(request):

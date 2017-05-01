@@ -13,7 +13,7 @@
 <div id='convo_detail'>
   <ul>
     {% for message in conversation.messages %}
-      <li>
+      <li {% if user.id == message.from_user_id %}class='sent'{% endif %}>
       {{message.content}}
     </li>
     {% endfor %}
