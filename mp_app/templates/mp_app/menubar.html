@@ -25,9 +25,9 @@
   <div id='account'>
     Welcome, <a href='/profile/{{user.id}}'>{{user.username}}</a> |
       {% if unread_messages > 0 %}
-        <a class='messages' href='messages'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i> {{unread_messages}}</a>  |
+        <a class='messages' href='/messages'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i> {{unread_messages}}</a>  |
       {% else %}
-        <a class='messages' href='messages'><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true"></i></a>  |
+        <a class='messages' href='/messages'><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true"></i></a>  |
       {% endif %}
     <a class='navbutton' href='/logout'>Logout</a>
   </div>

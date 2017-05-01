@@ -1,5 +1,28 @@
-.sent {
+span.sent {
+  border-radius: 5px 5px 0px 5px;
   color: white;
   background-color: #4386a8;
+}
+
+span {
+  border-radius: 5px 5px 5px 0px;
+  background-color: #eee;
+  font-size: 1.2em;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin-bottom: 2px;
+}
+
+li.sent {
   text-align: right;
+}
+
+div.main {
+  width: 45%;
+  margin: auto;
 }

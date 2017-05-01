@@ -9,14 +9,15 @@
 
 {% include 'mp_app/menubar.html' %}
 
+<div class='main'>
 <h1>
-  <a href='/profile/{{other_user.id}}'>{{other_user.username}}</a>
+  Your messages w/ <a href='/profile/{{other_user.id}}'>@{{other_user.username}}</a>
 </h1>
 <div id='convo_detail'>
   <ul>
     {% for message in conversation.messages %}
-      <li {% if user.id == message.from_user_id %}class='sent'{% endif %}>
-      {{message.content}}
+      <li{% if user.id == message.from_user_id %} class='sent'{% endif %}>
+      <span{% if user.id == message.from_user_id %} class='sent'{% endif %}>{{message.content}}</span>
     </li>
     {% endfor %}
 </ul>
@@ -32,6 +33,7 @@
 </div>
 <a href='/messages'>Back to Messages</a>
 {% endblock %}
+</div>
 
 {% block javascript %}
 <script src="{% static 'js/createMessage.js' %}"></script>
