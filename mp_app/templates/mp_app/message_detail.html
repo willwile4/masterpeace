@@ -10,7 +10,11 @@
 <div id='convo_detail'>
   <ul>
     {% for message in messages %}
-    <li>
+      {% {{if message.from_user_id}} == {{user.id}} %}
+    <li class='sent'>
+      {% else %}
+      <li class='received'>
+        {% endif %}
       {{message.content}}
       <ul>
         <li>{{message.created}}</li>

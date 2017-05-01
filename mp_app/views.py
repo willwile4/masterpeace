@@ -65,8 +65,18 @@ def profile(request, user_id):
         return render(request, 'mp_app/create_profile.html', {'user': user})
 
 
+class Conversation:
+    def __init__(self, user_id, other):
+        self.id = user_id
+        self.other = other
+        self.messages = [message for message in Message.objects.filter(Q(from_user_id=other.id, to_user_id=user_id) | Q(to_user_id=other.id, from_user_id=user_id)).order_by('created')]
+        self.unread = Message.objects.filter(to_user_id=user_id, from_user_id=other.id, read=False).exists()
+        self.latest_message = self.messages[-1]
+
+
 def messages(request):
     convo_users = [User.objects.get(id=user_id) for user_id in set([message.to_user_id if message.from_user_id == request.user.id else message.from_user_id for message in Message.objects.filter(Q(from_user_id=request.user.id) | Q(to_user_id=request.user.id))])]
+    conversations = [Conversation(request.user.id, user) for user in convo_users][::-1]
     # all_messages = Message.objects.filter(to_user_id=request.user.id)
     last_messages = (Message.objects.filter(from_user_id=user.id).order_by('created')[0] for user in convo_users)
     unread_messages = Message.objects.filter(to_user_id=request.user.id,
@@ -76,7 +86,7 @@ def messages(request):
                                                     # 'messages': all_messages,
                                                     'unread_messages': u_m,
                                                     'last_messages': last_messages,
-                                                    'convos': convo_users})
+                                                    'convos': conversations})
 
 
 def message_detail(request, user_id):
