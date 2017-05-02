@@ -54,6 +54,10 @@ urlpatterns = [
     url(r'^messages/$', views.messages, name='messages'),
     url(r'^messages/(?P<user_id>[0-9]+)',
         views.message_detail, name='message_detail'),
+    url(r'^text_tags/(?P<tag_id>[0-9]+)',
+        views.filter_text_tags, name='filter_text_tags'),
+    url(r'^image_tags/(?P<tag_id>[0-9]+)',
+        views.filter_image_tags, name='filter_image_tags')
 ]
 
 if settings.DEBUG:

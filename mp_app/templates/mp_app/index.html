@@ -17,7 +17,7 @@
       <span class='post_title'>{{text.title}}</span></br>
       {{text.text}}</br></br>
       {% for tag in text.tag.all %}
-      <span class='tag'>#{{tag}}</span>
+      <span class='tag'><a href='/text_tags/{{tag.id}}'>#{{tag}}</a></span>
       {% endfor %}
       </br>
       {% if user.is_authenticated and text.owner_id == user.id %}
@@ -60,7 +60,7 @@
         <span class='post_title'>{{image.title}}</span></br>
         {{image.caption}}</br></br>
         {% for tag in image.tag.all %}
-        <span class='tag'>#{{tag}}</span></br>
+        <span class='tag'><a href='/image_tags/{{tag.id}}/'>#{{tag}}</a></span>
         {% endfor %}
         </br>
         {% if user.is_authenticated and image.owner_id == user.id %}
