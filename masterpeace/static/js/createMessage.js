@@ -16,7 +16,15 @@ function createMessage(e) {
     }
     }
     $.ajax(settings);
+    var content = $('[name="content"]').val()
+    $('#messageList').append('<li class="sent"><span class="sent">' + content + '</span></li>');
+    var content = document.getElementById("content")
+    content.value = '';
 };
 
-
+$("#content").keypress(function (e) {
+    if(e.which == 13 && !e.shiftKey) {
+      createMessage(e);
+    }
+});
 $('#create_message').click(createMessage);

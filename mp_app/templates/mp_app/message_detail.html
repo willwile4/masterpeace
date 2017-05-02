@@ -15,7 +15,7 @@
   <a href='/profile/{{other_user.id}}'>@{{other_user.username}}</a>
 </h1>
 <div id='convo_detail'>
-  <ul>
+  <ul id='messageList'>
     {% for message in conversation.messages %}
       <li{% if user.id == message.from_user_id %} class='sent'{% endif %}>
       <span{% if user.id == message.from_user_id %} class='sent'{% endif %}>{{message.content}}</span>
@@ -38,5 +38,6 @@
 </div>
 
 {% block javascript %}
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src="{% static 'js/createMessage.js' %}"></script>
 {% endblock %}
