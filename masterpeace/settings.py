@@ -32,6 +32,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 ALLOWED_HOSTS = [
+    '0.0.0.0',
     'localhost',
     '127.0.0.1',
     'masterpeace.herokuapp.com',
@@ -120,6 +121,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -239,8 +241,3 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "masterpeace.settings")
 
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
-
-# key info for AWS & S3
-AWS_ACCESS_KEY_ID = 'AKIAJ26SQE2P7AGMV77Q'
-AWS_SECRET_ACCESS_KEY = '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'
-S3_BUCKET = 'masterpeace'
