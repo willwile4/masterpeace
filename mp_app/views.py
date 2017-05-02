@@ -22,19 +22,41 @@ import json
 import boto3
 
 
+def mp_jumblr():
+    '''
+    Combines posts into one queryset to render on templates.
+    '''
+    textmps = [(mp, mp.created) for mp in TextMP.objects.all()]
+    imagemps = [(mp, mp.created) for mp in ImageMP.objects.all()]
+    allmps = reversed(sorted(textmps + imagemps, key=lambda mp: mp[1]))
+    return ([item[0] for item in allmps])
+
+
 def index(request):
-    image_mps = ImageMP.objects.all().order_by('-created')
-    text_mps = TextMP.objects.all().order_by('-created')
+    all_mps = mp_jumblr()
     user_profiles = UserProfile.objects.all()
-    text_tags = TextTag.objects.all()
     messages = Message.objects.filter(to_user_id=request.user.id, read=False)
     u_m = len(messages)
-    return render(request, 'mp_app/index.html', {'image_mps': image_mps,
-                                                 'text_mps': text_mps,
-                                                 'user_profiles': user_profiles,
-                                                 'text_tags': text_tags,
-                                                 'messages': messages,
-                                                 'unread_messages': u_m})
+    return render(request, 'mp_app/index.html', {
+                                           'all_mps': all_mps,
+                                           'user_profiles': user_profiles,
+                                           'messages': messages,
+                                           'unread_messages': u_m})
+
+
+def profile(request, user_id):
+    if UserProfile.objects.filter(user_id=user_id).exists():
+        messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+        u_m = len(messages)
+        user_profile = UserProfile.objects.get(user_id=user_id)
+        user = User.objects.get(id=user_id)
+        all_mps = mp_jumblr()
+        return render(request, 'mp_app/profile.html', {'profile': user_profile,
+                                                       'all_mps': all_mps,
+                                                       'unread_messages': u_m})
+    elif request.user.id == user_id:
+        user = User.objects.get(id=user_id)
+        return render(request, 'mp_app/create_profile.html', {'user': user})
 
 
 def edit_profile(request):
@@ -114,23 +136,6 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
-
-
-def profile(request, user_id):
-    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
-    u_m = len(messages)
-    if UserProfile.objects.filter(user_id=user_id).exists():
-        user_profile = UserProfile.objects.get(user_id=user_id)
-        user = User.objects.get(id=user_id)
-        image_mps = ImageMP.objects.filter(owner_id=user.id).order_by('-created')
-        text_mps = TextMP.objects.filter(owner_id=user.id).order_by('-created')
-        return render(request, 'mp_app/profile.html', {'profile': user_profile,
-                                                       'image_mps': image_mps,
-                                                       'text_mps': text_mps,
-                                                       'unread_messages': u_m})
-    elif request.user.id == user_id:
-        user = User.objects.get(id=user_id)
-        return render(request, 'mp_app/create_profile.html', {'user': user})
 
 
 class Conversation:
