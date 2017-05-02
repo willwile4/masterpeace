@@ -25,14 +25,15 @@
 
   <div class='profile_info'>
     @<span class='username'>{{profile.user.username}}</span>
-    {% if profile.allow_messages %}
-    <a href='/messages/{{profile.user_id}}'>Send a message</a>
-    {% endif %}
     </br>
     <span class='bio'>{{profile.bio}}</span></br>
 
     {% if user.is_authenticated and profile.user_id == user.id %}
       <span class='edit_profile'><a href='/edit_profile'>Edit profile</a></span>
+    {% endif %}
+    <br>
+    {% if profile.allow_messages %}
+    <a href='/messages/{{profile.user_id}}'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a>
     {% endif %}
   </div>
 </div>
@@ -42,8 +43,11 @@
   <div class='posts_img' id='img_{{image.id}}'>
     <a href="/media/{{image.image}}" data-fancybox="gallery" data-caption="{{image.caption}}">
       <img class='masterpeace' src="/media/{{image.image}}" alt="" /></a>
-      <span class='username'>{{image.title}}</span></br>
-      {{image.tags}}</br>
+      <span class='username'>{{image.title}}</span>
+      {{image.caption}}
+      {% for tag in image.tag.all %}
+      <span class='tag'>#{{tag}}</span>
+      {% endfor %}
       {% if user.is_authenticated and profile.user_id == user.id %}
         <span class='edit_image'><a href='/edit_image/{{image.id}}'>Edit</a></span>
       {% endif %}
@@ -54,7 +58,9 @@
   <div class='posts_txt' id='text_{{text.id}}'>
     <span class='username'>{{text.title}}</span>
     {{text.text}}</br>
-    {{text.tags}}</br>
+    {% for tag in text.tag.all %}
+    <span class='tag'>#{{tag}}</span>
+    {% endfor %}
     {% if user.is_authenticated and profile.user_id == user.id %}
       <span class='edit_text'><a href='/edit_text/{{text.id}}'>Edit</a></span>
     {% endif %}

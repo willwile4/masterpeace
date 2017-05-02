@@ -9,14 +9,16 @@
 
 {% include 'mp_app/menubar.html' %}
 
+<div class='main'>
 <h1>
-  <a href='/profile/{{other_user.id}}'>{{other_user.username}}</a>
+  <img class='avi' src='/media/{{profile.pic}}'>
+  <a href='/profile/{{other_user.id}}'>@{{other_user.username}}</a>
 </h1>
 <div id='convo_detail'>
   <ul>
     {% for message in conversation.messages %}
-      <li {% if user.id == message.from_user_id %}class='sent'{% endif %}>
-      {{message.content}}
+      <li{% if user.id == message.from_user_id %} class='sent'{% endif %}>
+      <span{% if user.id == message.from_user_id %} class='sent'{% endif %}>{{message.content}}</span>
     </li>
     {% endfor %}
 </ul>
@@ -26,12 +28,14 @@
     {% csrf_token %}
     <input id='from_user' type='text' name='from_user' value='{{user.id}}' style='display:none'>
     <input id='to_user' type='text' name='to_user' value='{{other_user.id}}' style='display:none'>
-    <input id='content' type='text' name="content" placeholder="Write your message here">
+    <textarea name="content" cols="80" rows="5" class="vLargeTextField" id="content" placeholder="Write your message here...">
+</textarea>
     <input type='submit' id="create_message" value='Send'>
   </form>
 </div>
 <a href='/messages'>Back to Messages</a>
 {% endblock %}
+</div>
 
 {% block javascript %}
 <script src="{% static 'js/createMessage.js' %}"></script>
