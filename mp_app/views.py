@@ -61,6 +61,8 @@ def edit_profile(request):
 
 def edit_image(request, id):
     user = request.user
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
     try:
         image = ImageMP.objects.get(id=id)
     except ImageMP.DoesNotExist:
@@ -77,10 +79,13 @@ def edit_image(request, id):
     else:
         form = EditImage(instance=image)
     return render(request, 'mp_app/edit_image.html', {'form': form,
-                                                      'image': image})
+                                                      'image': image,
+                                                      'unread_messages': u_m})
 
 
 def edit_text(request, id):
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
     user = request.user
     try:
         text = TextMP.objects.get(id=id)
@@ -98,7 +103,8 @@ def edit_text(request, id):
     else:
         form = EditText(instance=text)
     return render(request, 'mp_app/edit_text.html', {'form': form,
-                                                     'text': text})
+                                                     'text': text,
+                                                     'unread_messages': u_m})
 
 
 def signup(request):
@@ -171,6 +177,8 @@ def message_detail(request, user_id):
 
 
 def create_textMP(request):
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
     if request.method == 'POST':
         f = CreateTextMPForm(request.POST)
         if f.is_valid():
@@ -186,18 +194,23 @@ def create_textMP(request):
             return redirect('/')
     else:
         f = CreateTextMPForm()
-    return render(request, 'mp_app/create.html', {'form': f})
+    return render(request, 'mp_app/create.html', {'form': f,
+                                                  'unread_messages': u_m})
 
 
 def filter_text_tags(request, tag_id):
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
     texttags = TextTag.objects.filter(id=tag_id)
-    context = {'texttags': texttags}
+    context = {'texttags': texttags, 'unread_messages': u_m}
     return render(request, 'mp_app/filter_text_tags.html', context)
 
 
 def filter_image_tags(request, tag_id):
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
     imagetags = ImageTag.objects.filter(id=tag_id)
-    context = {'imagetags': imagetags}
+    context = {'imagetags': imagetags, 'unread_messages': u_m}
     return render(request, 'mp_app/filter_image_tags.html', context)
 
 
