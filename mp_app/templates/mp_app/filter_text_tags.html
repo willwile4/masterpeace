@@ -1,15 +1,35 @@
 {% extends 'mp_app/base.html' %}
 {% load staticfiles %}
 {% block extra_head_content %}
-<link rel='stylesheet' type="text/css" href="{% static 'css/profile.css' %}"/>
+<link rel='stylesheet' type="text/css" href="{% static 'css/base.css' %}"/>
 {% endblock %}
 {% block content %}
 {% include 'mp_app/menubar.html' %}
-{% for tag in texttags %}
-  {% for textmp in tag.textmp_set.all %}
-    {{ textmp }}
+
+<div id='hashtagTop'>{% for tag in texttags%}
+  <br><span id='tagTitle'>Filtering results for: #{{ tag }}</span>
+  {% endfor %}</div>
+<div class='gallery'>
+  {% for tag in texttags %}
+    {% for textmp in tag.textmp_set.all %}
+    <div class='posts_txt' id='text_{{text.id}}'>
+      <span class='post_title'>{{textmp.title}}</span></br>
+      {{textmp.text}}</br></br>
+      {{textmp.owner}}</br>
+      {% for tag in textmp.tag.all %}
+      <span class='tag'><a href='/text_tags/{{tag.id}}'>#{{tag}}</a></span>
       {% endfor %}
+      {% if user.is_authenticated and textmp.owner_id == user.id %}
+        Posted by:<a href='/profile/{{textmp.owner_id}}'>You</a></br>
+        <span class='edit_text'><a href='/edit_text/{{textmp.id}}'>Edit</a></span>
+      {% else %}
+        Posted by: <a href='/profile/{{textmp.owner_id}}'>{{textmp.owner}}</a></br>
+      {% endif %}
+    </div>
+    {% endfor %}
 {% endfor %}
+  </div>
+
 
 {% endblock %}
 

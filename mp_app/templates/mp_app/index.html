@@ -11,7 +11,7 @@
       <span class='post_title'>{{text.title}}</span></br>
       {{text.text}}</br></br>
       {% for tag in text.tag.all %}
-      <span class='tag'>#{{tag}}</span>
+      <span class='tag'><a href='/text_tags/{{tag.id}}'>#{{tag}}</a></span>
       {% endfor %}
       {% if user.is_authenticated and text.owner_id == user.id %}
         Posted by:<a href='/profile/{{text.owner_id}}'>You</a></br>

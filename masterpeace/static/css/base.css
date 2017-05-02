@@ -30,6 +30,16 @@ a, a:visited{
   white-space: nowrap;
 }
 
+#hastagTop{
+  padding-top: 300px;
+}
+
+#tagTitle {
+  padding-left: 5%;
+  color: #4386a8;
+  font-size: 110%;
+}
+
 .gallery{
   width: 95%;
   margin: 0 auto;
