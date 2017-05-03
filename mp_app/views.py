@@ -55,7 +55,7 @@ def profile(request, user_id):
         return render(request, 'mp_app/profile.html', {'profile': user_profile,
                                                        'all_mps': all_mps,
                                                        'unread_messages': u_m})
-    elif request.user.id == user_id:
+    if str(request.user.id) == str(user_id):
         user = User.objects.get(id=user_id)
         return render(request, 'mp_app/create_profile.html', {'user': user})
 
