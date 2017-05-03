@@ -17,6 +17,7 @@ from django.http import HttpResponseRedirect
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
 from django.db.models import Q
+from rest_framework.decorators import api_view
 import os
 import json
 import boto3
@@ -187,6 +188,14 @@ def create_textMP(request):
     else:
         f = CreateTextMPForm()
     return render(request, 'mp_app/create.html', {'form': f})
+
+
+@api_view(['GET', 'DELETE'])
+def delete_textMP(request, text_id):
+    textMP = TextMP.objects.get(id=text_id)
+    if request.method == 'DELETE':
+        textMP.delete()
+    return redirect('/')
 
 
 def filter_text_tags(request, tag_id):

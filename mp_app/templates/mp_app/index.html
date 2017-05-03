@@ -5,6 +5,7 @@
 
 {% include 'mp_app/menubar.html' %}
 
+<<<<<<< HEAD
 {% if user.is_authenticated %}
   <div class='gallery'>
 
@@ -12,6 +13,10 @@
       <i class="fa fa-long-arrow-right fa-5x" aria-hidden="true"></i>
     </div>
 
+=======
+<div class='gallery'>
+  {% csrf_token %}
+>>>>>>> delete_post
   {% for text in text_mps %}
     <div class='posts_txt' id='text_{{text.id}}'>
       <span class='post_title'>{{text.title}}</span></br>
@@ -23,6 +28,7 @@
       {% if user.is_authenticated and text.owner_id == user.id %}
         <p>Posted by: <a href='/profile/{{text.owner_id}}'>You</a>, {{text.created}}</p>
         <span class='edit_text'><a href='/edit_text/{{text.id}}'>edit</a></span>
+        <span class='delete_text' id='{{text.id}}'>Delete</span>
       {% else %}
         <p>Posted by: <a href='/profile/{{text.owner_id}}'>{{text.owner}}</a>, {{text.created}}</p>
       {% endif %}
@@ -66,6 +72,7 @@
         {% if user.is_authenticated and image.owner_id == user.id %}
           <p>Posted by: <a href='/profile/{{image.owner_id}}'>You</a>, {{image.created}}</p>
           <span class='edit_image'><a href='/edit_image/{{image.id}}'>edit</a></span>
+          <span class='delete_image' id='{{image.id}}'>Delete</span>
         {% else %}
           <p>Posted by: <a href='/profile/{{image.owner_id}}'>{{image.owner}}</a>, {{image.created}}</p>
         {% endif %}
@@ -115,9 +122,7 @@
 
 {% endif %}
 
-
 {% endblock %}
-
 {% block javascript %}
-
+<script src='{% static "js/deleteText.js" %}'></script>
 {% endblock %}
