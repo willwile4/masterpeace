@@ -58,3 +58,9 @@ class CreateTextMPForm(ModelForm):
     class Meta:
         model = TextMP
         fields = ('title', 'text', 'allow_feedback', 'tag', 'artform', )
+
+
+class DeleteTextMPForm(forms.ModelForm):
+    class Meta:
+        model = TextMP
+        fields = ('title', 'text', 'allow_feedback', 'tag', 'artform')

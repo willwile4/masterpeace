@@ -6,6 +6,7 @@
 {% include 'mp_app/menubar.html' %}
 
 <div class='gallery'>
+  {% csrf_token %}
   {% for text in text_mps %}
     <div class='posts_txt' id='text_{{text.id}}'>
       <span class='post_title'>{{text.title}}</span></br>
@@ -16,6 +17,7 @@
       {% if user.is_authenticated and text.owner_id == user.id %}
         Posted by:<a href='/profile/{{text.owner_id}}'>You</a></br>
         <span class='edit_text'><a href='/edit_text/{{text.id}}'>Edit</a></span>
+        <span class='delete_text' id='{{text.id}}'>Delete</span>
       {% else %}
         Posted by: <a href='/profile/{{text.owner_id}}'>{{text.owner}}</a></br>
       {% endif %}
@@ -37,6 +39,8 @@
         {% if user.is_authenticated and image.owner_id == user.id %}
           Posted by: <a href='/profile/{{image.owner_id}}'>You</a></br>
           <span class='edit_image'><a href='/edit_image/{{image.id}}'>Edit</a></span>
+          <span class='delete_image' id='{{image.id}}'>Delete</span>
+
         {% else %}
           Posted by: <a href='/profile/{{image.owner_id}}'>{{image.owner}}</a></br>
         {% endif %}
@@ -57,9 +61,7 @@
   {% endfor %}
 </div>
 
-
 {% endblock %}
-
 {% block javascript %}
-
+<script src='{% static "js/deleteText.js" %}'></script>
 {% endblock %}
