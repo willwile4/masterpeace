@@ -68,7 +68,7 @@
           {{mp.caption}}</br></br>
 
           {% for tag in mp.tag.all %}
-            <span class='tag'><a href='/text_tags/{{tag.id}}'>#{{tag}}</a></span>
+            <span class='tag'><a href='/image_tags/{{tag.id}}'>#{{tag}}</a></span>
           {% endfor %}
 
           {% if user.is_authenticated and mp.owner_id == user.id %}
