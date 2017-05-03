@@ -17,7 +17,7 @@ class Message(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    pic = models.ImageField(upload_to="masterpeace/static/user_images/",
+    pic = models.FileField(upload_to="masterpeace/static/user_images/",
                             blank=True, null=True)
     bio = models.CharField(max_length=500)
     fb_link = models.URLField(null=True, blank=True)
@@ -67,7 +67,7 @@ class ImageMP(models.Model):
     allow_feedback = models.BooleanField(default=False)
     title = models.CharField(max_length=50)
     caption = models.CharField(max_length=144)
-    image = models.ImageField(upload_to="mp_images/")
+    image = models.FileField(upload_to="masterpeace/static/mp_images/")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     artform = models.ForeignKey(Artform, on_delete=models.CASCADE)

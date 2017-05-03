@@ -99,42 +99,47 @@ def account(request):
     return render(request, 'mp_app/s3_test.html')
 
 
+def blob_test(request):
+    return render(request, 'mp_app/blob_test.html')
+
 def sign_s3(request):
-    AWS_ACCESS_KEY = os.environ.get('AWSAccessKeyId')
-    AWS_SECRET_KEY = os.environ.get('AWSSecretKey')
-    S3_BUCKET = os.environ.get('S3_BUCKET')
-    # file_name = request.GET.get('file_name')
-    # file_type = request.GET.get('file_type')
-
-    object_name = urllib.parse.quote_plus(request.GET['file_name'])
-    mime_type = request.GET['file_type']
-    print(object_name, mime_type)
-
-    # s3_resource = boto3.resource('s3')
-    # s3 = s3_resource.meta.client
-
-    secondsPerDay = 36000
-    expires = int(time.time()+secondsPerDay)
-    amz_headers = "x-amz-acl:public-read"
-
-    string_to_sign = "POST\n\n{}\n{}\n{}\n/{}/{}".format(mime_type, expires,
-                                                    amz_headers, S3_BUCKET,
-                                                    object_name)
-
-    encodedSecretKey = AWS_SECRET_KEY.encode()
-
-    encodedString = string_to_sign.encode()
-    h = hmac.new(encodedSecretKey, encodedString, sha1)
-    hDigest = h.digest()
-    signature = base64.encodebytes(hDigest).strip()
-    signature = urllib.parse.quote_plus(signature)
-    url = 'https://%s.s3.amazonaws.com/%s' % (S3_BUCKET, object_name)
-
-    return JsonResponse({
-        'signed_request': '{}?AWSAccessKeyId={}&Expires={}&Signature=%{}'.format(url,
-                                            AWS_ACCESS_KEY, expires, signature),
-        'url': url,
-    })
+    pass
+#     # AWS_ACCESS_KEY = os.environ.get('AWSAccessKeyId')
+#     AWS_ACCESS_KEY = 'AKIAIM26OJZRVLFHUENQ'
+#     AWS_SECRET_KEY = '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'
+#     S3_BUCKET = 'masterpeace'
+#     # file_name = request.GET.get('file_name')
+#     # file_type = request.GET.get('file_type')
+#
+#     object_name = urllib.parse.quote_plus(request.GET['file_name'])
+#     mime_type = request.GET['file_type']
+#     print(object_name, mime_type)
+#
+#     # s3_resource = boto3.resource('s3')
+#     # s3 = s3_resource.meta.client
+#
+#     secondsPerDay = 36000
+#     expires = int(time.time()+secondsPerDay)
+#     amz_headers = "x-amz-acl:public-read"
+#
+#     string_to_sign = "POST\n\n{}\n{}\n{}\n/{}/{}".format(mime_type, expires,
+#                                                     amz_headers, S3_BUCKET,
+#                                                     object_name)
+#
+#     encodedSecretKey = AWS_SECRET_KEY.encode()
+#
+#     encodedString = string_to_sign.encode()
+#     h = hmac.new(encodedSecretKey, encodedString, sha1)
+#     hDigest = h.digest()
+#     signature = base64.encodebytes(hDigest).strip()
+#     signature = urllib.parse.quote_plus(signature)
+#     url = 'https://{}.s3.amazonaws.com/{}'.format(S3_BUCKET, object_name)
+#
+#     return JsonResponse({
+#         'signed_request': '{}?AWSAccessKeyId={}&Expires={}&Signature=%{}'.format(url,
+#                                             AWS_ACCESS_KEY, expires, signature),
+#         'url': url,
+#     })
 
     # presigned_post = s3.generate_presigned_post(
     #     Bucket='masterpeace',

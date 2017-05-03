@@ -47,7 +47,8 @@ urlpatterns = [
     url(r'^profile/(?P<user_id>[0-9]+)', views.profile, name='profile'),
     url(r'^privacy/', views.privacy, name="privacy"),
     url(r'^s3_test/', views.account, name='account'),
-    url(r'^sign_s3', views.sign_s3, name='sign_s3')
+    url(r'^sign_s3', views.sign_s3, name='sign_s3'),
+    url(r'^blob_test', views.blob_test, name='blob_test')
 ]
 
 if settings.DEBUG:
