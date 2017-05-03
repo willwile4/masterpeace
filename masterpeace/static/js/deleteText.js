@@ -24,6 +24,7 @@ function delete_textMP(e) {
         url: '/api/text_mp/' + e.target.id,
         success: function(result) {
             console.log('success')
+            location.reload();
     }
   }
     $.ajax(settings);
@@ -39,6 +40,7 @@ function delete_imageMP(e) {
         url: '/api/image_mp/' + e.target.id,
         success: function(result) {
             console.log('success')
+            location.reload();
     }
   }
     $.ajax(settings);

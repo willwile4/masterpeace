@@ -160,7 +160,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'MasterPeace',
+<<<<<<< HEAD
         'USER': 'raleigh',
+=======
+        'USER': 'Friese',
+>>>>>>> origin
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',
