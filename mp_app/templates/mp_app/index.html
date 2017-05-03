@@ -27,7 +27,7 @@
         {% if user.is_authenticated and mp.owner_id == user.id %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>You</a>, {{mp.created}}</p>
           <span class='edit_text'><a href='/edit_text/{{mp.id}}'>edit</a></span>
-          <span class='delete_image' id='{{image.id}}'>Delete</span>
+          <a href='#'><span class='delete_text' id='{{mp.id}}'>delete</span></a>
         {% else %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
         {% endif %}
@@ -73,7 +73,8 @@
 
           {% if user.is_authenticated and mp.owner_id == user.id %}
             <p>Posted by: <a href='/profile/{{mp.owner_id}}'>You</a>, {{mp.created}}</p>
-            <span class='edit_text'><a href='/edit_text/{{mp.id}}'>edit</a></span>
+            <span class='edit_image'><a href='/edit_image/{{mp.id}}'>edit</a></span></br>
+            <a href='#'><span class='delete_image' id='{{mp.id}}'>delete</span></a>
           {% else %}
             <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
           {% endif %}

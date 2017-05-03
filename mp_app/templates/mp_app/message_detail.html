@@ -10,26 +10,29 @@
 {% include 'mp_app/menubar.html' %}
 
 <div class='main'>
-<h1>
-  <img class='avi' src='/media/{{profile.pic}}'>
-  <a href='/profile/{{other_user.id}}'>@{{other_user.username}}</a>
-</h1>
-<div id='convo_detail'>
-  <ul id='messageList'>
-    {% for message in conversation.messages %}
-      <li{% if user.id == message.from_user_id %} class='sent'{% endif %}>
-      <span{% if user.id == message.from_user_id %} class='sent'{% endif %}>{{message.content}}</span>
-    </li>
-    {% endfor %}
-</ul>
+  <h1>
+    {% if profile.pic %}
+      <img class='avi' src='/media/{{profile.pic}}'/>
+    {% else %}
+      <img class='avi' src='{% static "base_images/icon.png" %}'/>
+    {% endif %}
+    <a href='/profile/{{other_user.id}}'>@{{other_user.username}}</a>
+  </h1>
+  <div id='convo_detail'>
+    <ul id='messageList'>
+      {% for message in conversation.messages %}
+        <li{% if user.id == message.from_user_id %} class='sent'{% endif %}>
+        <span{% if user.id == message.from_user_id %} class='sent'{% endif %}>{{message.content}}</span>
+      </li>
+      {% endfor %}
+  </ul>
 </div>
 <div class='createMessageForm'>
   <form name='createMessage' id='createMessage' method='post'>
     {% csrf_token %}
     <input id='from_user' type='text' name='from_user' value='{{user.id}}' style='display:none'>
     <input id='to_user' type='text' name='to_user' value='{{other_user.id}}' style='display:none'>
-    <textarea name="content" cols="80" rows="5" class="vLargeTextField" id="content" placeholder="Write your message here...">
-</textarea>
+    <textarea name="content" cols="80" rows="5" class="vLargeTextField" id="content" placeholder="Write your message here..."></textarea>
     <input type='submit' id="create_message" value='Send'>
   </form>
 </div>

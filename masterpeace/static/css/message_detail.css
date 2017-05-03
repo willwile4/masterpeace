@@ -2,10 +2,11 @@ span.sent {
   border-radius: 5px 5px 0px 5px;
   color: white;
   background-color: #4386a8;
+  padding: .2em;
 }
 
 .avi {
-  height: 50px;
+  height: 2em;
   width: auto;
   border-radius: 50%;
 }

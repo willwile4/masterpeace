@@ -29,7 +29,7 @@
     <span class='bio'>{{profile.bio}}</span></br>
 
     {% if user.is_authenticated and profile.user_id == user.id %}
-      <span class='edit_profile'><a href='/edit_profile'>Edit profile</a></span>
+      <span class='edit_profile'><a href='/edit_profile'>edit profile</a></span>
     {% else %}
       {% if profile.allow_messages %}
       <a href='/messages/{{profile.user_id}}'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a>
@@ -42,35 +42,37 @@
 <div class='user_gallery'>
 
 {% for mp in all_mps %}
+  {% if mp.owner_id == profile.user_id %}
+    {% if mp.image %}
+      <div class='posts_img' id='img_{{mp.id}}'>
+        <a href="/media/{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
+          <img class='masterpeace' src="/media/{{mp.image}}" alt="" /></a>
+          <span class='username'>{{mp.title}}</span>
+          {{mp.caption}}
+          {% for tag in mp.tag.all %}
+          <span class='tag'>#{{tag}}</span>
+          {% endfor %}
+          {% if user.is_authenticated and profile.user_id == user.id %}
+            <span class='edit_image'><a href='/edit_image/{{mp.id}}'>edit</a></span>
+            <a href='#'><span class='delete_image' id='{{mp.id}}'>delete</span></a>
+          {% endif %}
+      </div>
 
-  {% if mp.image %}
-    <div class='posts_img' id='img_{{mp.id}}'>
-      <a href="/media/{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
-        <img class='masterpeace' src="/media/{{mp.image}}" alt="" /></a>
+    {% elif mp.text %}
+
+      <div class='posts_txt' id='text_{{mp.id}}'>
         <span class='username'>{{mp.title}}</span>
-        {{mp.caption}}
+        {{mp.text}}</br>
         {% for tag in mp.tag.all %}
         <span class='tag'>#{{tag}}</span>
         {% endfor %}
         {% if user.is_authenticated and profile.user_id == user.id %}
-          <span class='edit_image'><a href='/edit_image/{{mp.id}}'>Edit</a></span>
+          <span class='edit_text'><a href='/edit_text/{{mp.id}}'>edit</a></span>
+          <a href='#'><span class='delete_text' id='{{mp.id}}'>delete</span></a>
         {% endif %}
-    </div>
-
-  {% elif mp.text %}
-
-    <div class='posts_txt' id='text_{{mp.id}}'>
-      <span class='username'>{{mp.title}}</span>
-      {{mp.text}}</br>
-      {% for tag in mp.tag.all %}
-      <span class='tag'>#{{tag}}</span>
-      {% endfor %}
-      {% if user.is_authenticated and profile.user_id == user.id %}
-        <span class='edit_text'><a href='/edit_text/{{mp.id}}'>Edit</a></span>
-      {% endif %}
-    </div>
+      </div>
+    {% endif %}
   {% endif %}
-
 {% endfor %}
 
 </div>
