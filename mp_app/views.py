@@ -15,20 +15,7 @@ from .serializers import (UserSerializer, MessageSerializer,
 from django.http import HttpResponseRedirect
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
-import base64
-import hashlib
-import hmac
-import logging
-import time
-import urllib
-from hashlib import sha1
-from django.http import HttpResponseRedirect
-from django.http import JsonResponse
 import os
-import json
-import boto3
-
-logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -102,63 +89,6 @@ def account(request):
 def blob_test(request):
     return render(request, 'mp_app/blob_test.html')
 
-def sign_s3(request):
-    pass
-#     # AWS_ACCESS_KEY = os.environ.get('AWSAccessKeyId')
-#     AWS_ACCESS_KEY = 'AKIAIM26OJZRVLFHUENQ'
-#     AWS_SECRET_KEY = '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'
-#     S3_BUCKET = 'masterpeace'
-#     # file_name = request.GET.get('file_name')
-#     # file_type = request.GET.get('file_type')
-#
-#     object_name = urllib.parse.quote_plus(request.GET['file_name'])
-#     mime_type = request.GET['file_type']
-#     print(object_name, mime_type)
-#
-#     # s3_resource = boto3.resource('s3')
-#     # s3 = s3_resource.meta.client
-#
-#     secondsPerDay = 36000
-#     expires = int(time.time()+secondsPerDay)
-#     amz_headers = "x-amz-acl:public-read"
-#
-#     string_to_sign = "POST\n\n{}\n{}\n{}\n/{}/{}".format(mime_type, expires,
-#                                                     amz_headers, S3_BUCKET,
-#                                                     object_name)
-#
-#     encodedSecretKey = AWS_SECRET_KEY.encode()
-#
-#     encodedString = string_to_sign.encode()
-#     h = hmac.new(encodedSecretKey, encodedString, sha1)
-#     hDigest = h.digest()
-#     signature = base64.encodebytes(hDigest).strip()
-#     signature = urllib.parse.quote_plus(signature)
-#     url = 'https://{}.s3.amazonaws.com/{}'.format(S3_BUCKET, object_name)
-#
-#     return JsonResponse({
-#         'signed_request': '{}?AWSAccessKeyId={}&Expires={}&Signature=%{}'.format(url,
-#                                             AWS_ACCESS_KEY, expires, signature),
-#         'url': url,
-#     })
-
-    # presigned_post = s3.generate_presigned_post(
-    #     Bucket='masterpeace',
-    #     Key=file_name,
-    #     Fields={'acl': "public-read", "Content-Type": file_type},
-    #     Conditions=[
-    #         {'acl': 'public-read'},
-    #         {'Content-Type': file_type}
-    #     ],
-    #     ExpiresIn=3600,
-    #     # AWS_access_key=os.environ.get('AWS_ACCESS_KEY_ID'),
-    #     # AWS_secret_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
-    # )
-    # print(presigned_post)
-    # return json.dumps({
-    #     'data': presigned_post,
-    #     'url': 'https://{}.s3.amazonaws.com/{}'.format(S3_BUCKET, file_name)
-    # })
-
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -175,29 +105,21 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
 
-    def sign_s3(self, request):
-        S3_BUCKET = os.environ.get('S3_BUCKET')
+    def pic_to_store(self, request, pic, prof_id):
+        if request.method == 'PATCH':
+            b = blob.Blob(pic)
+            b = b.to_text()
+            u = UserProfile.objects.get(pk=prof_id)
+            u.pic = b
+            u.save()
+            return None
+        else:
+            pass
 
-        file_name = request.args.get('file_name')
-        file_type = request.args.get('file_type')
-
-        s3 = boto3.client('s3')
-
-        presigned_post = s3.generate_presigned_post(
-            Bucket=S3_BUCKET,
-            Key=file_name,
-            Fields={'acl': "public-read", "Content-Type": file_type},
-            Conditions=[
-                {'acl': 'public-read'},
-                {'Content-Type': file_type}
-            ],
-            ExpiresIn=3600
-        )
-
-        return json.dumps({
-            'data': presigned_post,
-            'url': 'https://{}.s3.amazonaws.com/{}'.format(S3_BUCKET, file_name)
-        })
+    def blob_into_pic(self, requiest, pic, prof_id):
+        up = UserProfile.objects.get(pk=prof_id)
+        b = Blob(pic)
+        pass
 
     def submit_form(self, request):
         if request.method == 'POST':
