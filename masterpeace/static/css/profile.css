@@ -66,7 +66,7 @@
   display: flex;
   flex-flow: wrap row;
   justify-content: flex-start;
-  padding-left: 5em;
+  padding-left: 3em;
 }
 
 .posts_img{
@@ -89,7 +89,7 @@
   width: 27%;
   display: flex;
   flex-flow: column;
-  align-items: flex-start;
+  align-items: center;
   border: .1em solid black;
   margin: 1em;
   padding: .5em;
@@ -99,10 +99,6 @@
   -moz-transition: <> .5s;
   -o-transition: <> .5s;
   transition: <> .5s;           for teh transistions       */
-}
-
-.posts_txt:hover{
-  text-overflow:ellipsis;
 }
 
 img.masterpeace{
@@ -118,4 +114,8 @@ img.masterpeace{
 .masterpeace:hover{
   max-width:11em;
   max-height:11em;
+}
+
+.edit_delete{
+  position: relative;
 }
