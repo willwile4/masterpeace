@@ -1,0 +1,22 @@
+.unread {
+  border-bottom: thin solid #3e926b;
+  background-color: #c7e5d7;
+  font-weight: bold;
+}
+
+div.messages {
+  width: 45%;
+  margin: auto;
+}
+
+li.message {
+  border-bottom: thin solid #3e926b;
+}
+
+li.message_preview {
+  font-style: italic;
+}
+
+ul {
+  list-style-type: none;
+}

@@ -7,9 +7,55 @@ body{
   height: 100%;
 }
 
+.right_arrow{
+  right: 1em;
+  position: fixed;
+}
+
 a, a:visited{
+  display: inline;
   text-decoration: none;
   color: #4386a8;
+}
+
+.signup_splash{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.splash{
+  width: 70%;
+  height: 70%;
+  object-fit: scale-down;
+}
+
+.info_splash{
+  position: fixed;
+  padding: 2em;
+  list-style: none;
+}
+
+.signup_button{
+  text-transform: uppercase;
+  width: 100%;
+  height: 5%;
+  margin: 1em 1em 1em 3em;
+  width: auto;
+  font-size: 2em;
+  top: 50%;
+  padding: 1em 2em 1em;
+  border-radius: 1em;
+  background-color: #ccc;
+  -webkit-box-shadow: 0px 1px 30px 1px rgba(67,134,168,1);
+  -moz-box-shadow: 0px 1px 30px 1px rgba(67,134,168,1);
+  box-shadow: 0px 1px 30px 1px rgba(67,134,168,1);
+  transition: .2s ease;
+  position: absolute;
+}
+
+.signup_button:hover{
+  background-color: #74C19D;
+  transition: .2s ease;
 }
 
 .registration{
@@ -28,6 +74,16 @@ a, a:visited{
   box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
   overflow: auto;
   white-space: nowrap;
+}
+
+#hastagTop{
+  padding-top: 300px;
+}
+
+#tagTitle {
+  padding-left: 5%;
+  color: #4386a8;
+  font-size: 110%;
 }
 
 .gallery{
@@ -58,13 +114,14 @@ a, a:visited{
   min-height: 45em;
   max-height:30%;
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   align-items: flex-start;
   border-right: .1em solid black;
   margin: 1em;
   padding: 1em;
   white-space: initial;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .image_itself{
@@ -79,7 +136,7 @@ a, a:visited{
   width: 15em;
 }
 
-.image_title{
+.post_title{
   font-weight: bold;
   font-size: 1.5em;
 }
@@ -92,4 +149,38 @@ img.masterpeace{
   -webkit-box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
   -moz-box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
   box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
+}
+
+.tag{
+  font-size: .8em;
+  text-decoration: underline;
+}
+
+.feedback:before{
+  content: '>';
+  width: 80%;
+  padding: 1em;
+  text-align: center;
+}
+
+.feedback_bar{
+  padding: .5em;
+  min-width: 5em;
+  max-width: 6em;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+  border: .1em solid black;
+}
+
+.feedback:hover .feedback_bar{
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.1s, opacity 0.1s linear;
+  display: flex;
+  justify-content: space-around;
+}
+
+.feedback_button:hover{
+  color: red;
 }

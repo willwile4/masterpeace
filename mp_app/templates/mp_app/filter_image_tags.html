@@ -1,0 +1,43 @@
+{% extends 'mp_app/base.html' %}
+{% load staticfiles %}
+{% block extra_head_content %}
+<link rel='stylesheet' type="text/css" href="{% static 'css/base.css' %}"/>
+{% endblock %}
+{% block content %}
+{% include 'mp_app/menubar.html' %}
+
+<div id='hashtagTop'>{% for tag in imagetags%}
+  <br><span id='tagTitle'>Filtering results for: #{{ tag }}</span>
+  {% endfor %}</div>
+<div class='gallery'>
+  {% for tag in imagetags %}
+    {% for imagemp in tag.imagemp_set.all %}
+    <div class='posts_img' id='image_{{imagemp.id}}'>
+      <div class='image_itself'>
+        <img class='masterpeace' src="/media/{{imagemp.image}}">
+      </div>
+      <div class='image_info'>
+      <span class='post_title'>{{imagemp.title}}</span></br>
+      {{imagemp.caption}}</br>
+      {% for tag in imagemp.tag.all %}
+      <span class='tag'><a href='/image_tags/{{tag.id}}'>#{{tag}}</a></span>
+      {% endfor %}
+    </br></br>
+      {% if user.is_authenticated and imagemp.owner_id == user.id %}
+        Posted by:<a href='/profile/{{imagemp.owner_id}}'>You</a></br>
+        <span class='edit_image'><a href='/edit_image/{{imagemp.id}}'>Edit</a></span>
+      {% else %}
+        Posted by: <a href='/profile/{{imagemp.owner_id}}'>{{imagemp.owner}}</a></br>
+      {% endif %}
+    </div>
+  </div>
+    {% endfor %}
+  {% endfor %}
+  </div>
+
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

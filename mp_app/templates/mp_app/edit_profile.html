@@ -1,0 +1,22 @@
+{% extends 'mp_app/base.html' %}
+{% load staticfiles %}
+{% block extra_head_content %}
+<link rel='stylesheet' type="text/css" href="{% static 'css/profile.css' %}"/>
+{% endblock %}
+{% block content %}
+{% include 'mp_app/menubar.html' %}
+<div class='profile_editor'>
+  <h2>Edit profile</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value='Update'></input></br></br>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

@@ -1,3 +1,21 @@
+.profile_editor{
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 1em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: .5em;
+  -webkit-box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
+  -moz-box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
+  box-shadow: 0px 1px 40px 1px rgba(67,134,168,1);
+  overflow: auto;
+  white-space: nowrap;
+}
+
 .profile{
   border-bottom: .1em solid black;
   display:flex;
@@ -12,6 +30,11 @@
   position: relative;
   -webkit-transition-duration: .7s; /* Safari */
   transition-duration: .7s;
+}
+
+#profile_pic{
+  max-width: 5em;
+  height: auto;
 }
 
 .profile_pic:hover{
@@ -43,12 +66,13 @@
   display: flex;
   flex-flow: wrap row;
   justify-content: flex-start;
-  padding-left: 7em;
+  padding-left: 5em;
 }
 
 .posts_img{
-  min-height: 80%;
-  width: 20%;
+  max-height: 20em;
+  min-height: 1em;
+  width: 27%;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -59,11 +83,12 @@
 }
 
 .posts_txt{
-  min-height: 50%;
+  max-height: 20em;
+  min-height: 1em;
   min-width: 20%;
-  width: 20%;
+  width: 27%;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column;
   align-items: flex-start;
   border: .1em solid black;
   margin: 1em;

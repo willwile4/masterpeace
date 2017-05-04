@@ -4,20 +4,36 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
 {% endblock %}
 <header id='nav'>
-
   <div id='logo'>
     <a href='/'>
-      <img src='{% static "base_images/logo.png" %}' alt='MasterPeace' height='72' width='214'/>
+      <img src='{% static "base_images/menubar_logo.png" %}' height="65" alt='Masterpeace'/>
     </a>
   </div>
 
   {% if user.is_authenticated %}
+  <div class='dropdown'>
+    <a class='navbutton' id='new_post' href='#'><i class="fa fa-plus-square-o fa-4x"></i></a>
+    <div class="dropdown-content">
+      <div class='post_button' id='text'>
+        <a href='/create_textMP'><i class="fa fa-pencil-square-o fa-3x" aria-hidden="true"></i></a>
+      </div>
+      <div class='post_button' id='image'>
+        <a href='create_imageMP'><i class="fa fa-picture-o fa-3x" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
   <div id='account'>
-    Welcome, <a href='/profile/{{user.id}}'>{{user.username}}</a><a class='navbutton' href='/logout'>Logout</a><a class='navbutton' href='/'><i class="fa fa-plus-square-o fa-4x"></i></a>
+    Welcome, <a href='/profile/{{user.id}}'>{{user.username}}</a> |
+      {% if unread_messages > 0 %}
+        <a class='messages' href='/messages'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i> {{unread_messages}}</a>  |
+      {% else %}
+        <a class='messages' href='/messages'><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true"></i></a>  |
+      {% endif %}
+    <a class='navbutton' href='/logout'>Logout</a>
   </div>
   {% else %}
   <div id='account'>
-    <a class='navbutton' href='/login'>Login</a><a class='navbutton' href='/signup'>Signup</a>
+    <a class='navbutton' href='/login'>Login</a> | <a class='navbutton' href='/signup'>Signup</a>
   </div>
   {% endif %}
 </header>
