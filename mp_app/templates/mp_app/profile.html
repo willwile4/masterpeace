@@ -50,7 +50,7 @@
           <span class='username'>{{mp.title}}</span>
           {{mp.caption}}
           {% for tag in mp.tag.all %}
-          <span class='tag'>#{{tag}}</span>
+          <a href='/image_tags/{{tag.id}}'><span class='tag'>#{{tag}}</span></a>
           {% endfor %}
           {% if user.is_authenticated and profile.user_id == user.id %}
             <span class='edit_image'><a href='/edit_image/{{mp.id}}'>edit</a></span>
@@ -64,7 +64,7 @@
         <span class='username'>{{mp.title}}</span>
         {{mp.text}}</br>
         {% for tag in mp.tag.all %}
-        <span class='tag'>#{{tag}}</span>
+        <a href='/text_tags/{{tag.id}}'><span class='tag'>#{{tag}}</span></a>
         {% endfor %}
         {% if user.is_authenticated and profile.user_id == user.id %}
           <span class='edit_text'><a href='/edit_text/{{mp.id}}'>edit</a></span>

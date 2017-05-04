@@ -40,9 +40,9 @@ urlpatterns = [
         namespace='rest_framework')),
     url(r'^$', include('mp_app.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^login/$', auth_views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, name='logout'),
-    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^login/', auth_views.login, name='login'),
+    url(r'^logout/', auth_views.logout, name='logout'),
+    url(r'^signup/', views.signup, name='signup'),
     url(r"^soc/", include("social_django.urls", namespace="social")),
     url(r'^profile/(?P<user_id>[0-9]+)', views.profile, name='profile'),
     url(r'^edit_profile/', views.edit_profile, name="edit_profile"),
@@ -57,7 +57,8 @@ urlpatterns = [
     url(r'^text_tags/(?P<tag_id>[0-9]+)',
         views.filter_text_tags, name='filter_text_tags'),
     url(r'^image_tags/(?P<tag_id>[0-9]+)',
-        views.filter_image_tags, name='filter_image_tags')
+        views.filter_image_tags, name='filter_image_tags'),
+    url(r'^blob_test', views.blob_test, name='blob_test')
 ]
 
 if settings.DEBUG:
