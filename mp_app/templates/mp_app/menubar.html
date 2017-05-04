@@ -6,10 +6,11 @@
 <header id='nav'>
   <div id='logo'>
     <a href='/'>
-      <img src='{% static "base_images/logo.png" %}' alt='MasterPeace' height='72' width='214'/>
+      <img src='{% static "base_images/menubar_logo.png" %}' height="65" alt='Masterpeace'/>
     </a>
   </div>
 
+  {% if user.is_authenticated %}
   <div class='dropdown'>
     <a class='navbutton' id='new_post' href='#'><i class="fa fa-plus-square-o fa-4x"></i></a>
     <div class="dropdown-content">
@@ -21,20 +22,18 @@
       </div>
     </div>
   </div>
-
-  {% if user.is_authenticated %}
   <div id='account'>
     Welcome, <a href='/profile/{{user.id}}'>{{user.username}}</a> |
       {% if unread_messages > 0 %}
-        <a class='messages' href='messages'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i> {{unread_messages}}</a>  |
+        <a class='messages' href='/messages'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i> {{unread_messages}}</a>  |
       {% else %}
-        <a class='messages' href='messages'><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true"></i></a>  |
+        <a class='messages' href='/messages'><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true"></i></a>  |
       {% endif %}
     <a class='navbutton' href='/logout'>Logout</a>
   </div>
   {% else %}
   <div id='account'>
-    <a class='navbutton' href='/login'>Login</a><a class='navbutton' href='/signup'>Signup</a>
+    <a class='navbutton' href='/login'>Login</a> | <a class='navbutton' href='/signup'>Signup</a>
   </div>
   {% endif %}
 </header>

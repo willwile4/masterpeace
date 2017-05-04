@@ -25,41 +25,56 @@
 
   <div class='profile_info'>
     @<span class='username'>{{profile.user.username}}</span>
-    {% if profile.allow_messages %}
-    <a href='/messages/{{profile.user_id}}'>Send a message</a>
-    {% endif %}
     </br>
     <span class='bio'>{{profile.bio}}</span></br>
 
     {% if user.is_authenticated and profile.user_id == user.id %}
-      <span class='edit_profile'><a href='/edit_profile'>Edit profile</a></span>
+      <span class='edit_profile'><a href='/edit_profile'>edit profile</a></span>
+    {% else %}
+      {% if profile.allow_messages %}
+      <a href='/messages/{{profile.user_id}}'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a>
+      {% endif %}
     {% endif %}
+    <br>
   </div>
 </div>
 
 <div class='user_gallery'>
-{% for image in image_mps %}
-  <div class='posts_img' id='img_{{image.id}}'>
-    <a href="/media/{{image.image}}" data-fancybox="gallery" data-caption="{{image.caption}}">
-      <img class='masterpeace' src="/media/{{image.image}}" alt="" /></a>
-      <span class='username'>{{image.title}}</span></br>
-      {{image.tags}}</br>
-      {% if user.is_authenticated and profile.user_id == user.id %}
-        <span class='edit_image'><a href='/edit_image/{{image.id}}'>Edit</a></span>
-      {% endif %}
-  </div>
+
+{% for mp in all_mps %}
+  {% if mp.owner_id == profile.user_id %}
+    {% if mp.image %}
+      <div class='posts_img' id='img_{{mp.id}}'>
+        <a href="/media/{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
+          <img class='masterpeace' src="/media/{{mp.image}}" alt="" /></a>
+          <span class='username'>{{mp.title}}</span>
+          {{mp.caption}}
+          {% for tag in mp.tag.all %}
+          <a href='/image_tags/{{tag.id}}'><span class='tag'>#{{tag}}</span></a>
+          {% endfor %}
+          {% if user.is_authenticated and profile.user_id == user.id %}
+            <span class='edit_image'><a href='/edit_image/{{mp.id}}'>edit</a></span>
+            <a href='#'><span class='delete_image' id='{{mp.id}}'>delete</span></a>
+          {% endif %}
+      </div>
+
+    {% elif mp.text %}
+
+      <div class='posts_txt' id='text_{{mp.id}}'>
+        <span class='username'>{{mp.title}}</span>
+        {{mp.text}}</br>
+        {% for tag in mp.tag.all %}
+        <a href='/text_tags/{{tag.id}}'><span class='tag'>#{{tag}}</span></a>
+        {% endfor %}
+        {% if user.is_authenticated and profile.user_id == user.id %}
+          <span class='edit_text'><a href='/edit_text/{{mp.id}}'>edit</a></span>
+          <a href='#'><span class='delete_text' id='{{mp.id}}'>delete</span></a>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endif %}
 {% endfor %}
 
-{% for text in text_mps %}
-  <div class='posts_txt' id='text_{{text.id}}'>
-    <span class='username'>{{text.title}}</span>
-    {{text.text}}</br>
-    {{text.tags}}</br>
-    {% if user.is_authenticated and profile.user_id == user.id %}
-      <span class='edit_text'><a href='/edit_text/{{text.id}}'>Edit</a></span>
-    {% endif %}
-  </div>
-{% endfor %}
 </div>
 
 {% endblock %}
@@ -69,4 +84,5 @@
         integrity="sha256-lGYI9J+diJJWwLLMD35V79cLhrxo7MYzNQImKJntuL0="
         crossorigin="anonymous"></script>
 <script src="{% static 'js/profile.js' %}"></script>
+<script src='{% static "js/deleteText.js" %}'></script>
 {% endblock %}
