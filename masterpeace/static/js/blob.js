@@ -2,32 +2,28 @@
 // next: retrive the blob and put it on the page
 
 function textToImg(text) {
-  window.onload = function() {
-  var fileInput = document.getElementById('imgFile');
-  var fileDisplayArea = document.getElementById('fileDisplayArea');
-
-  fileInput.addEventListener('change', function(e) {
-    var file = fileInput.files[0];
-    var textType = /text.*/;
-    console.log(file);
-
-  if (file.type.match(textType)) {
-    var reader = new FileReader();
-
-    reader.onload = function(e) {
-      fileDisplayArea.innerText = reader.result;
-      console.log(reader.result);
-      var image = new Image();
-      // change text to img on screen
-      var source_string = `data:image/png;base64,${reader.result}`;
-      image.src = source_string;
-      document.body.appendChild(image);
-    }
-      reader.readAsText(file);
-  } else {
-      fileDisplayArea.innerText = "File not supported!";
+  //get ascii string into binary then into an array then into a blob.
+  //had some strange issues using ArrayBuffer()
+  console.log(document.getElementById('fileDisplayArea'));
+  var file = new Array(atob(document.getElementById('fileDisplayArea').innerText));
+  file = new Blob(file, {type:'image/*'});
+  console.log(file);
+  //currently doesn't seem to be loading as a DataURL. It's type is string and shows up as a broken image.
+  var reader = new FileReader();
+  reader.onload = function(event) {
+    var content = event.target.result;
+    context = document.getElementById("imageDisplay").getContext("2d"),
+        img = new Image();
+    img.onload = function() {
+        context.drawImage(img, 300, 150);
+    };
+    img.src = content;
+    console.log(img);
   }
-});
+  reader.readAsDataURL(file);
+
+  reader.onerror = function(event) {
+    console.error('error, file could not be read: ' + event.target.error.code);;
 }
 }
 
@@ -37,19 +33,17 @@ function imgToText() {
     let file = document.getElementById('imgFile');
     let img = document.getElementById('imgFile').files[0];
     let displayArea = document.getElementById('fileDisplayArea');
-    console.log(file);
-    console.log(img);
     //open a file reader and read in file, then turn it from binary to ascii
     var reader = new FileReader();
     reader.onload = function(event) {
-        var contents = event.target.result;
+        let contents = event.target.result;
         //turn to ascii string
         let asciiContents = btoa(contents);
         //add ascii string to form
-        var form = new FormData();
-        form.append('file', asciiContents);
-        console.log(form);
-        displayArea.append(form);
+        let form = {
+            'file': asciiContents,
+        }
+        displayArea.append(form.file);
     };
     reader.onerror = function(event) {
         console.error('error, file could not be read');
@@ -106,7 +100,6 @@ function imgToText() {
     //     fileDisplayArea.innerText = "File not supported!";
     // }
     // });
-    console.log('end');
 };
 
 //add click event so that image is processed upon submit
@@ -114,6 +107,11 @@ $('#submitBtn').click(function(event) {
     event.preventDefault();
     imgToText();
 });
+
+$('#showBtn').click(function(event) {
+    event.preventDefault();
+    textToImg();
+})
 
 // function toDataURL(url, callback) {
 //   var xhr = new XMLHttpRequest();
