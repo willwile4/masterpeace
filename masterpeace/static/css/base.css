@@ -7,6 +7,10 @@ body{
   height: 100%;
 }
 
+ul{
+  list-style: none;
+}
+
 .footer{
   position:relative;
   bottom: 0;
@@ -116,9 +120,8 @@ a, a:visited{
   padding: 1em;
 }
 
-.posts_txt{ /* fix this cack right here */
-  min-width:30%;
-  max-width: auto;
+.posts_txt{
+  min-width:60%;
   min-height: 45em;
   max-height:30%;
   display: flex;
@@ -133,14 +136,15 @@ a, a:visited{
 }
 
 .image_itself{
-  min-height: 60%;
+  min-height: 50%;
   margin: 1em;
   display: flex;
   align-items: center;
 }
 
 .image_info{
-  margin: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
   width: 15em;
 }
 

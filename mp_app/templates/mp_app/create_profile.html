@@ -6,8 +6,9 @@
 {% endblock %}
 
 {% block content %}
+{% include 'mp_app/menubar.html' %}
 
-<div class='createProfileForm'>
+<div class='registration'>
     <form name='createProfile' id='createProfile' method='post'>
         {% csrf_token %}
         <input id='user_id' type='text' name='user_id' value='{{user.id}}' style='display:none'>

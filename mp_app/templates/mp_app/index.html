@@ -118,14 +118,6 @@
   {% endfor %}
   </div>
 {% else %}
-  <div class='info_splash'>
-    <ul>
-      <li>a</li>
-      <li>a</li>
-      <li>a</li>
-      <li>a</li>
-    </ul>
-  </div>
 
   <div class='signup_splash'>
     <img class='splash' src="{% static 'base_images/bob.png' %}">
@@ -133,10 +125,11 @@
 
   <a class='signup_button' href='/signup'>Sign up and post your masterpeace!</a>
 {% endif %}
+
+
 <div class='footer'>
   Masterpeace © 2017 | Find us on <a href='https://github.com/willwile4/masterpeace'>GitHub!</a>
 </div>
-
 
 {% endblock %}
 {% block javascript %}

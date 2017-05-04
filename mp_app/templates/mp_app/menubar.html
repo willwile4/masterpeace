@@ -23,7 +23,11 @@
     </div>
   </div>
   <div id='account'>
+    {% if not user.first_name %}
     Welcome, <a href='/profile/{{user.id}}'>{{user.username}}</a> |
+    {% else %}
+    Welcome, <a href='/profile/{{user.id}}'>{{user.first_name}}</a> |
+    {% endif %}
       {% if unread_messages > 0 %}
         <a class='messages' href='/messages'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i> {{unread_messages}}</a>  |
       {% else %}

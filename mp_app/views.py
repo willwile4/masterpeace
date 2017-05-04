@@ -13,12 +13,10 @@ from .serializers import (UserSerializer, MessageSerializer,
                           ImageFeedbackSerializer, TextFeedbackSerializer,
                           ImageTagSerializer, TextTagSerializer,
                           ArtformSerializer)
-from django.http import HttpResponseRedirect
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
 from django.db.models import Q
 from rest_framework.decorators import api_view
-import os
 
 
 def mp_jumblr():
@@ -198,8 +196,8 @@ def create_textMP(request):
             return redirect('/')
     else:
         f = CreateTextMPForm()
-    return render(request, 'mp_app/create.html', {'form': f,
-                                                  'unread_messages': u_m})
+    return render(request, 'mp_app/create_text.html', {'form': f,
+                                                       'unread_messages': u_m})
 
 
 @api_view(['GET', 'DELETE'])
