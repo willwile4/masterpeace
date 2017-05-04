@@ -6,8 +6,12 @@
       <title>{% block title %}Masterpeace{% endblock title %}</title>
       <link rel="icon" href="{% static 'base_images/favicon.png' %}" type="image/png">
       <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+      <!-- Font Awesome, for awesome icons! -->
       <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+      <!-- Awesome buttons, by Rafael Caferati  -->
       <link async rel="import" href="https://raw.githubusercontent.com/rcaferati/awesome-button/master/awesome-button.html"/>
+      <!-- AOS, an animate on scroll library by Michał Sajnóg -->
+      <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
 
       {% block extra_head_content %}{% endblock %}
     </head>
@@ -17,9 +21,9 @@
       {% endblock %}
 
       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-      {% block javascript %}
+      <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.0/webcomponents.min.js"></script>
+      {% block javascript %}
       {% endblock %}
     </body>
 

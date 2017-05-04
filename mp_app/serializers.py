@@ -39,7 +39,8 @@ class ImageMPSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageMP
         fields = ('tag', 'owner', 'allow_feedback', 'title', 'caption',
-                  'image', 'created', 'updated', 'artform')
+                  'image', 'created', 'updated', 'artform', 'feedback1',
+                  'feedback2', 'feedback3', 'feedback4', 'feedback5')
         read_only_fields = ('image',)
 
 
@@ -47,7 +48,8 @@ class TextMPSerializer(serializers.ModelSerializer):
     class Meta:
         model = TextMP
         fields = ('tag', 'owner', 'allow_feedback', 'title', 'text',
-                  'created', 'updated', 'artform')
+                  'created', 'updated', 'artform', 'feedback1',
+                  'feedback2', 'feedback3', 'feedback4', 'feedback5')
 
 
 class ImageFeedbackSerializer(serializers.ModelSerializer):

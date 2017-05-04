@@ -7,6 +7,14 @@ body{
   height: 100%;
 }
 
+.footer{
+  position:relative;
+  bottom: 0;
+  text-align: center;
+  width:100%;
+  height: 2em;
+}
+
 .right_arrow{
   right: 1em;
   position: fixed;

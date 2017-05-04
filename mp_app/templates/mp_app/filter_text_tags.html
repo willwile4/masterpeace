@@ -7,7 +7,13 @@
 {% include 'mp_app/menubar.html' %}
 
 <div id='hashtagTop'>{% for tag in texttags%}
-  <br><span id='tagTitle'>Filtering results for: #{{ tag }}</span>
+  <br>
+  <span id='tagTitle'>
+    <a href='#' onclick='history.go(-1); return true;'>
+      <i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back
+    </a> |
+      Filtering results for: #{{ tag }}
+  </span>
   {% endfor %}</div>
 <div class='gallery'>
   {% for tag in texttags %}
@@ -20,10 +26,10 @@
       <span class='tag'><a href='/text_tags/{{tag.id}}'>#{{tag}}</a></span>
       {% endfor %}
       {% if user.is_authenticated and textmp.owner_id == user.id %}
-        Posted by:<a href='/profile/{{textmp.owner_id}}'>You</a></br>
-        <span class='edit_text'><a href='/edit_text/{{textmp.id}}'>Edit</a></span>
+        <p>Posted by: <a href='/profile/{{textmp.owner_id}}'>You</a>, {{textmp.created}}</p>
+        <span class='edit_text'><a href='/edit_text/{{textmp.id}}'>edit</a></span>
       {% else %}
-        Posted by: <a href='/profile/{{textmp.owner_id}}'>{{textmp.owner}}</a></br>
+        <p>Posted by: <a href='/profile/{{textmp.owner_id}}'>{{textmp.owner}}</a>, {{textmp.created}}</p>
       {% endif %}
     </div>
     {% endfor %}

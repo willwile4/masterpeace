@@ -8,7 +8,7 @@
 {% if user.is_authenticated %}
   <div class='gallery'>
     {% csrf_token %}
-    <div class='right_arrow'>
+    <div data-aos='fade' class='right_arrow'>
       <i class="fa fa-long-arrow-right fa-5x" aria-hidden="true"></i>
     </div>
 
@@ -38,19 +38,24 @@
           <div class='feedback'>
             <table class='feedback_bar'>
               <td>
-                <a class='feedback_button' href='#'><i class="fa fa-quora" aria-hidden="true"></i></a>
+                <a class='feedback_button' id='0' href='#0'><i class="fa fa-quora" aria-hidden="true"></i></a>
+                  <div class='feedback_counter' id='0'>{{mp.feedback1}}</div>
               </td>
               <td>
-                <a class='feedback_button' href='#'><i class="fa fa-meetup" aria-hidden="true"></i></a>
+                <a class='feedback_button' id='1' href='#'><i class="fa fa-meetup" aria-hidden="true"></i></a>
+                  <div class='feedback_counter' id='1'>{{mp.feedback2}}</div>
               </td>
               <td>
-                <a class='feedback_button' href='#'><i class="fa fa-superpowers" aria-hidden="true"></i></a>
+                <a class='feedback_button' id='2' href='#'><i class="fa fa-superpowers" aria-hidden="true"></i></a>
+                  <div class='feedback_counter' id='2'>{{mp.feedback3}}</div>
               </td>
               <td>
-                <a class='feedback_button' href='#'><i class="fa fa-microchip" aria-hidden="true"></i></a>
+                <a class='feedback_button' id='3' href='#'><i class="fa fa-microchip" aria-hidden="true"></i></a>
+                  <div class='feedback_counter' id='4'>{{mp.feedback4}}</div>
               </td>
               <td>
-                <a class='feedback_button' href='#'><i class="fa fa-anchor" aria-hidden="true"></i></a>
+                <a class='feedback_button' id='4' href='#'><i class="fa fa-anchor" aria-hidden="true"></i></a>
+                  <div class='feedback_counter' id='5'>{{mp.feedback5}}</div>
               </td>
             </table>
           </div>
@@ -68,7 +73,7 @@
           {{mp.caption}}</br></br>
 
           {% for tag in mp.tag.all %}
-            <span class='tag'><a href='/text_tags/{{tag.id}}'>#{{tag}}</a></span>
+            <span class='tag'><a href='/image_tags/{{tag.id}}'>#{{tag}}</a></span>
           {% endfor %}
 
           {% if user.is_authenticated and mp.owner_id == user.id %}
@@ -85,19 +90,24 @@
             <div class='feedback'>
               <table class='feedback_bar'>
                 <td>
-                  <a class='feedback_button' href='#'><i class="fa fa-quora" aria-hidden="true"></i></a>
+                  <a class='feedback_button' id='5' href='#'><i class="fa fa-quora" aria-hidden="true"></i></a>
+                    <div class='feedback_counter' id='5'>{{mp.feedback1}}</div>
                 </td>
                 <td>
-                  <a class='feedback_button' href='#'><i class="fa fa-meetup" aria-hidden="true"></i></a>
+                  <a class='feedback_button' id='6' href='#'><i class="fa fa-meetup" aria-hidden="true"></i></a>
+                    <div class='feedback_counter' id='6'>{{mp.feedback2}}</div>
                 </td>
                 <td>
-                  <a class='feedback_button' href='#'><i class="fa fa-superpowers" aria-hidden="true"></i></a>
+                  <a class='feedback_button' id='7' href='#'><i class="fa fa-superpowers" aria-hidden="true"></i></a>
+                    <div class='feedback_counter' id='7'>{{mp.feedback3}}</div>
                 </td>
                 <td>
-                  <a class='feedback_button' href='#'><i class="fa fa-microchip" aria-hidden="true"></i></a>
+                  <a class='feedback_button' id='8' href='#'><i class="fa fa-microchip" aria-hidden="true"></i></a>
+                    <div class='feedback_counter' id='8'>{{mp.feedback4}}</div>
                 </td>
                 <td>
-                  <a class='feedback_button' href='#'><i class="fa fa-anchor" aria-hidden="true"></i></a>
+                  <a class='feedback_button' id='9' href='#'><i class="fa fa-anchor" aria-hidden="true"></i></a>
+                    <div class='feedback_counter' id='9'>{{mp.feedback5}}</div>
                 </td>
               </table>
             </div>
@@ -106,6 +116,7 @@
       </div>
     {% endif %}
   {% endfor %}
+  </div>
 {% else %}
   <div class='info_splash'>
     <ul>
@@ -122,8 +133,13 @@
 
   <a class='signup_button' href='/signup'>Sign up and post your masterpeace!</a>
 {% endif %}
+<div class='footer'>
+  Masterpeace © 2017 | Find us on <a href='https://github.com/willwile4/masterpeace'>GitHub!</a>
+</div>
+
 
 {% endblock %}
 {% block javascript %}
 <script src='{% static "js/deleteText.js" %}'></script>
+<script src='{% static "js/feedback.js" %}'></script>
 {% endblock %}
