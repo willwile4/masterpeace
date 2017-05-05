@@ -74,8 +74,7 @@ def edit_profile(request):
 
     else:
         form = EditProfile(instance=profile)
-    return render(request, 'mp_app/edit_profile.html', {'form': form,
-                                                        'profile': profile})
+    return render(request, 'mp_app/edit_profile.html', {'profile': profile})
 
 
 def edit_image(request, id):
