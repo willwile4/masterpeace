@@ -15,8 +15,7 @@ class Message(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    pic = models.FileField(upload_to="masterpeace/static/user_images/",
-                           blank=True, null=True)
+    pic = models.TextField(default='none')
     bio = models.CharField(max_length=500)
     fb_link = models.URLField(null=True, blank=True)
     insta_link = models.URLField(null=True, blank=True)

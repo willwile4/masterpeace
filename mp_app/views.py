@@ -251,16 +251,6 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
 
-    # going to need to take entire form, find the ascii, write it out, and
-    # then piece form back together and POST the new form.
-    # currently getting 400 error from api, which is probably syntatical. 
-    def ascii_to_file(self, request, ascii):
-        with open('ascii_img.txt', 'w') as f:
-            f.write()
-        pass
-
-
-
 
 class ImageMPViewSet(viewsets.ModelViewSet):
     queryset = ImageMP.objects.all()

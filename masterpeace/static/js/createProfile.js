@@ -1,5 +1,6 @@
 //js file to create a user's profile upon registration.
-//currently gettinga 400 error. 
+//currently posting pic as a text file, but default appears in api.
+//should be the value attr of the input element, which is the ascii string. 
 
 function createProfile(e) {
     e.preventDefault();
