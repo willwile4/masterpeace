@@ -11,10 +11,9 @@
     <form name='createProfile' id='createProfile' method='post'>
         {% csrf_token %}
         <input id='user_id' type='text' name='user_id' value='{{user.id}}' style='display:none'>
-        <input type='file' id='file_input' name="file"/>
+        <input type='file' id='image' name="file"/>
         <p id='status'>Please select a file</p>
         <img id='preview' src="{% static 'base_images/user.svg' %}" width=10% height=auto/>
-        <input type='hidden' id='avatar-url' name='pic' value='/static/user.svg'><br>
         Bio:<input type='text' name="bio" placeholder="Bio"><br>
         Facebook:<input type='url' name="fb_link" placeholder="Link to Facebook"><br>
         Instagram:<input type='url' name="insta_link" placeholder="Link to Instagram"><br>
@@ -28,5 +27,5 @@
 
 {% block javascript %}
 <script src="{% static 'js/createProfile.js' %}"></script>
-<script src="{% static 'js/blob.js' %}"></script>
+<script src="{% static 'js/bin-ascii.js' %}"></script>
 {% endblock %}
