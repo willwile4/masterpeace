@@ -1,5 +1,5 @@
 //js file to turn an image into a blob, then store the blob in our API.
-
+//half a blob
 
 //this is a reference file. Please Do Not Alter!!
 function textToImg(text) {
