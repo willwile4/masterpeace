@@ -83,7 +83,7 @@ class TextMP(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     allow_feedback = models.BooleanField(default=False)
     title = models.CharField(max_length=50)
-    text = models.TextField(null=True, blank=True)
+    text = models.TextField(null=True, blank=True, max_length=10000000)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     artform = models.ForeignKey(Artform, on_delete=models.CASCADE)
