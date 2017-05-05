@@ -27,7 +27,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ('user', 'user_id', 'pic', 'bio', 'dob', 'fb_link', 'insta_link',
+        fields = ('user', 'user_id', 'pic', 'bio', 'fb_link', 'insta_link',
                   'twitter_link', 'allow_messages')
 
 
