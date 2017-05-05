@@ -5,8 +5,7 @@
 function textToImg(text) {
   //get ascii string into binary then into an array then into a blob.
   let file = document.getElementById('fileDisplayArea').innerHTML;
-  let displayArea = document.getElementById('imageDisplay')
-  console.log(file, typeof(file));
+  let displayArea = document.getElementById('imageDisplay');
 
   img = document.createElement('img');
   img.src = "data:image/png;base64," + document.getElementById('fileDisplayArea').innerHTML;

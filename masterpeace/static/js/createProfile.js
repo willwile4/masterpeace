@@ -1,6 +1,6 @@
 //js file to create a user's profile upon registration.
 //currently posting pic as a text file, but default appears in api.
-//should be the value attr of the input element, which is the ascii string. 
+//should be the value attr of the input element, which is the ascii string.
 
 function createProfile(e) {
     e.preventDefault();
@@ -12,7 +12,8 @@ function createProfile(e) {
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
         'twitter_link': $('[name="twitter_link"]').val(),
-        'allow_messages': $('[name="allow_messages"]').val(),
+        'allow_messages': false, // fix this plz k thx $('[name="allow_messages"]').val(),
+        'dob': $('[name="dob"]').val(),
     };
     console.log($form);
     var settings = {

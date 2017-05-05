@@ -1,7 +1,7 @@
 //js file to turn an image into a blob, then store the blob in our API.
 
 //this function shows a preview of the img on the screen.
-function textToImg(text) {
+function textToImg() {
   //get ascii string into binary then into an array then into a blob.
   let elem = document.getElementById('form-image');
   let file = elem.getAttribute('value');
@@ -37,5 +37,4 @@ function imgToText() {
 
 //add click event so that image is processed upon submit
 var imgf = document.getElementById('form-image');
-console.log(imgf);
 imgf.addEventListener('change', imgToText);
