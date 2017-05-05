@@ -13,7 +13,6 @@ function createProfile(e) {
         'insta_link': $('[name="insta_link"]').val(),
         'twitter_link': $('[name="twitter_link"]').val(),
         'allow_messages': false, // fix this plz k thx $('[name="allow_messages"]').val(),
-        'dob': $('[name="birthday"]').val(),
     };
     console.log($form);
     var settings = {

@@ -20,7 +20,6 @@ class UserProfile(models.Model):
     fb_link = models.URLField(null=True, blank=True)
     insta_link = models.URLField(null=True, blank=True)
     twitter_link = models.URLField(null=True, blank=True)
-    dob = models.DateField(auto_now_add=False, null=True, blank=True)
     allow_messages = models.BooleanField(default=False)
     followers = models.ManyToManyField('self', symmetrical=False, blank=True)
 
