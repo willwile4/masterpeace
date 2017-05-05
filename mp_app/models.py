@@ -16,7 +16,7 @@ class Message(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     pic = models.FileField(upload_to="masterpeace/static/user_images/",
-                            blank=True, null=True)
+                           blank=True, null=True)
     bio = models.CharField(max_length=500)
     fb_link = models.URLField(null=True, blank=True)
     insta_link = models.URLField(null=True, blank=True)
@@ -64,11 +64,16 @@ class ImageMP(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     allow_feedback = models.BooleanField(default=False)
     title = models.CharField(max_length=50)
-    caption = models.CharField(max_length=144)
+    caption = models.CharField(max_length=144, null=True, blank=True)
     image = models.FileField(upload_to="masterpeace/static/mp_images/")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     artform = models.ForeignKey(Artform, on_delete=models.CASCADE)
+    feedback1 = models.IntegerField(default=0)
+    feedback2 = models.IntegerField(default=0)
+    feedback3 = models.IntegerField(default=0)
+    feedback4 = models.IntegerField(default=0)
+    feedback5 = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -79,10 +84,15 @@ class TextMP(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     allow_feedback = models.BooleanField(default=False)
     title = models.CharField(max_length=50)
-    text = models.TextField(blank=True)
+    text = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     artform = models.ForeignKey(Artform, on_delete=models.CASCADE)
+    feedback1 = models.IntegerField(default=0)
+    feedback2 = models.IntegerField(default=0)
+    feedback3 = models.IntegerField(default=0)
+    feedback4 = models.IntegerField(default=0)
+    feedback5 = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

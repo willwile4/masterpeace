@@ -13,12 +13,10 @@ from .serializers import (UserSerializer, MessageSerializer,
                           ImageFeedbackSerializer, TextFeedbackSerializer,
                           ImageTagSerializer, TextTagSerializer,
                           ArtformSerializer)
-from django.http import HttpResponseRedirect
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
 from django.db.models import Q
 from rest_framework.decorators import api_view
-import os
 
 
 def mp_jumblr():
@@ -172,9 +170,9 @@ def message_detail(request, user_id):
     u_m = len(Message.objects.filter(to_user_id=request.user.id, read=False))
     other_user = User.objects.get(id=user_id)
     context = {'unread_messages': u_m,
-     'conversation': conversation,
-     'other_user': other_user,
-     'user': request.user}
+               'conversation': conversation,
+               'other_user': other_user,
+               'user': request.user}
     if UserProfile.objects.filter(user_id=user_id).exists():
         context['profile'] = UserProfile.objects.get(user_id=user_id)
     return render(request, 'mp_app/message_detail.html', context)
@@ -198,8 +196,8 @@ def create_textMP(request):
             return redirect('/')
     else:
         f = CreateTextMPForm()
-    return render(request, 'mp_app/create.html', {'form': f,
-                                                  'unread_messages': u_m})
+    return render(request, 'mp_app/create_text.html', {'form': f,
+                                                       'unread_messages': u_m})
 
 
 @api_view(['GET', 'DELETE'])

@@ -7,6 +7,7 @@ header#nav{
   text-align: center;
   padding-right: 1em;
   z-index: 1;
+  font-size: 1.1em;
 }
 
 div#logo{
@@ -40,7 +41,7 @@ div#account{
     justify-content: space-around;
     border-radius: 1em;
     top: -200%;
-    margin-left: -140%;
+    margin-left: -123%;
     background-color: #ccc;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);

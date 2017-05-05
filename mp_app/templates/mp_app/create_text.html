@@ -2,13 +2,15 @@
 
 {% load staticfiles %}
 
-{% block extra_head_content %}{% endblock%}
+{% block extra_head_content %}
+<link rel='stylesheet' type="text/css" href="{% static 'css/profile.css' %}"/>
+{% endblock%}
 
 {% block content %}
 
 {% include 'mp_app/menubar.html' %}
 <div class='registration'>
-  <h2>Create a text post</h2>
+  <h2>Write a masterpeace</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
