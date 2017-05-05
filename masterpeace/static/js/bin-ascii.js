@@ -1,24 +1,20 @@
 //js file to turn an image into a blob, then store the blob in our API.
-// next: retrive the blob and put it on the page
 
+//this function shows a preview of the img on the screen.
 function textToImg(text) {
   //get ascii string into binary then into an array then into a blob.
-  let elem = document.getElementById('image');
+  let elem = document.getElementById('form-image');
   let file = elem.getAttribute('value');
-  let displayArea = document.getElementById('preview');
-  console.log(file, typeof(file));
-
-  img = document.getElementById('preview');
+  let displayArea = document.getElementById('form-image-preview');
+  img = document.getElementById('form-image-preview');
   img.src = "data:image/png;base64," + file;
-  //displayArea.append(img);
-  // TODO get data via ajax to our DB our restful API
 }
 
 //turns an image into a blob
 function imgToText() {
     // get file elem and get image
-    let file = document.getElementById('image').files[0];
-    let imgField = document.getElementById('image');
+    let file = document.getElementById('form-image').files[0];
+    let imgField = document.getElementById('form-image');
     //open a file reader and read in file, then turn it from binary to ascii
     var reader = new FileReader();
     reader.onload = function(event) {
@@ -40,6 +36,6 @@ function imgToText() {
 };
 
 //add click event so that image is processed upon submit
-var imgf = document.getElementById('image');
+var imgf = document.getElementById('form-image');
 console.log(imgf);
 imgf.addEventListener('change', imgToText);

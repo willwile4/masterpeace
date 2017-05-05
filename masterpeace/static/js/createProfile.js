@@ -1,19 +1,19 @@
 //js file to create a user's profile upon registration.
-//known bugs: any user can create a profile for user's without a profile.
+//currently gettinga 400 error. 
 
 function createProfile(e) {
     e.preventDefault();
     let $form = {
         "user": $('[name="user_id"]').val(),
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
-        'pic': $('[name="pic"]').val(),
+        'pic': $("#form-image").attr('value'),
         'bio': $('[name="bio"]').val(),
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
         'twitter_link': $('[name="twitter_link"]').val(),
         'allow_messages': $('[name="allow_messages"]').val(),
     };
-
+    console.log($form);
     var settings = {
         method: "POST",
         url: '/api/profile/',
