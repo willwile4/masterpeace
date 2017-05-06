@@ -13,9 +13,9 @@
     </div>
 
   {% for mp in all_mps %}
-
+  <!-- Begin text mp div -->
     {% if mp.text %}
-      <div class='posts_txt' id='text_{{mp.id}}'>
+      <div class='posts_txt' id='{{mp.id}}'>
         <span class='post_title'>{{mp.title}}</span></br>
         {{mp.text}}</br></br>
 
@@ -31,35 +31,51 @@
         {% else %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
         {% endif %}
+        {{mp.id}}
 
         </br></br>
 
         {% if mp.allow_feedback %}
+          <form name='feedbackData' id='feedbackData' method='post'>
+            {% csrf_token %}
+            <input id='critic_id' type='text' name='critic_id' value={{user.id}} style='display:none'>
+            <input id='masterpeace_id' type='text' name='masterpeace_id' value={{mp.id}} style='display:none'>
+          </form>
           <div class='feedback'>
             <table class='feedback_bar'>
               <td>
-                <a class='feedback_button' href='#'><i class="fa fa-quora" aria-hidden="true"></i></a>
+                <a class='text_feedback_button' id='1'><i class="fa fa-quora" aria-hidden="true"></i>
+                  <div class='counter' id='1'>{{mp.feedback1}}</div>
+                </a>
               </td>
               <td>
-                <a class='feedback_button' href='#'><i class="fa fa-meetup" aria-hidden="true"></i></a>
+                <a class='text_feedback_button' id='2'><i class="fa fa-meetup" aria-hidden="true"></i>
+                  <div class='counter' id='2'>{{mp.feedback2}}</div>
+                </a>
               </td>
               <td>
-                <a class='feedback_button' href='#'><i class="fa fa-superpowers" aria-hidden="true"></i></a>
+                <a class='text_feedback_button' id='3'><i class="fa fa-superpowers" aria-hidden="true"></i>
+                  <div class='counter' id='3'>{{mp.feedback3}}</div>
+                </a>
               </td>
               <td>
-                <a class='feedback_button' href='#'><i class="fa fa-microchip" aria-hidden="true"></i></a>
+                <a class='text_feedback_button' id='4'><i class="fa fa-microchip" aria-hidden="true"></i>
+                  <div class='counter' id='4'>{{mp.feedback4}}</div>
+                </a>
               </td>
               <td>
-                <a class='feedback_button' href='#'><i class="fa fa-anchor" aria-hidden="true"></i></a>
+                <a class='text_feedback_button' id='5'><i class="fa fa-anchor" aria-hidden="true"></i>
+                  <div class='counter' id='5'>{{mp.feedback5}}</div>
+                </a>
               </td>
             </table>
           </div>
         {% endif %}
       </div>
-
+      <!-- End text mp div -->
     {% elif mp.image %}
-
-      <div class='posts_img' id='image_{{mp.id}}'>
+      <!-- Begin image mp div -->
+      <div class='posts_img' id='{{mp.id}}'>
         <div class='image_itself'>
           <img class='masterpeace' src="/media/{{mp.image}}">
         </div>
@@ -82,22 +98,39 @@
           </br></br>
 
           {% if mp.allow_feedback %}
+          {{mp.id}}
+
+            <form name='feedbackData' id='feedbackData' method='post'>
+              {% csrf_token %}
+              <input id='critic_id' type='text' name='critic_id' value={{user.id}} style='display:none'>
+              <input id='masterpeace_id' type='text' name='masterpeace_id' value={{mp.id}} style='display:none'>
+            </form>
             <div class='feedback'>
               <table class='feedback_bar'>
                 <td>
-                  <a class='feedback_button' href='#'><i class="fa fa-quora" aria-hidden="true"></i></a>
+                  <a class='image_feedback_button' id='1'><i class="fa fa-quora" aria-hidden="true"></i>
+                    <div class='counter' id='1'>{{mp.feedback1}}</div>
+                  </a>
                 </td>
                 <td>
-                  <a class='feedback_button' href='#'><i class="fa fa-meetup" aria-hidden="true"></i></a>
+                  <a class='image_feedback_button' id='2'><i class="fa fa-meetup" aria-hidden="true"></i>
+                    <div class='counter' id='2'>{{mp.feedback2}}</div>
+                  </a>
                 </td>
                 <td>
-                  <a class='feedback_button' href='#'><i class="fa fa-superpowers" aria-hidden="true"></i></a>
+                  <a class='image_feedback_button' id='3'><i class="fa fa-superpowers" aria-hidden="true"></i>
+                    <div class='counter' id='3'>{{mp.feedback3}}</div>
+                  </a>
                 </td>
                 <td>
-                  <a class='feedback_button' href='#'><i class="fa fa-microchip" aria-hidden="true"></i></a>
+                  <a class='image_feedback_button' id='4'><i class="fa fa-microchip" aria-hidden="true"></i>
+                    <div class='counter' id='4'>{{mp.feedback4}}</div>
+                  </a>
                 </td>
                 <td>
-                  <a class='feedback_button' href='#'><i class="fa fa-anchor" aria-hidden="true"></i></a>
+                  <a class='image_feedback_button' id='5'><i class="fa fa-anchor" aria-hidden="true"></i>
+                    <div class='counter' id='5'>{{mp.feedback5}}</div>
+                  </a>
                 </td>
               </table>
             </div>
@@ -125,5 +158,6 @@
 
 {% endblock %}
 {% block javascript %}
+<script src='{% static "js/feedback.js" %}'></script>
 <script src='{% static "js/deleteText.js" %}'></script>
 {% endblock %}

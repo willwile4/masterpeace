@@ -69,6 +69,11 @@ class ImageMP(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     artform = models.ForeignKey(Artform, on_delete=models.CASCADE)
+    feedback1 = models.IntegerField(null=True)
+    feedback2 = models.IntegerField(null=True)
+    feedback3 = models.IntegerField(null=True)
+    feedback4 = models.IntegerField(null=True)
+    feedback5 = models.IntegerField(null=True)
 
     def __str__(self):
         return self.title
@@ -83,6 +88,11 @@ class TextMP(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     artform = models.ForeignKey(Artform, on_delete=models.CASCADE)
+    feedback1 = models.IntegerField(null=True)
+    feedback2 = models.IntegerField(null=True)
+    feedback3 = models.IntegerField(null=True)
+    feedback4 = models.IntegerField(null=True)
+    feedback5 = models.IntegerField(null=True)
 
     def __str__(self):
         return self.title
