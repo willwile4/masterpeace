@@ -66,6 +66,8 @@ def edit_profile(request):
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES, instance=profile)
 
+# do we need this? switched prof form to
+# html form for more js/img processing control -ww
         if form.is_valid():
             profile.pic = profile.pic
             profile = form.save(commit=True)
@@ -74,8 +76,7 @@ def edit_profile(request):
 
     else:
         form = EditProfile(instance=profile)
-    return render(request, 'mp_app/edit_profile.html', {'form': form,
-                                                        'profile': profile})
+    return render(request, 'mp_app/edit_profile.html', {'profile': profile})
 
 
 def edit_image(request, id):
@@ -235,6 +236,14 @@ def account(request):
 def blob_test(request):
     return render(request, 'mp_app/blob_test.html')
 
+
+def create_image(request):
+    tag_qs = ImageTag.objects.all()
+    tags = [tag for tag in tag_qs]
+    af_qs = Artform.objects.all()
+    artform = [af for af in af_qs]
+    return render(request, 'mp_app/create_image.html', {'tags': tags,
+                                                        'artform': artform})
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

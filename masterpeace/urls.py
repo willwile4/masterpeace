@@ -58,7 +58,8 @@ urlpatterns = [
         views.filter_text_tags, name='filter_text_tags'),
     url(r'^image_tags/(?P<tag_id>[0-9]+)',
         views.filter_image_tags, name='filter_image_tags'),
-    url(r'^blob_test', views.blob_test, name='blob_test')
+    url(r'^blob_test', views.blob_test, name='blob_test'),
+    url(r'^create_image', views.create_image, name='create_image')
 ]
 
 if settings.DEBUG:

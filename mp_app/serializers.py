@@ -26,22 +26,17 @@ class UserProfileSerializer(serializers.ModelSerializer):
     # )
 
     class Meta:
-        extra_kwargs = {
-                        'dob': {'write_only': True}
-                        }
         model = UserProfile
-        fields = ('user', 'user_id', 'pic', 'bio', 'dob', 'fb_link', 'insta_link',
-                  'twitter_link', 'allow_messages', 'followers')
-        read_only_fields = ('pic',)
+        fields = ('user', 'user_id', 'pic', 'bio', 'fb_link', 'insta_link',
+                  'twitter_link', 'allow_messages')
 
 
 class ImageMPSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageMP
         fields = ('tag', 'owner', 'allow_feedback', 'title', 'caption',
-                  'image', 'created', 'updated', 'artform', 'feedback1',
+                  'image', 'artform', 'feedback1',
                   'feedback2', 'feedback3', 'feedback4', 'feedback5')
-        read_only_fields = ('image',)
 
 
 class TextMPSerializer(serializers.ModelSerializer):
