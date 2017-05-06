@@ -12,54 +12,54 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='imagemp',
-            name='feedback1',
-            field=models.IntegerField(null=True),
-        ),
-        migrations.AddField(
-            model_name='imagemp',
-            name='feedback2',
-            field=models.IntegerField(null=True),
-        ),
-        migrations.AddField(
-            model_name='imagemp',
-            name='feedback3',
-            field=models.IntegerField(null=True),
-        ),
-        migrations.AddField(
-            model_name='imagemp',
-            name='feedback4',
-            field=models.IntegerField(null=True),
-        ),
-        migrations.AddField(
-            model_name='imagemp',
-            name='feedback5',
-            field=models.IntegerField(null=True),
-        ),
-        migrations.AddField(
-            model_name='textmp',
-            name='feedback1',
-            field=models.IntegerField(null=True),
-        ),
-        migrations.AddField(
-            model_name='textmp',
-            name='feedback2',
-            field=models.IntegerField(null=True),
-        ),
-        migrations.AddField(
-            model_name='textmp',
-            name='feedback3',
-            field=models.IntegerField(null=True),
-        ),
-        migrations.AddField(
-            model_name='textmp',
-            name='feedback4',
-            field=models.IntegerField(null=True),
-        ),
-        migrations.AddField(
-            model_name='textmp',
-            name='feedback5',
-            field=models.IntegerField(null=True),
-        ),
+        # migrations.AddField(
+        #     model_name='imagemp',
+        #     name='feedback1',
+        #     field=models.IntegerField(null=True),
+        # ),
+        # migrations.AddField(
+        #     model_name='imagemp',
+        #     name='feedback2',
+        #     field=models.IntegerField(null=True),
+        # ),
+        # migrations.AddField(
+        #     model_name='imagemp',
+        #     name='feedback3',
+        #     field=models.IntegerField(null=True),
+        # ),
+        # migrations.AddField(
+        #     model_name='imagemp',
+        #     name='feedback4',
+        #     field=models.IntegerField(null=True),
+        # ),
+        # migrations.AddField(
+        #     model_name='imagemp',
+        #     name='feedback5',
+        #     field=models.IntegerField(null=True),
+        # ),
+        # migrations.AddField(
+        #     model_name='textmp',
+        #     name='feedback1',
+        #     field=models.IntegerField(null=True),
+        # ),
+        # migrations.AddField(
+        #     model_name='textmp',
+        #     name='feedback2',
+        #     field=models.IntegerField(null=True),
+        # ),
+        # migrations.AddField(
+        #     model_name='textmp',
+        #     name='feedback3',
+        #     field=models.IntegerField(null=True),
+        # ),
+        # migrations.AddField(
+        #     model_name='textmp',
+        #     name='feedback4',
+        #     field=models.IntegerField(null=True),
+        # ),
+        # migrations.AddField(
+        #     model_name='textmp',
+        #     name='feedback5',
+        #     field=models.IntegerField(null=True),
+        # ),
     ]
