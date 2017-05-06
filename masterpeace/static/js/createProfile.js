@@ -4,6 +4,8 @@
 
 function createProfile(e) {
     e.preventDefault();
+    console.log('hi mom');
+    console.log(e);
     let $form = {
         "user": $('[name="user_id"]').val(),
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),

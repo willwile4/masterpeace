@@ -10,6 +10,7 @@
   <form name='edit_profile' id='edit_profile' method='PUT'>
       {% csrf_token %}
       <input id='user_id' type='text' name='user_id' value='{{user.id}}' style='display:none'>
+      <input id='profile' type='text' name='profile' value='{{profile.id}}' style='display:none'>
       <input type='file' id='form-image' name="file"/>
       <p id='status'>Please select a file</p>
       <img id='form-image-preview' src="{% static 'base_images/user.svg' %}" width=10% height=auto/>
