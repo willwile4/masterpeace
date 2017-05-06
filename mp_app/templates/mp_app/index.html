@@ -8,7 +8,7 @@
 {% if user.is_authenticated %}
   <div class='gallery'>
     {% csrf_token %}
-    <div class='right_arrow'>
+    <div data-aos='fade' class='right_arrow'>
       <i class="fa fa-long-arrow-right fa-5x" aria-hidden="true"></i>
     </div>
 
@@ -26,8 +26,8 @@
 
         {% if user.is_authenticated and mp.owner_id == user.id %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>You</a>, {{mp.created}}</p>
-          <span class='edit_text'><a href='/edit_text/{{mp.id}}'>edit</a></span>
-          <a href='#'><span class='delete_text' id='{{mp.id}}'>delete</span></a>
+          <p><span class='edit_text'><a href='/edit_text/{{mp.id}}'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
+          <a href='#'><span class='delete_text' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a></p>
         {% else %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
         {% endif %}
@@ -44,6 +44,7 @@
           <div class='feedback'>
             <table class='feedback_bar'>
               <td>
+<<<<<<< HEAD
                 <a class='text_feedback_button' id='1'><i class="fa fa-quora" aria-hidden="true"></i>
                   <div class='counter' id='1'>{{mp.feedback1}}</div>
                 </a>
@@ -84,13 +85,13 @@
           {{mp.caption}}</br></br>
 
           {% for tag in mp.tag.all %}
-            <span class='tag'><a href='/text_tags/{{tag.id}}'>#{{tag}}</a></span>
+            <span class='tag'><a href='/image_tags/{{tag.id}}'>#{{tag}}</a></span>
           {% endfor %}
 
           {% if user.is_authenticated and mp.owner_id == user.id %}
             <p>Posted by: <a href='/profile/{{mp.owner_id}}'>You</a>, {{mp.created}}</p>
-            <span class='edit_image'><a href='/edit_image/{{mp.id}}'>edit</a></span></br>
-            <a href='#'><span class='delete_image' id='{{mp.id}}'>delete</span></a>
+            <p><span class='edit_image'><a href='/edit_image/{{mp.id}}'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
+            <a href='#'><span class='delete_image' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a></p>
           {% else %}
             <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
           {% endif %}
@@ -108,6 +109,7 @@
             <div class='feedback'>
               <table class='feedback_bar'>
                 <td>
+<<<<<<< HEAD
                   <a class='image_feedback_button' id='1'><i class="fa fa-quora" aria-hidden="true"></i>
                     <div class='counter' id='1'>{{mp.feedback1}}</div>
                   </a>
@@ -139,15 +141,8 @@
       </div>
     {% endif %}
   {% endfor %}
-{% else %}
-  <div class='info_splash'>
-    <ul>
-      <li>a</li>
-      <li>a</li>
-      <li>a</li>
-      <li>a</li>
-    </ul>
   </div>
+{% else %}
 
   <div class='signup_splash'>
     <img class='splash' src="{% static 'base_images/bob.png' %}">
@@ -156,8 +151,14 @@
   <a class='signup_button' href='/signup'>Sign up and post your masterpeace!</a>
 {% endif %}
 
+
+<div class='footer'>
+  Masterpeace © 2017 | Find us on <a href='https://github.com/willwile4/masterpeace'>GitHub!</a>
+</div>
+
 {% endblock %}
 {% block javascript %}
 <script src='{% static "js/feedback.js" %}'></script>
 <script src='{% static "js/deleteText.js" %}'></script>
+<script src='{% static "js/feedback.js" %}'></script>
 {% endblock %}

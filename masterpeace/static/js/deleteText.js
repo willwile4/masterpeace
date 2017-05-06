@@ -1,4 +1,4 @@
-console.log('hi mom');
+
 let csrftoken = $('[name="csrfmiddlewaretoken"]').val();
 
 function csrfSafeMethod(method) {

@@ -32,6 +32,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 ALLOWED_HOSTS = [
+    '0.0.0.0',
     'localhost',
     '127.0.0.1',
     'masterpeace.herokuapp.com',
@@ -112,8 +113,7 @@ REST_FRAMEWORK = {
         ('rest_framework.authentication.BasicAuthentication',
          'rest_framework.authentication.SessionAuthentication',),
     'DEFAULT_PERMISSION_CLASSES':
-        ("rest_framework.permissions.IsAuthenticatedOrReadOnly",
-         "rest_framework.permissions.IsAuthenticated",),
+        ("rest_framework.permissions.IsAuthenticatedOrReadOnly",),
     'DEFAULT_PARSER_CLASSES': ("rest_framework.parsers.FormParser",
                                "rest_framework.parsers.MultiPartParser"),
     'PAGE_SIZE': 10
@@ -160,7 +160,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'MasterPeace',
-        'USER': 'raleigh',
+        'USER': '',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',

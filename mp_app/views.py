@@ -14,14 +14,10 @@ from .serializers import (UserSerializer, MessageSerializer,
                           ImageFeedbackSerializer, TextFeedbackSerializer,
                           ImageTagSerializer, TextTagSerializer,
                           ArtformSerializer)
-from django.http import HttpResponseRedirect
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
 from django.db.models import Q
 from rest_framework.decorators import api_view
-import os
-import json
-import boto3
 
 
 def mp_jumblr():
@@ -86,6 +82,8 @@ def edit_profile(request):
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES, instance=profile)
 
+# do we need this? switched prof form to
+# html form for more js/img processing control -ww
         if form.is_valid():
             profile.pic = profile.pic
             profile = form.save(commit=True)
@@ -94,8 +92,7 @@ def edit_profile(request):
 
     else:
         form = EditProfile(instance=profile)
-    return render(request, 'mp_app/edit_profile.html', {'form': form,
-                                                        'profile': profile})
+    return render(request, 'mp_app/edit_profile.html', {'profile': profile})
 
 
 def edit_image(request, id):
@@ -190,9 +187,9 @@ def message_detail(request, user_id):
     u_m = len(Message.objects.filter(to_user_id=request.user.id, read=False))
     other_user = User.objects.get(id=user_id)
     context = {'unread_messages': u_m,
-     'conversation': conversation,
-     'other_user': other_user,
-     'user': request.user}
+               'conversation': conversation,
+               'other_user': other_user,
+               'user': request.user}
     if UserProfile.objects.filter(user_id=user_id).exists():
         context['profile'] = UserProfile.objects.get(user_id=user_id)
     return render(request, 'mp_app/message_detail.html', context)
@@ -216,8 +213,8 @@ def create_textMP(request):
             return redirect('/')
     else:
         f = CreateTextMPForm()
-    return render(request, 'mp_app/create.html', {'form': f,
-                                                  'unread_messages': u_m})
+    return render(request, 'mp_app/create_text.html', {'form': f,
+                                                       'unread_messages': u_m})
 
 
 @api_view(['GET', 'DELETE'])
@@ -249,8 +246,20 @@ def privacy(request):
 
 
 def account(request):
-    return render(request, 'mp_app/account.html')
+    return render(request, 'mp_app/s3_test.html')
 
+
+def blob_test(request):
+    return render(request, 'mp_app/blob_test.html')
+
+
+def create_image(request):
+    tag_qs = ImageTag.objects.all()
+    tags = [tag for tag in tag_qs]
+    af_qs = Artform.objects.all()
+    artform = [af for af in af_qs]
+    return render(request, 'mp_app/create_image.html', {'tags': tags,
+                                                        'artform': artform})
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -267,94 +276,12 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
 
-    def sign_s3(self, request):
-        S3_BUCKET = os.environ.get('S3_BUCKET')
-
-        file_name = request.args.get('file_name')
-        file_type = request.args.get('file_type')
-
-        s3 = boto3.client('s3')
-
-        presigned_post = s3.generate_presigned_post(
-            Bucket=S3_BUCKET,
-            Key=file_name,
-            Fields={'acl': "public-read", "Content-Type": file_type},
-            Conditions=[
-                {'acl': 'public-read'},
-                {'Content-Type': file_type}
-            ],
-            ExpiresIn=3600
-        )
-
-        return json.dumps({
-            'data': presigned_post,
-            'url': 'https://{}.s3.amazonaws.com/{}'.format(S3_BUCKET, file_name)
-        })
-
-    def submit_form(self, request):
-        if request.method == 'POST':
-            user_id = request.form['user_id']
-            first_name = request.form['first_name']
-            last_name = request.form['last_name']
-            password = request.form['password']
-            confirm_password = request.form['conf_password']
-            email = request.form['email']
-            avatar_url = request.form['avatar-url']
-            dob = request.form['DOB']
-            bio = request.form['bio']
-            fb = request.form['FBlink']
-            insta = request.form['Instalink']
-            twitter = request.form['Twitterlink']
-            allow_messages = request.form['allow_messages']
-
-            u = UserProfile(user_id, first_name, last_name, password,
-                            confirm_password, email, avatar_url, dob, bio, fb,
-                            insta, twitter, allow_messages)
-            print("cool")
-            u.save()
-
-        return HttpResponseRedirect('/profile/')
-
 
 class ImageMPViewSet(viewsets.ModelViewSet):
     queryset = ImageMP.objects.all()
     serializer_class = ImageMPSerializer
     permission_classes = [IsAuthenticated]
     parser_classes = (FormParser, MultiPartParser)
-
-    def sign_s3(self, request):
-        S3_BUCKET = os.environ.get('S3_BUCKET')
-
-        file_name = request.args.get('file_name')
-        file_type = request.args.get('file_type')
-
-        s3 = boto3.client('s3')
-
-        presigned_post = s3.generate_presigned_post(
-            Bucket=S3_BUCKET,
-            Key=file_name,
-            Fields={'acl': "public-read", "Content-Type": file_type},
-            Conditions=[
-                {'acl': 'public-read'},
-                {'Content-Type': file_type}
-            ],
-            ExpiresIn=3600
-        )
-
-        return json.dumps({
-            'data': presigned_post,
-            'url': 'https://{}.s3.amazonaws.com/{}'.format(S3_BUCKET, file_name)
-        })
-
-    def submit_form(self, request):
-        if request.method == 'POST':
-            pass
-
-        #     self.update(username, first_name, last_name, password,
-        #                 confirm_password, email, avatar_url, dob, bio, fb,
-        #                 insta, twitter, allow_messages)
-        #
-        # return HttpResponseRedirect('/profile/')
 
 
 class TextMPViewSet(viewsets.ModelViewSet):

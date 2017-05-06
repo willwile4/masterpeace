@@ -1,0 +1,30 @@
+{% extends 'mp_app/base.html' %}
+{% load staticfiles %}
+
+{% block extra_head_content %}
+{% endblock %}
+
+{% block content %}
+{% include 'mp_app/menubar.html' %}
+<div>
+  <form method='post' id='image-mp-form'>
+      {% csrf_token %}
+     <input type="select" name='tag' placeholder="Tag" value={{tags}}/><br>
+      <input type='text' name='owner' value={{user.id}} style="display:none"/><br>
+      <input type='' name='allow_feedback'/><br>
+      <input type='text' name='title' placeholder="Title"/><br>
+      <input type='text' name='caption' placeholder="Caption"/><br>
+      <input type='file' id='form-image' name='image' /><br>
+      <p id='status'>Please select a file</p><br>
+      <img id='form-image-preview' src="{% static 'base_images/picture.png' %}" width=10% height=auto/><br>
+      <input type='select' name='artform' value={{artform}}/><br>
+      <input type='submit' name='submit' id='submitBtn' value='Create'/>
+  </form>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/bin-ascii.js' %}"></script>
+<script src="{% static 'js/createImage.js' %}"></script>
+{% endblock %}

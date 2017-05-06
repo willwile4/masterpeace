@@ -1,23 +1,26 @@
-//js file to create a user's profile upon registration.
-//currently posting pic as a text file, but default appears in api.
-//should be the value attr of the input element, which is the ascii string.
+//js file to edit a user's profile upon registration.
+//currently getting a
 
-function createProfile(e) {
+function editProfile(e) {
     e.preventDefault();
+    let user =  $('[name="user_id"]').val()
     let $form = {
-        "user": $('[name="user_id"]').val(),
+        "user": user,
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
         'pic': $("#form-image").attr('value'),
         'bio': $('[name="bio"]').val(),
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
         'twitter_link': $('[name="twitter_link"]').val(),
-        'allow_messages': false, // fix this plz k thx $('[name="allow_messages"]').val(),
+        'allow_messages': false,// fix this plz k thx $('[name="allow_messages"]').val(),
     };
     console.log($form);
     var settings = {
-        method: "POST",
-        url: '/api/profile/',
+        headers: {
+           'X-HTTP-Method-Override': 'PATCH'
+        },
+        url: '/api/profile/' + user + '/',
+        content-type: application/json,
         data: $form,
         success: function(result) {
             console.log('success')
@@ -26,5 +29,4 @@ function createProfile(e) {
     $.ajax(settings);
 };
 
-
-$('#create_profile').click(createProfile);
+$('#submitChanges').click(editProfile);
