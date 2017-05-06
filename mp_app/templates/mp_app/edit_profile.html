@@ -7,9 +7,9 @@
 {% include 'mp_app/menubar.html' %}
 <div class='profile_editor'>
   <h2>Edit profile</h2>
-  <form name='edit_profile' id='edit_profile' method='PATCH'>
+  <form name='edit_profile' id='edit_profile' method='PUT'>
       {% csrf_token %}
-
+      <input id='user_id' type='text' name='user_id' value='{{user.id}}' style='display:none'>
       <input type='file' id='form-image' name="file"/>
       <p id='status'>Please select a file</p>
       <img id='form-image-preview' src="{% static 'base_images/user.svg' %}" width=10% height=auto/>
@@ -25,5 +25,6 @@
 {% endblock %}
 
 {% block javascript %}
+<script src="{% static 'js/editProfile.js' %}"></script>
 <script src="{% static 'js/bin-ascii.js' %}"></script>
 {% endblock %}
