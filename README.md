@@ -1,7 +1,7 @@
 # masterpeace
 
 
-A final project by Nadia Mounzih, Will Warren, Ryan Semmler, and Josh Friese.
+A final project by [Nadia Mounzih](https://nmounzih.github.io), [Will Warren](https://willwile4.github.io), Ryan Semmler, and [Josh Friese](https://phist210.github.io).
 
 There is enough vitriol in the world today, so we created an app for users to view
-an artform in an 100% positive environment.
+art in a reaffirming environment. We seek to integrate the gallery experience into the digital world. Users are given the option to allow feedback on their pieces, and the option to allow users to message them.

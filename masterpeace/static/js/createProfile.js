@@ -9,7 +9,7 @@ function createProfile(e) {
     let $form = {
         "user": $('[name="user_id"]').val(),
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
-        'pic': $("#form-image").attr('value'),
+        'pic': "data:64;base64," + $("#form-image").attr('value'),
         'bio': $('[name="bio"]').val(),
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
