@@ -9,15 +9,22 @@
 <div>
   <form method='post' id='image-mp-form'>
       {% csrf_token %}
-     <input type="select" name='tag' placeholder="Tag" value={{tags}}/><br>
+      <select  name='tag'>
+          {% for t in tags %}
+            <option value={{t.id}}>{{t}}</option><br>
+          {% endfor %}
+      </select>
       <input type='text' name='owner' value={{user.id}} style="display:none"/><br>
-      <input type='' name='allow_feedback'/><br>
+      Allow Feedback: <input type='checkbox' name='allow_feedback'/><br>
       <input type='text' name='title' placeholder="Title"/><br>
       <input type='text' name='caption' placeholder="Caption"/><br>
       <input type='file' id='form-image' name='image' /><br>
       <p id='status'>Please select a file</p><br>
       <img id='form-image-preview' src="{% static 'base_images/picture.png' %}" width=10% height=auto/><br>
-      <input type='select' name='artform' value={{artform}}/><br>
+      <select name='artform'>
+          {% for af in artform %}
+            <option value={{af.id}}>{{af}}</option><br>
+          {% endfor %}
       <input type='submit' name='submit' id='submitBtn' value='Create'/>
   </form>
 </div>

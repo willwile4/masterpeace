@@ -3,12 +3,12 @@
 
 function createImage(event) {
     event.preventDefault();
-    console.log("create");
-    $form = {
+    let $form = {
       'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
       'tag': $('[name="tag"]').val(),
+      'title': $('[name="title"]').val(),
       'owner': $('[name="owner"]').val(),
-      'image': $('[name="form-image"]').val(),
+      'image': "data:image/png;base64," + $("#form-image").attr('value'),
       'artform': $('[name="artform"]').val(),
       'caption': $('[name="caption"]').val(),
       'allow_feedback': true,

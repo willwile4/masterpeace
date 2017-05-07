@@ -20,10 +20,10 @@ function editProfile(e) {
            'X-HTTP-Method-Override': 'PATCH'
         },
         url: '/api/profile/' + user + '/',
-        content-type: application/json,
+        Content-Type: 'application/json',
         data: $form,
         success: function(result) {
-            console.log('success')
+            console.log('success');
     }
     }
     $.ajax(settings);

@@ -66,7 +66,7 @@
 
       <div class='posts_img' id='image_{{mp.id}}'>
         <div class='image_itself'>
-          <img class='masterpeace' src="/media/{{mp.image}}">
+          <img class='masterpeace' src="{{mp.image}}"/>
         </div>
         <div class='image_info'>
           <span class='post_title'>{{mp.title}}</span></br>
@@ -135,4 +135,5 @@
 {% block javascript %}
 <script src='{% static "js/deleteText.js" %}'></script>
 <script src='{% static "js/feedback.js" %}'></script>
+<script src='{% static "js/bin-ascii.js" %}'></script>
 {% endblock %}
