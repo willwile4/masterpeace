@@ -6,7 +6,7 @@
 
 {% block content %}
 {% include 'mp_app/menubar.html' %}
-<div>
+<div class="registration">
   <form method='post' id='image-mp-form'>
       {% csrf_token %}
       <select  name='tag'>
