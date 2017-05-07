@@ -40,7 +40,7 @@ function editProfile(e) {
         data: $form,
         success: function(result) {
             console.log('success');
-             history.go(-1);
+            window.history.go(-1);
     }
   };
     $.ajax(settings);
