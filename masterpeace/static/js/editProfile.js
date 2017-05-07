@@ -1,9 +1,24 @@
 //js file to edit a user's profile upon registration.
 //currently getting a
 
+let csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
 function editProfile(e) {
     e.preventDefault();
-    let user =  $('[name="user_id"]').val()
+    let user =  $('[name="user_id"]').val();
+    let profile = $('[name="profile"]').val();
     let $form = {
         "user": user,
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
@@ -16,11 +31,12 @@ function editProfile(e) {
     };
     console.log($form);
     var settings = {
-        headers: {
-           'X-HTTP-Method-Override': 'PATCH'
-        },
-        url: '/api/profile/' + user + '/',
-        Content-Type: 'application/json',
+        // headers: {
+        //    'X-HTTP-Method-Override': 'PATCH'
+        // },
+        method: 'PATCH',
+        url: '/api/profile/' + profile + '/',
+        // contenttype: application/json,
         data: $form,
         success: function(result) {
             console.log('success');

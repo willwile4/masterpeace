@@ -2,10 +2,11 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from django.contrib.auth import login, authenticate
-from .forms import SignUpForm, CreateTextMPForm, EditProfile, EditImage, EditText
+from .forms import (SignUpForm, CreateTextMPForm, EditProfile, EditImage,
+                    EditText)
 from django.contrib.auth.models import User
 from .models import (Message, UserProfile, ImageMP,
-                     TextMP, ImageFeedback, TextFeedback,
+                     TextMP, ImageFeedback, TextFeedback, FeedbackType,
                      ImageTag, TextTag, Artform)
 from .serializers import (UserSerializer, MessageSerializer,
                           UserProfileSerializer,
@@ -31,14 +32,29 @@ def mp_jumblr():
 
 def index(request):
     all_mps = mp_jumblr()
+    for mp in all_mps:
+        if hasattr(mp, 'text'):
+            mp.feedback1 = len(TextFeedback.objects.filter(masterpeace_id=mp.id, icon_id=1))
+            mp.feedback2 = len(TextFeedback.objects.filter(masterpeace_id=mp.id, icon_id=2))
+            mp.feedback3 = len(TextFeedback.objects.filter(masterpeace_id=mp.id, icon_id=3))
+            mp.feedback4 = len(TextFeedback.objects.filter(masterpeace_id=mp.id, icon_id=4))
+            mp.feedback5 = len(TextFeedback.objects.filter(masterpeace_id=mp.id, icon_id=5))
+            mp.save()
+        else:
+            mp.feedback1 = len(ImageFeedback.objects.filter(masterpeace_id=mp.id, icon_id=1))
+            mp.feedback2 = len(ImageFeedback.objects.filter(masterpeace_id=mp.id, icon_id=2))
+            mp.feedback3 = len(ImageFeedback.objects.filter(masterpeace_id=mp.id, icon_id=3))
+            mp.feedback4 = len(ImageFeedback.objects.filter(masterpeace_id=mp.id, icon_id=4))
+            mp.feedback5 = len(ImageFeedback.objects.filter(masterpeace_id=mp.id, icon_id=5))
+            mp.save()
     user_profiles = UserProfile.objects.all()
     messages = Message.objects.filter(to_user_id=request.user.id, read=False)
     u_m = len(messages)
     return render(request, 'mp_app/index.html', {
                                            'all_mps': all_mps,
                                            'user_profiles': user_profiles,
-                                           'messages': messages,
-                                           'unread_messages': u_m})
+                                           'unread_messages': u_m,
+                                           'user': request.user})
 
 
 def profile(request, user_id):
