@@ -31,7 +31,6 @@
         {% else %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
         {% endif %}
-        {{mp.id}}
 
         </br></br>
 
@@ -98,7 +97,6 @@
           </br></br>
 
           {% if mp.allow_feedback %}
-          {{mp.id}}
 
             <form name='feedbackData' id='feedbackData' method='post'>
               {% csrf_token %}
