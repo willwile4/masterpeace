@@ -229,10 +229,6 @@ def privacy(request):
     return render(request, 'mp_app/privacypolicy.html')
 
 
-def account(request):
-    return render(request, 'mp_app/s3_test.html')
-
-
 def blob_test(request):
     return render(request, 'mp_app/blob_test.html')
 

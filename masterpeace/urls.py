@@ -49,7 +49,6 @@ urlpatterns = [
     url(r'^edit_image/(?P<id>[0-9]+)', views.edit_image, name="edit_image"),
     url(r'^edit_text/(?P<id>[0-9]+)', views.edit_text, name="edit_text"),
     url(r'^privacy/', views.privacy, name="privacy"),
-    url(r'^account/', views.account, name='account'),
     url(r'^create_textMP/$', views.create_textMP, name='create_textMP'),
     url(r'^messages/$', views.messages, name='messages'),
     url(r'^messages/(?P<user_id>[0-9]+)',
