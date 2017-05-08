@@ -1,5 +1,0 @@
-# DB key
-SEC_KEY = 'ro^&4l_e^h8gw#=8yxcx($v%0)xrmg5(taiohjd_5ot2ia#cow'
-
-SOCIAL_AUTH_GOOG_OAUTH2_KEY = '273320263650-2frd1g91126c41pp2tlgh08h1u79mdn0'
-SOCIAL_AUTH_GOOG_OAUTH2_SECRET = 'eI3gQL0X0C3ixQWmvj5TBREC'
