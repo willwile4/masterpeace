@@ -31,7 +31,6 @@
         {% else %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
         {% endif %}
-        {{mp.id}}
 
         </br></br>
 
@@ -44,7 +43,6 @@
           <div class='feedback'>
             <table class='feedback_bar'>
               <td>
-<<<<<<< HEAD
                 <a class='text_feedback_button' id='1'><i class="fa fa-quora" aria-hidden="true"></i>
                   <div class='counter' id='1'>{{mp.feedback1}}</div>
                 </a>
@@ -78,7 +76,7 @@
       <!-- Begin image mp div -->
       <div class='posts_img' id='{{mp.id}}'>
         <div class='image_itself'>
-          <img class='masterpeace' src="/media/{{mp.image}}">
+          <img class='masterpeace' src="{{mp.image}}"/>
         </div>
         <div class='image_info'>
           <span class='post_title'>{{mp.title}}</span></br>
@@ -99,7 +97,6 @@
           </br></br>
 
           {% if mp.allow_feedback %}
-          {{mp.id}}
 
             <form name='feedbackData' id='feedbackData' method='post'>
               {% csrf_token %}
@@ -109,7 +106,6 @@
             <div class='feedback'>
               <table class='feedback_bar'>
                 <td>
-<<<<<<< HEAD
                   <a class='image_feedback_button' id='1'><i class="fa fa-quora" aria-hidden="true"></i>
                     <div class='counter' id='1'>{{mp.feedback1}}</div>
                   </a>
@@ -161,4 +157,5 @@
 <script src='{% static "js/feedback.js" %}'></script>
 <script src='{% static "js/deleteText.js" %}'></script>
 <script src='{% static "js/feedback.js" %}'></script>
+<script src='{% static "js/bin-ascii.js" %}'></script>
 {% endblock %}

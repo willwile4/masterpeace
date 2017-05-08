@@ -27,7 +27,7 @@ ul{
 a, a:visited{
   display: inline;
   text-decoration: none;
-  color: #4386a8;
+  color: #50575a;
 }
 
 .signup_splash{
@@ -115,7 +115,7 @@ a, a:visited{
   width: 100%;
   display: flex;
   flex-flow: row;
-  border-right: .1em solid black;
+  border-right: .1em solid #50575a;
   margin: 1em;
   padding: 1em;
 }
@@ -127,7 +127,7 @@ a, a:visited{
   display: flex;
   flex-flow: column;
   align-items: flex-start;
-  border-right: .1em solid black;
+  border-right: .1em solid #50575a;
   margin: 1em;
   padding: 1em;
   white-space: initial;

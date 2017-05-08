@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import UserProfile, Message, ImageMP, TextMP, ImageFeedback, TextFeedback, ImageTag, TextTag, Artform
+from .models import (UserProfile, Message, ImageMP, TextMP,
+                     ImageFeedback, TextFeedback, ImageTag,
+                     TextTag, Artform)
 
 
 class UserSerializer(serializers.ModelSerializer):
