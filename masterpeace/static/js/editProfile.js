@@ -40,9 +40,10 @@ function editProfile(e) {
         data: $form,
         success: function(result) {
             console.log('success');
+             history.go(-1);
     }
-    }
+  };
     $.ajax(settings);
-};
+}
 
 $('#submitChanges').click(editProfile);

@@ -25,6 +25,7 @@ function createImage(event) {
         data: $form,
         success: function(result) {
             console.log('success');
+            window.location.replace("/");
         }
     });
 }
