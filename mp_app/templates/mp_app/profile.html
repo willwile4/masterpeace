@@ -51,9 +51,9 @@
         <div class='edit_delete'>
           <span class='edit_image'><a href='/edit_image/{{mp.id}}'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
           <a href='#'><span class='delete_image' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a>
+      </div>
+          {% else %}
           <a href='#'><span class='report_post' id="image_mp{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a>
-          <a href="#"
-        </div>
         {% endif %}
 
         <a href="{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
@@ -63,7 +63,6 @@
           {% for tag in mp.tag.all %}
           <a href='/image_tags/{{tag.id}}'><span class='tag'>#{{tag}}</span></a>
           {% endfor %}
-
       </div>
 
     {% elif mp.text %}
@@ -74,8 +73,9 @@
         <div class='edit_delete'>
           <span class='edit_text'><a href='/edit_text/{{mp.id}}'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
           <a href='#'><span class='delete_text' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a>
-          <a href='#'><span class='report_post' id="text_{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a>
         </div>
+        {% else %}
+        <a href='#'><span class='report_post' id="text_{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a>
         {% endif %}
 
         <span class='username'>{{mp.title}}</span>
