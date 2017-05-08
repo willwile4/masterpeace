@@ -1,4 +1,4 @@
-let csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+var csrftoken = $('[name="csrfmiddlewaretoken"]').val();
 
 function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
@@ -22,12 +22,12 @@ function delete_textMP(e) {
         method: "DELETE",
         url: '/api/text_mp/' + e.currentTarget.id,
         success: function(result) {
-            console.log('success')
+            console.log('success');
             location.reload();
     }
-  }
+  };
     $.ajax(settings);
-};
+}
 
 function delete_imageMP(e) {
   console.log(e);
@@ -38,12 +38,12 @@ function delete_imageMP(e) {
         method: "DELETE",
         url: '/api/image_mp/' + e.currentTarget.id,
         success: function(result) {
-            console.log('success')
+            console.log('success');
             location.reload();
     }
-  }
+  };
     $.ajax(settings);
-};
+}
 
 
 $('.delete_text').click(delete_textMP);
