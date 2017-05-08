@@ -92,6 +92,7 @@ def edit_profile(request):
 
     else:
         form = EditProfile(instance=profile)
+    print(profile.bio)
     return render(request, 'mp_app/edit_profile.html', {'profile': profile})
 
 

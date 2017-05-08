@@ -10,14 +10,15 @@
   <form name='edit_profile' id='edit_profile' method='PUT'>
       {% csrf_token %}
       <input id='user_id' type='text' name='user_id' value='{{user.id}}' style='display:none'>
+      <input id='profile' type='text' name='profile' value='{{profile.id}}' style='display:none'>
       <input type='file' id='form-image' name="file"/>
       <p id='status'>Please select a file</p>
       <img id='form-image-preview' src="{% static 'base_images/user.svg' %}" width=10% height=auto/>
-      Bio:<input type='text' name="bio" placeholder="Bio"><br>
-      Facebook:<input type='url' name="fb_link" placeholder="Link to Facebook"><br>
-      Instagram:<input type='url' name="insta_link" placeholder="Link to Instagram"><br>
-      Twitter:<input type='url' name="twitter_link" placeholder="Link to Twitter"><br>
-      Allow Messages:<input type='checkbox' name='allow_messages' placeholder="Allow Messages"><br>
+      Bio:<input type='text' name="bio" placeholder='Bio' value='{{profile.bio}}'><br>
+      Facebook:<input type='url' name="fb_link" placeholder="Link to Facebook" value='{{profile.fb_link}}'><br>
+      Instagram:<input type='url' name="insta_link" placeholder="Link to Instagram" value='{{profile.insta_link}}'><br>
+      Twitter:<input type='url' name="twitter_link" placeholder="Link to Twitter" value='{{profile.twitter_link}}'><br>
+      Allow Messages:<input id='checkbox' type='checkbox' name='allow_messages' placeholder="Allow Messages" value='{{profile.allow_messages}}'><br>
       <input type='submit' id="submitChanges" value='Update profile'>
   </form>
 </div>

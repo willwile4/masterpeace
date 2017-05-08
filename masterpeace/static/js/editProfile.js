@@ -1,9 +1,25 @@
 //js file to edit a user's profile upon registration.
 //currently getting a
 
+let csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
 function editProfile(e) {
     e.preventDefault();
-    let user =  $('[name="user_id"]').val()
+    let user =  $('[name="user_id"]').val();
+    let profile = $('[name="profile"]').val();
+    var isChecked = $("#checkbox").prop("checked");
     let $form = {
         "user": user,
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
@@ -12,15 +28,12 @@ function editProfile(e) {
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
         'twitter_link': $('[name="twitter_link"]').val(),
-        'allow_messages': false,// fix this plz k thx $('[name="allow_messages"]').val(),
+        'allow_messages': isChecked,
     };
     console.log($form);
     var settings = {
-        headers: {
-           'X-HTTP-Method-Override': 'PATCH'
-        },
-        url: '/api/profile/' + user + '/',
-        content-type: application/json,
+        method: 'PATCH',
+        url: '/api/profile/' + profile + '/',
         data: $form,
         success: function(result) {
             console.log('success')
