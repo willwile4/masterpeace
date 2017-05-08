@@ -6,13 +6,13 @@
     padding-top: 5%;
 }
 
-#splash img {
+#splash > img {
     width: 250px;
-    margin-left: 7%
+    margin-left: 7%;
     height: auto;
     padding-top: 5%;
 }
 
-#splash h1 {
+#splash > h1 {
     padding-top: 5%;
 }

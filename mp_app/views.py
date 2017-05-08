@@ -6,7 +6,7 @@ from .forms import (SignUpForm, CreateTextMPForm, EditProfile, EditImage,
                     EditText)
 from django.contrib.auth.models import User
 from .models import (Message, UserProfile, ImageMP,
-                     TextMP, ImageFeedback, TextFeedback, FeedbackType,
+                     TextMP, ImageFeedback, TextFeedback,
                      ImageTag, TextTag, Artform)
 from .serializers import (UserSerializer, MessageSerializer,
                           UserProfileSerializer,
@@ -256,6 +256,7 @@ def create_image(request):
     artform = [af for af in af_qs]
     return render(request, 'mp_app/create_image.html', {'tags': tags,
                                                         'artform': artform})
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

@@ -17,9 +17,9 @@
 <div class='profile'>
   <div class='profile_pic'>
     {% if profile.pic %}
-    <img width="80" height="80" id='profile_pic' src='{{profile.pic}}'/>
+      <img id='profile_pic' width="80" height="80" src='{{profile.pic}}'/>
     {% else %}
-    <img id='profile_pic' src='{% static "base_images/icon.png" %}'/>
+      <img id='profile_pic' width="80" height="80" src='{% static "base_images/icon.png" %}'/>
     {% endif %}
   </div>
 
