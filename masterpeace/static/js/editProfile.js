@@ -29,7 +29,7 @@ function editProfile(e) {
     let $form = {
         "user": user,
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
-        'pic': "data:image/" + fileType + "png;base64," + $("#form-image").attr('value'),
+        'pic': "data:image/" + fileType + ";base64," + $("#form-image").attr('value'),
         'bio': $('[name="bio"]').val(),
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
