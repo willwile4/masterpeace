@@ -15,15 +15,19 @@ $.ajaxSetup({
     }
 });
 
-let filename = $('#form-image').val()
+var filename = $('#form-image').val();
 for(var i = 0; i < filename.length; i++) {
     if (filename[i] === '.') {
-        fileType = filename.slice([i]);
+        var fileType = filename.slice([i]);
     }
 }
 
+console.log();
+
+
 function editProfile(e) {
     e.preventDefault();
+    console.log(filename);
     var user =  $('[name="user_id"]').val();
     var profile = $('[name="profile"]').val();
     var $form = {
@@ -47,7 +51,7 @@ function editProfile(e) {
         data: $form,
         success: function(result) {
             console.log('success');
-            window.location("/profile/" + user);
+            window.location.replace("/profile/" + user);
     }
   };
     $.ajax(settings);
