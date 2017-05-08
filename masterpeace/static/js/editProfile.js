@@ -1,7 +1,9 @@
 //js file to edit a user's profile upon registration.
 //currently getting a
 
-var csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+
+let csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+
 
 function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
@@ -15,20 +17,18 @@ $.ajaxSetup({
     }
 });
 
-var filename = $('#form-image').val();
-for(var i = 0; i < filename.length; i++) {
-    if (filename[i] === '.') {
-        var fileType = filename.slice([i]);
-    }
-}
-
-
 function editProfile(e) {
     e.preventDefault();
-    console.log(filename);
-    var user =  $('[name="user_id"]').val();
-    var profile = $('[name="profile"]').val();
-    var $form = {
+    let user =  $('[name="user_id"]').val();
+    let profile = $('[name="profile"]').val();
+    var isChecked = $("#checkbox").prop("checked");
+    var filename = $('#form-image').val();
+    for(var i = 0; i < filename.length; i++) {
+        if (filename[i] === '.') {
+            var fileType = filename.slice([i]);
+        }
+    }
+    let $form = {
         "user": user,
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
         'pic': "data:image/" + fileType + ";base64," + $("#form-image").attr('value'),
@@ -36,16 +36,12 @@ function editProfile(e) {
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
         'twitter_link': $('[name="twitter_link"]').val(),
-        'allow_messages': false,// fix this plz k thx $('[name="allow_messages"]').val(),
+        'allow_messages': isChecked,
     };
     console.log($form);
     var settings = {
-        // headers: {
-        //    'X-HTTP-Method-Override': 'PATCH'
-        // },
         method: 'PATCH',
         url: '/api/profile/' + profile + '/',
-        // contenttype: application/json,
         data: $form,
         success: function(result) {
             console.log('success');
