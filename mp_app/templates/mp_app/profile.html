@@ -54,8 +54,8 @@
         </div>
         {% endif %}
 
-        <a href="/media/{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
-          <img class='masterpeace' src="{{mp.image}}" alt="" /></a>
+        <a href="{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
+          <img class='masterpeace' src="{{mp.image}}" alt="masterpeace"/></a>
           <span class='username'>{{mp.title}}</span>
           {{mp.caption}}
           {% for tag in mp.tag.all %}
