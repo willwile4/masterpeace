@@ -20,7 +20,7 @@
     {% for imagemp in tag.imagemp_set.all %}
     <div class='posts_img' id='image_{{imagemp.id}}'>
       <div class='image_itself'>
-        <img class='masterpeace' src="/media/{{imagemp.image}}">
+        <img class='masterpeace' src="{{imagemp.image}}">
       </div>
       <div class='image_info'>
       <span class='post_title'>{{imagemp.title}}</span></br>

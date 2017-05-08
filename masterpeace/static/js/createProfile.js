@@ -1,14 +1,21 @@
 //js file to create a user's profile upon registration.
-//currently posting pic as a text file, but default appears in api.
-//should be the value attr of the input element, which is the ascii string.
 
 function createProfile(e) {
     e.preventDefault();
     var isChecked = $("#checkbox").prop("checked");
+    console.log('hi mom');
+    console.log(e);
+    let filename = $('#form-image').val()
+    for(var i = 0; i < filename.length; i++) {
+        if (filename[i] === '.') {
+            fileType = filename.slice([i+1]);
+        }
+    }
+
     let $form = {
         "user": $('[name="user_id"]').val(),
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
-        'pic': $("#form-image").attr('value'),
+        'pic': "data:image/" + fileType + ";base64," + $("#form-image").attr('value'),
         'bio': $('[name="bio"]').val(),
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
@@ -22,7 +29,8 @@ function createProfile(e) {
         data: $form,
         success: function(result) {
             console.log('success')
-    }
+            window.location.replace('/profile/' + $('[name="user_id"]').val() + '/')
+      }
     }
     $.ajax(settings);
 };

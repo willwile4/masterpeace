@@ -16,10 +16,10 @@
 
 <div class='profile'>
   <div class='profile_pic'>
-    {% if profile.pic %}
-    <img id='' src='data:image/png;base64,{{profile.pic}}'/>
+    {% if not profile.pic %}
+      <img id='profile_pic' width="80" height="80" src='{% static "base_images/icon.png" %}'/>
     {% else %}
-    <img id='profile_pic' src='{% static "base_images/icon.png" %}'/>
+      <img id='profile_pic' width="80" height="80" src='{{profile.pic}}'/>
     {% endif %}
   </div>
 
@@ -54,8 +54,8 @@
         </div>
         {% endif %}
 
-        <a href="/media/{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
-          <img class='masterpeace' src="/media/{{mp.image}}" alt="" /></a>
+        <a href="{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
+          <img class='masterpeace' src="{{mp.image}}" alt="masterpeace"/></a>
           <span class='username'>{{mp.title}}</span>
           {{mp.caption}}
           {% for tag in mp.tag.all %}

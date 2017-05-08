@@ -12,7 +12,7 @@
 <div class='main'>
   <h1>
     {% if profile.pic %}
-      <img class='avi' src='/media/{{profile.pic}}'/>
+      <img class='avi' src='{{profile.pic}}'/>
     {% else %}
       <img class='avi' src='{% static "base_images/icon.png" %}'/>
     {% endif %}
