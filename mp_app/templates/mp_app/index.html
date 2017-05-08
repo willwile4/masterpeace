@@ -27,6 +27,7 @@
         {% if user.is_authenticated and mp.owner_id == user.id %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>You</a>, {{mp.created}}</p>
           <p><span class='edit_text'><a href='/edit_text/{{mp.id}}'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
+            {{mp.id}}
           <a href='#'><span class='delete_text' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a></p>
         {% else %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
