@@ -27,7 +27,8 @@ function createProfile(e) {
         data: $form,
         success: function(result) {
             console.log('success')
-    }
+            window.location.replace('/profile/' + $('[name="user_id"]').val() + '/')
+      }
     }
     $.ajax(settings);
 };
