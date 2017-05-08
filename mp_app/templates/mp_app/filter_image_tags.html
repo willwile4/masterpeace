@@ -34,6 +34,7 @@
         <span class='edit_image'><a href='/edit_image/{{imagemp.id}}'>edit</a></span>
       {% else %}
         <p>Posted by: <a href='/profile/{{imagemp.owner_id}}'>{{imagemp.owner}}</a>, {{imagemp.created}}</p>
+        <a href='#'><span class='report_post' id="text_{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a>
       {% endif %}
     </div>
   </div>

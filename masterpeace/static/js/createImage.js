@@ -7,7 +7,8 @@ function createImage(event) {
     let filename = $('#form-image').val()
     for(var i = 0; i < filename.length; i++) {
         if (filename[i] === '.') {
-            fileType = filename.slice([i]);
+            fileType = filename.slice([i+1]);
+            console.log(fileType);
         }
     }
     let $form = {

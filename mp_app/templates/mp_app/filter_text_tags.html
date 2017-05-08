@@ -30,6 +30,7 @@
         <span class='edit_text'><a href='/edit_text/{{textmp.id}}'>edit</a></span>
       {% else %}
         <p>Posted by: <a href='/profile/{{textmp.owner_id}}'>{{textmp.owner}}</a>, {{textmp.created}}</p>
+        <a href='#'><span class='report_post' id="text_{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a>
       {% endif %}
     </div>
     {% endfor %}

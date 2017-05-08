@@ -27,7 +27,8 @@
         {% if user.is_authenticated and mp.owner_id == user.id %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>You</a>, {{mp.created}}</p>
           <p><span class='edit_text'><a href='/edit_text/{{mp.id}}'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
-          <a href='#'><span class='delete_text' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a></p>
+          <a href='#'><span class='delete_text' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a>
+          <a href='#'><span class='report_post' id="text_{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a></p>
         {% else %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
         {% endif %}
@@ -89,7 +90,8 @@
           {% if user.is_authenticated and mp.owner_id == user.id %}
             <p>Posted by: <a href='/profile/{{mp.owner_id}}'>You</a>, {{mp.created}}</p>
             <p><span class='edit_image'><a href='/edit_image/{{mp.id}}'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
-            <a href='#'><span class='delete_image' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a></p>
+            <a href='#'><span class='delete_image' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a>
+            <a href='#'><span class='report_post' id="image_mp{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a></p>
           {% else %}
             <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
           {% endif %}

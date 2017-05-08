@@ -34,12 +34,5 @@ Please read our Privacy Policy [here](https://masterpeace.herokuapp.com/privacy_
 
 * **Josh Friese** - [Portfolio](https://phist210.github.io) [LinkedIn](https://www.linkedin.com/in/joshua-friese-1aa13990/)
 * **Nadia Mounzih** - [Portfolio](https://nmounzih.github.io) [LinkedIn](https://www.linkedin.com/in/nadia-mounzih-4736b1b2/)
-* **Ryan Semmlere** - [Portfolio] [LinkedIn](https://www.linkedin.com/in/ryan-semmler-04770a141/)
+* **Ryan Semmler** - [Portfolio] [LinkedIn](https://www.linkedin.com/in/ryan-semmler-04770a141/)
 * **Will Warren** - [PurpleBooth](https://willwile4.github.io) [LinkedIn](https://www.linkedin.com/in/wmwarreniv/)
-
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc

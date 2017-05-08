@@ -4,6 +4,7 @@ function createProfile(e) {
     e.preventDefault();
     console.log('hi mom');
     console.log(e);
+    var isChecked = $("#checkbox").prop("checked");
     let filename = $('#form-image').val()
     for(var i = 0; i < filename.length; i++) {
         if (filename[i] === '.') {
@@ -18,7 +19,7 @@ function createProfile(e) {
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
         'twitter_link': $('[name="twitter_link"]').val(),
-        'allow_messages': false, // fix this plz k thx $('[name="allow_messages"]').val(),
+        'allow_messages': isChecked,
     };
     console.log($form);
     var settings = {
