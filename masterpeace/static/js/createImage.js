@@ -1,4 +1,5 @@
-//may need to initialize feedback 1-5 at 0, feedback is apart of the serializer.
+//js file to create an image masterpeace
+//need to initialize feedback 1-5 at 0, feedback is apart of the serializer.
 //file to create a new image masterpeace post
 
 function createImage(event) {
