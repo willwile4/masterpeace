@@ -4,6 +4,7 @@
 
 function createProfile(e) {
     e.preventDefault();
+    var isChecked = $("#checkbox").prop("checked");
     let $form = {
         "user": $('[name="user_id"]').val(),
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
@@ -12,7 +13,7 @@ function createProfile(e) {
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
         'twitter_link': $('[name="twitter_link"]').val(),
-        'allow_messages': false, // fix this plz k thx $('[name="allow_messages"]').val(),
+        'allow_messages': isChecked,
     };
     console.log($form);
     var settings = {
