@@ -15,6 +15,13 @@ $.ajaxSetup({
     }
 });
 
+let filename = $('#form-image').val()
+for(var i = 0; i < filename.length; i++) {
+    if (filename[i] === '.') {
+        fileType = filename.slice([i]);
+    }
+}
+
 function editProfile(e) {
     e.preventDefault();
     var user =  $('[name="user_id"]').val();
@@ -22,7 +29,7 @@ function editProfile(e) {
     var $form = {
         "user": user,
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
-        'pic': "data:image/png;base64," + $("#form-image").attr('value'),
+        'pic': "data:image/" + fileType + "png;base64," + $("#form-image").attr('value'),
         'bio': $('[name="bio"]').val(),
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
