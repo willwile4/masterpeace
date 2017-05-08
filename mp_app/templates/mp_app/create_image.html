@@ -10,7 +10,7 @@
 
 {% include 'mp_app/menubar.html' %}
 <div class="registration">
-  <h2>Show a masterpeace</h2>
+  <h2>Show your masterpeace</h2>
   <form method='post' id='image-mp-form'>
       {% csrf_token %}
       <input type='text' name='owner' value={{user.id}} style="display:none"/><br>
