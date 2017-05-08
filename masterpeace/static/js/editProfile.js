@@ -1,13 +1,39 @@
 //js file to edit a user's profile upon registration.
 //currently getting a
 
+var csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+var filename = $('#form-image').val();
+for(var i = 0; i < filename.length; i++) {
+    if (filename[i] === '.') {
+        var fileType = filename.slice([i]);
+    }
+}
+
+console.log();
+
+
 function editProfile(e) {
     e.preventDefault();
-    let user =  $('[name="user_id"]').val()
-    let $form = {
+    console.log(filename);
+    var user =  $('[name="user_id"]').val();
+    var profile = $('[name="profile"]').val();
+    var $form = {
         "user": user,
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
-        'pic': $("#form-image").attr('value'),
+        'pic': "data:image/" + fileType + ";base64," + $("#form-image").attr('value'),
         'bio': $('[name="bio"]').val(),
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
@@ -16,17 +42,19 @@ function editProfile(e) {
     };
     console.log($form);
     var settings = {
-        headers: {
-           'X-HTTP-Method-Override': 'PATCH'
-        },
-        url: '/api/profile/' + user + '/',
-        content-type: application/json,
+        // headers: {
+        //    'X-HTTP-Method-Override': 'PATCH'
+        // },
+        method: 'PATCH',
+        url: '/api/profile/' + profile + '/',
+        // contenttype: application/json,
         data: $form,
         success: function(result) {
-            console.log('success')
+            console.log('success');
+            window.location.replace("/profile/" + user);
     }
-    }
+  };
     $.ajax(settings);
-};
+}
 
 $('#submitChanges').click(editProfile);

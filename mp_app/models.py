@@ -17,7 +17,7 @@ class Message(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     pic = models.TextField(default='none', max_length=100000000)
-    bio = models.CharField(max_length=500)
+    bio = models.CharField(max_length=500, null=True, blank=True)
     fb_link = models.URLField(null=True, blank=True)
     insta_link = models.URLField(null=True, blank=True)
     twitter_link = models.URLField(null=True, blank=True)
@@ -64,7 +64,7 @@ class ImageMP(models.Model):
     allow_feedback = models.BooleanField(default=False)
     title = models.CharField(max_length=50)
     caption = models.CharField(max_length=144, null=True, blank=True)
-    image = models.TextField(default='none', max_length=10000000)
+    image = models.TextField(blank=True, null=True, max_length=10000000)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     artform = models.ForeignKey(Artform, on_delete=models.CASCADE)
