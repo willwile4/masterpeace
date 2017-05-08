@@ -4,6 +4,7 @@
 
 function createImage(event) {
     event.preventDefault();
+    var isChecked = $("#checkbox").prop("checked");
     let filename = $('#form-image').val()
     for(var i = 0; i < filename.length; i++) {
         if (filename[i] === '.') {
@@ -18,7 +19,7 @@ function createImage(event) {
       'image': "data:image/" + fileType + ";base64," + $("#form-image").attr('value'),
       'artform': $('[name="artform"]').val(),
       'caption': $('[name="caption"]').val(),
-      'allow_feedback': true,
+      'allow_feedback': isChecked,
       'feedback1': 0,
       'feedback2': 0,
       'feedback3': 0,
