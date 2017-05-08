@@ -22,8 +22,6 @@ for(var i = 0; i < filename.length; i++) {
     }
 }
 
-console.log();
-
 
 function editProfile(e) {
     e.preventDefault();

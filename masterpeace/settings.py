@@ -14,7 +14,6 @@ import os
 import dj_database_url
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
-from .secrets import SEC_KEY, SOCIAL_AUTH_GOOG_OAUTH2_KEY, SOCIAL_AUTH_GOOG_OAUTH2_SECRET
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SEC_KEY
+SECRET_KEY = os.environ.get(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,8 +85,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = SOCIAL_AUTH_GOOG_OAUTH2_KEY
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = SOCIAL_AUTH_GOOG_OAUTH2_SECRET
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get(SOCIAL_AUTH_GOOGLE_OAUTH2_KEY)
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET)
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
