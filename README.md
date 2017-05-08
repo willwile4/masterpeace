@@ -13,7 +13,7 @@ art in a reaffirming environment. We seek to integrate the gallery experience in
 ### Installing
 
 
-
+   need to finish this....
 
 ## Deployment
 
