@@ -15,21 +15,25 @@ $.ajaxSetup({
     }
 });
 
-let filename = $('#form-image').val()
+var filename = $('#form-image').val();
 for(var i = 0; i < filename.length; i++) {
     if (filename[i] === '.') {
-        fileType = filename.slice([i]);
+        var fileType = filename.slice([i]);
     }
 }
 
+console.log();
+
+
 function editProfile(e) {
     e.preventDefault();
+    console.log(filename);
     var user =  $('[name="user_id"]').val();
     var profile = $('[name="profile"]').val();
     var $form = {
         "user": user,
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
-        'pic': "data:image/" + fileType + "png;base64," + $("#form-image").attr('value'),
+        'pic': "data:image/" + fileType + ";base64," + $("#form-image").attr('value'),
         'bio': $('[name="bio"]').val(),
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
@@ -47,7 +51,7 @@ function editProfile(e) {
         data: $form,
         success: function(result) {
             console.log('success');
-            window.location("/profile/" + user);
+            window.location.replace("/profile/" + user);
     }
   };
     $.ajax(settings);
