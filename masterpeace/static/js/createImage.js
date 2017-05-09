@@ -18,6 +18,7 @@ function createImage(event) {
       'image': "data:image/" + fileType + ";base64," + $("#form-image").attr('value'),
       'artform': $('[name="artform"]').val(),
       'caption': $('[name="caption"]').val(),
+      'tag': $('[name="tag"]').val(),
       'allow_feedback': isChecked,
       'feedback1': 0,
       'feedback2': 0,
@@ -26,19 +27,12 @@ function createImage(event) {
       'feedback5': 0,
     }
 
-     //this SHOULD handle m2m tags but doesn't. :^/
-    let $tags = ($('[name="tag"]').val());
-    console.log($tags);
-    for(var i = 0; i < $tags.length; i++) {
-        Object.assign($form, {'tag': $tags[i]});
-    };
 
-
-    console.log('form: ', $form);
     $.ajax({
         method: 'POST',
         url: "/api/image_mp/",
         data: $form,
+        traditional: true;
         success: function(result) {
             console.log('success');
             window.location.replace("/");
