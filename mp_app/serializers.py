@@ -64,7 +64,7 @@ class TextFeedbackSerializer(serializers.ModelSerializer):
 class ImageTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageTag
-        fields = ('title',)
+        fields = ('id','title',)
 
 
 class TextTagSerializer(serializers.ModelSerializer):
