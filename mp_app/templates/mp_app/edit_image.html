@@ -7,7 +7,7 @@
 {% include 'mp_app/menubar.html' %}
 <div class='profile_editor'>
   <h2>Edit masterpeace</h2>
-  <form method="post" enctype="multipart/form-data">
+  <form id ='edit_profile' name='edit_image' method="PUT">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value='Update'></input>
@@ -19,5 +19,5 @@
 {% endblock %}
 
 {% block javascript %}
-
+<!-- <script src='{% static "js/editImage.js" %}'></script> -->
 {% endblock %}
