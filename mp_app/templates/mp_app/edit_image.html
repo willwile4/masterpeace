@@ -7,7 +7,7 @@
 {% include 'mp_app/menubar.html' %}
 <div class='profile_editor'>
   <h2>Edit masterpeace</h2>
-  <form id ='edit_profile' name='edit_image' method="PUT">
+    <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value='Update'></input>
