@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import (UserProfile, Message, ImageMP, TextMP,
                      ImageFeedback, TextFeedback, ImageTag,
-                     TextTag, Artform)
+                     TextTag, Artform, AbusiveTextReport, AbusiveImageReport)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -64,7 +64,7 @@ class TextFeedbackSerializer(serializers.ModelSerializer):
 class ImageTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageTag
-        fields = ('id','title',)
+        fields = ('id', 'title',)
 
 
 class TextTagSerializer(serializers.ModelSerializer):
@@ -77,3 +77,15 @@ class ArtformSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artform
         fields = ('title',)
+
+
+class AbusiveImageReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AbusiveImageReport
+        fields = ('post_id', 'reporting_user')
+
+
+class AbusiveTextReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AbusiveTextReport
+        fields = ('post_id', 'reporting_user')
