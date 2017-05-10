@@ -3,9 +3,6 @@
 {% load staticfiles %}
 
 {% block extra_head_content %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.css"
-                       integrity="sha256-/vM/tv5uT2eM8uXkH815piWGPGwWjok2VlMWJ++2BEk="
-                       crossorigin="anonymous" />
 <link rel='stylesheet' type="text/css" href="{% static 'css/profile.css' %}"/>
 
 {% endblock %}
@@ -57,8 +54,7 @@
         </div>
         {% endif %}
 
-        <a id='gallery' class="fancybox" href="{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
-        <img class='masterpeace' src="{{mp.image}}" alt="masterpeace"/></a>
+        <img id='img_{{mp.id}}' class='masterpeace' src="{{mp.image}}" alt="masterpeace"/>
         <span class='username'>{{mp.title}}</span>
         {{mp.caption}}
 
@@ -87,6 +83,7 @@
         {% endfor %}
 
       </div>
+
     {% endif %}
 
   {% endif %}
@@ -98,9 +95,6 @@
 {% endblock %}
 
 {% block javascript %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.js"
-        integrity="sha256-lGYI9J+diJJWwLLMD35V79cLhrxo7MYzNQImKJntuL0="
-        crossorigin="anonymous"></script>
 <script src="{% static 'js/profile.js' %}"></script>
 <script src='{% static "js/deleteText.js" %}'></script>
 {% endblock %}

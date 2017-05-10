@@ -5,17 +5,11 @@
 function createImage(event) {
     event.preventDefault();
     let isChecked = $("#checkbox").prop("checked");
-    let filename = $('#form-image').val()
-    for(var i = 0; i < filename.length; i++) {
-        if (filename[i] === '.') {
-            fileType = filename.slice([i+1]);
-        }
-    }
     let $form = {
       'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
       'title': $('[name="title"]').val(),
       'owner': $('[name="owner"]').val(),
-      'image': "data:image/" + fileType + ";base64," + $("#form-image").attr('value'),
+      'image': $("#form-image").attr('value'),
       'artform': $('[name="artform"]').val(),
       'caption': $('[name="caption"]').val(),
       'tag': $('[name="tag"]').val(),
