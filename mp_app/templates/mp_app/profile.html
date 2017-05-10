@@ -29,6 +29,7 @@
     <span class='bio'>{{profile.bio}}</span></br>
 
     {% if user.is_authenticated and profile.user_id == user.id %}
+    {% csrf_token %}
       <span class='edit_profile'><a href='/edit_profile'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
     {% else %}
       {% if profile.allow_messages %}
@@ -57,10 +58,10 @@
         {% endif %}
 
         <a href="{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
-          <img class='masterpeace' src="{{mp.image}}" alt="masterpeace"/></a>
-          <span class='username'>{{mp.title}}</span>
-          {{mp.caption}}
-          {% for tag in mp.tag.all %}
+        <img class='masterpeace' src="{{mp.image}}" alt="masterpeace"/></a>
+        <span class='username'>{{mp.title}}</span>
+        {{mp.caption}}
+        {% for tag in mp.tag.all %}
           <a href='/image_tags/{{tag.id}}'><span class='tag'>#{{tag}}</span></a>
           {% endfor %}
       </div>
@@ -81,7 +82,7 @@
         <span class='username'>{{mp.title}}</span>
         {{mp.text}}</br>
         {% for tag in mp.tag.all %}
-        <a href='/text_tags/{{tag.id}}'><span class='tag'>#{{tag}}</span></a>
+          <a href='/text_tags/{{tag.id}}'><span class='tag'>#{{tag}}</span></a>
         {% endfor %}
 
       </div>

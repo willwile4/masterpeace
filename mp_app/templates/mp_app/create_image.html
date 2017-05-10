@@ -26,12 +26,12 @@
       </select><br><br>
       Tag: <select multiple name='tag'>
           {% for t in tags %}
-            <option value={{t.id}}>{{t}}</option><br>
+            <option class='tag' name='tag' value={{t.id}}>{{t}}</option><br>
           {% endfor %}
       </select></br>
       <span style='font-size:.7em; font-style: italic;'>Use SHIFT-Click to select multiple.</span></br>
       </br>
-      Allow feedback: <input type='checkbox' name='allow_feedback'/><br>
+      Allow feedback: <input id="checkbox" type='checkbox' name='allow_feedback'/><br>
       </br>
       <input type='submit' name='submit' id='submitBtn' value='Create'/>
   </form>
