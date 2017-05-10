@@ -107,13 +107,14 @@ img.masterpeace{
   max-width: 10em;
   max-height: 10em;
   transition: ease .1s;
+  cursor: pointer;
 }
 
 .masterpeace:active{
-  max-width:33em;
-  max-height:33em;
+  max-width: 33em;
+  max-height: 33em;
   position: absolute;
-  margin: 0 auto;
+  margin-top: 1em;
   z-index: 99;
 }
 
