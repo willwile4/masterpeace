@@ -119,3 +119,9 @@ img.masterpeace{
 .edit_delete{
   position: relative;
 }
+
+.fancybox-content{
+  width: 100%;
+  display: inline-flex;
+  align-content: center;
+}
