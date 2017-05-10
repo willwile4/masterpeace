@@ -3,10 +3,10 @@
 {% load staticfiles %}
 
 {% block extra_head_content %}
-<link rel='stylesheet' type="text/css" href="{% static 'css/profile.css' %}"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.css"
                        integrity="sha256-/vM/tv5uT2eM8uXkH815piWGPGwWjok2VlMWJ++2BEk="
                        crossorigin="anonymous" />
+<link rel='stylesheet' type="text/css" href="{% static 'css/profile.css' %}"/>
 
 {% endblock %}
 
@@ -43,7 +43,9 @@
 <div class='user_gallery'>
 
 {% for mp in all_mps %}
+
   {% if mp.owner_id == profile.user_id %}
+
     {% if mp.image %}
 
       <div class='posts_img' id='img_{{mp.id}}'>
@@ -55,10 +57,11 @@
         </div>
         {% endif %}
 
-        <a href="{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
+        <a id='gallery' class="fancybox" href="{{mp.image}}" data-fancybox="gallery" data-caption="{{mp.caption}}">
         <img class='masterpeace' src="{{mp.image}}" alt="masterpeace"/></a>
         <span class='username'>{{mp.title}}</span>
         {{mp.caption}}
+
         {% for tag in mp.tag.all %}
           <a href='/image_tags/{{tag.id}}'><span class='tag'>#{{tag}}</span></a>
         {% endfor %}
@@ -78,13 +81,16 @@
 
         <span class='username'>{{mp.title}}</span>
         {{mp.text}}</br>
+
         {% for tag in mp.tag.all %}
           <a href='/text_tags/{{tag.id}}'><span class='tag'>#{{tag}}</span></a>
         {% endfor %}
 
       </div>
     {% endif %}
+
   {% endif %}
+
 {% endfor %}
 
 </div>

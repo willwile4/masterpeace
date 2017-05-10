@@ -3,26 +3,28 @@
 //this function shows a preview of the img on the screen.
 function textToImg() {
   //get ascii string into binary then into an array then into a blob.
-  let elem = document.getElementById('form-image');
-  let file = elem.getAttribute('value');
-  let displayArea = document.getElementById('form-image-preview');
+  var elem = document.getElementById('form-image');
+  var file = elem.getAttribute('value');
+  var displayArea = document.getElementById('form-image-preview');
   img = document.getElementById('form-image-preview');
-  img.src = "data:image/png;base64," + file;
+  img.src = file;
 }
 
 //turns an image into a blob
 function imgToText() {
     // get file elem and get image
-    let file = document.getElementById('form-image').files[0];
-    let imgField = document.getElementById('form-image');
+    var file = document.getElementById('form-image').files[0];
+    var imgField = document.getElementById('form-image');
     //open a file reader and read in file, then turn it from binary to ascii
     var reader = new FileReader();
-    console.log("bin-ascii, line 20", file);
     reader.onload = function(event) {
-        let contents = event.target.result;
+        var contents = event.target.result;
         //turn to ascii string
-        let asciiContents = btoa(contents);
-        imgField.setAttribute('value', asciiContents);
+        var asciiContents = btoa(contents);
+        var fileType = file.type
+        console.log(file);
+        console.log(fileType);
+        imgField.setAttribute('value', "data:" + fileType + ";base64," + asciiContents);
     };
     reader.onerror = function(event) {
         console.error('error, file could not be read');
@@ -34,7 +36,7 @@ function imgToText() {
     reader.readAsBinaryString(file);
     // TODO send data via ajax to our DB our restful API
 
-};
+}
 
 //add click event so that image is processed upon submit
 var imgf = document.getElementById('form-image');
