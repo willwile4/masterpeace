@@ -1,6 +1,5 @@
 function createTextFeedback(e) {
     e.preventDefault();
-    console.log('a');
     var $icon = e.currentTarget.id;
     var $mp_id = e.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
     let $form = {
@@ -9,8 +8,6 @@ function createTextFeedback(e) {
         "masterpeace": $mp_id,
         "icon": $icon,
     };
-    // console.log($form);
-    console.log('b');
     var settings = {
         method: "POST",
         url: '/api/text_feedback/',
@@ -19,13 +16,10 @@ function createTextFeedback(e) {
             console.log('success')
     }
   }
-  console.log('c');
     $.ajax(settings);
-    console.log('d');
     // console.log($("#" + $icon + ".counter"));
     var feedbackCounter = parseInt($("#" + $icon + ".counter")['0'].innerHTML);
     // console.log(feedbackCounter);
-    console.log('e');
     $("#" + $icon + ".counter").html(feedbackCounter + 1);
 };
 
@@ -51,7 +45,7 @@ function createImageFeedback(e) {
       }
     }
     $.ajax(settings);
-    var counters = $('.counter').length;
+    // var counters = $('.counter').length;
     var feedbackCounter = parseInt($("#" + $icon + ".counter")['0'].innerHTML);
     // console.log(feedbackCounter);
     $("#" + $icon + ".counter").html(feedbackCounter + 1);
