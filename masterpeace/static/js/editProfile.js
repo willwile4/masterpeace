@@ -2,7 +2,7 @@
 //currently getting a
 
 
-let csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+var csrftoken = $('[name="csrfmiddlewaretoken"]').val();
 
 
 function csrfSafeMethod(method) {
@@ -19,19 +19,13 @@ $.ajaxSetup({
 
 function editProfile(e) {
     e.preventDefault();
-    let user =  $('[name="user_id"]').val();
-    let profile = $('[name="profile"]').val();
+    var user =  $('[name="user_id"]').val();
+    var profile = $('[name="profile"]').val();
     var isChecked = $("#checkbox").prop("checked");
-    var filename = $('#form-image').val();
-    for(var i = 0; i < filename.length; i++) {
-        if (filename[i] === '.') {
-            var fileType = filename.slice([i]);
-        }
-    }
-    let $form = {
+    var $form = {
         "user": user,
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
-        'pic': "data:image/" + fileType + ";base64," + $("#form-image").attr('value'),
+        'pic': $("#form-image").attr('value'),
         'bio': $('[name="bio"]').val(),
         'fb_link': $('[name="fb_link"]').val(),
         'insta_link': $('[name="insta_link"]').val(),
@@ -45,7 +39,8 @@ function editProfile(e) {
         data: $form,
         success: function(result) {
             console.log('success');
-            window.location.replace("/profile/" + user);
+            window.location.replace('/profile/' + user)
+
     }
   };
     $.ajax(settings);

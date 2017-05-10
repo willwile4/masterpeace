@@ -3,6 +3,8 @@
 {% block extra_head_content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
 {% endblock %}
+
+{% block content %}
 <header id='nav'>
   <div id='logo'>
     <a href='/'>
@@ -41,3 +43,4 @@
   </div>
   {% endif %}
 </header>
+{% endblock %}

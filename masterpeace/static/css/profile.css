@@ -79,7 +79,6 @@
   border: .1em solid black;
   margin: 1em;
   padding: .5em;
-  z-index: 99;
 }
 
 .posts_txt{
@@ -104,16 +103,19 @@
 img.masterpeace{
   width: auto;
   height: auto;
-  z-index: 1;
   margin: 1em;
-  max-width:10em;
-  max-height:10em;
+  max-width: 10em;
+  max-height: 10em;
   transition: ease .1s;
+  cursor: pointer;
 }
 
-.masterpeace:hover{
-  max-width:11em;
-  max-height:11em;
+.masterpeace:active{
+  max-width: 33em;
+  max-height: 33em;
+  position: absolute;
+  margin-top: 1em;
+  z-index: 99;
 }
 
 .edit_delete{

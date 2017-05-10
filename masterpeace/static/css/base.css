@@ -168,12 +168,12 @@ img.masterpeace{
   text-decoration: underline;
 }
 
-.feedback:before{
+/*.feedback:before{
   content: '>';
   width: 80%;
   padding: 1em;
   text-align: center;
-}
+}*/
 
 .feedback_bar{
   padding: .5em;
@@ -186,11 +186,13 @@ img.masterpeace{
 }
 
 .feedback:hover .feedback_bar{
+  padding: .5em;
+  min-width: 5em;
+  max-width: 6em;
   visibility: visible;
   opacity: 1;
   transition: visibility 0.1s, opacity 0.1s linear;
-  display: flex;
-  justify-content: space-around;
+  border: .1em solid black;
 }
 
 .feedback_button:hover{
