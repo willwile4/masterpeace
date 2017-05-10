@@ -17,7 +17,6 @@ function imgToText() {
     let imgField = document.getElementById('form-image');
     //open a file reader and read in file, then turn it from binary to ascii
     var reader = new FileReader();
-    console.log("bin-ascii, line 20", file);
     reader.onload = function(event) {
         let contents = event.target.result;
         //turn to ascii string

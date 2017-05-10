@@ -127,3 +127,13 @@ class TextFeedback(models.Model):
 
     def __str__(self):
         return '{}, {}'.format(self.critic, self.icon)
+
+
+class AbusiveImageReport(models.Model):
+    post_id = models.ForeignKey(ImageMP, on_delete=models.CASCADE)
+    reporting_user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class AbusiveTextReport(models.Model):
+    post_id = models.ForeignKey(TextMP, on_delete=models.CASCADE)
+    reporting_user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -23,7 +23,7 @@ Add additional notes about how to deploy this on a live system
 
 * [Django](http://www.djangoproject.com/) - The web framework used
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-* [JQuery FancyBox](http://fancybox.net/) - Used to show detail view of a gallery item
+* [jQuery FancyBox](http://fancybox.net/) - Used to show detail view of a gallery item
 * [Heroku](https://heroku.com) - Used to host/deply our app
 
 

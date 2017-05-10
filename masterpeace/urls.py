@@ -32,6 +32,8 @@ router.register(r'text_feedback', views.TextFeedbackViewSet)
 router.register(r'image_tag', views.ImageTagViewSet)
 router.register(r'text_tag', views.TextTagViewSet)
 router.register(r'artform', views.ArtformViewSet)
+router.register(r'abusive_image_report', views.AbusiveImageReportViewSet)
+router.register(r'abusive_text_report', views.AbusiveTextReportViewSet)
 
 
 urlpatterns = [

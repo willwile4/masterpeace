@@ -30,7 +30,7 @@
           <a href='#'><span class='delete_text' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a>
         {% else %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
-           <a href='#'><span class='report_post' id="text_{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a></p>
+           <a href='#'><span class='report-text' id={{mp.id}} name="text_{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a></p>
         {% endif %}
 
         </br></br>
@@ -79,7 +79,7 @@
         <div class='image_itself'>
           <img class='masterpeace' src="{{mp.image}}"/>
         </div>
-        <div class='image_info'>
+        <div class='image_info' id='post_{{mp.id}}'>
           <span class='post_title'>{{mp.title}}</span></br>
           {{mp.caption}}</br></br>
 
@@ -93,7 +93,7 @@
             <a href='#'><span class='delete_image' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a></p>
           {% else %}
             <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
-            <a href='#'><span class='report_post' id="image_mp{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a>
+            <a href='#'><span class='report-image' id='{{mp.id}}' user='{{user.id}}' name="image_mp{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a>
           {% endif %}
 
           </br></br>
@@ -145,18 +145,17 @@
   <div class='signup_splash'>
     <img class='splash' src="{% static 'base_images/bob.png' %}">
   </div>
-
   <a class='signup_button' href='/signup'>Sign up and post your masterpeace!</a>
 {% endif %}
-
-
 <div class='footer'>
   Masterpeace © 2017 | <a href='/privacy'>Privacy Policy</a> | Find us on <a href='https://github.com/willwile4/masterpeace'>GitHub!</a>
 </div>
-
 {% endblock %}
+
 {% block javascript %}
 <script src='{% static "js/feedback.js" %}'></script>
-<script src='{% static "js/deleteText.js" %}'></script> 
+<script src='{% static "js/deleteText.js" %}'></script>
 <script src='{% static "js/bin-ascii.js" %}'></script>
+<script src='{% static "js/reportImageAbuse.js" %}'></script>
+<script src='{% static "js/reportTextAbuse.js" %}'></script>
 {% endblock %}

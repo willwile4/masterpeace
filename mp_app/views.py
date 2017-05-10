@@ -7,14 +7,15 @@ from .forms import (SignUpForm, CreateTextMPForm, EditProfile, EditImage,
 from django.contrib.auth.models import User
 from .models import (Message, UserProfile, ImageMP,
                      TextMP, ImageFeedback, TextFeedback,
-                     ImageTag, TextTag, Artform)
+                     ImageTag, TextTag, Artform, AbusiveImageReport,
+                      AbusiveTextReport)
 from .serializers import (UserSerializer, MessageSerializer,
                           UserProfileSerializer,
                           ImageMPSerializer, TextMPSerializer,
                           ImageFeedbackSerializer, TextFeedbackSerializer,
                           ImageTagSerializer, TextTagSerializer,
-                          ArtformSerializer)
-from rest_framework.permissions import IsAuthenticated
+                          ArtformSerializer, AbusiveImageReportSerializer, AbusiveTextReportSerializer)
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.parsers import FormParser, MultiPartParser
 from django.db.models import Q
 from rest_framework.decorators import api_view
@@ -310,3 +311,15 @@ class TextTagViewSet(viewsets.ModelViewSet):
 class ArtformViewSet(viewsets.ModelViewSet):
     queryset = Artform.objects.all()
     serializer_class = ArtformSerializer
+
+
+class AbusiveImageReportViewSet(viewsets.ModelViewSet):
+    queryset = AbusiveImageReport.objects.all()
+    serializer_class = AbusiveImageReportSerializer
+    #permission_classes = [IsAdminUser]
+
+
+class AbusiveTextReportViewSet(viewsets.ModelViewSet):
+    queryset = AbusiveTextReport.objects.all()
+    serializer_class = AbusiveTextReportSerializer
+    permission_classes = [IsAdminUser]

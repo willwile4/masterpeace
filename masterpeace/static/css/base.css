@@ -196,3 +196,11 @@ img.masterpeace{
 .feedback_button:hover{
   color: red;
 }
+
+#success-msg {
+    color: green;
+}
+
+#error-msg {
+    color: red;
+}
