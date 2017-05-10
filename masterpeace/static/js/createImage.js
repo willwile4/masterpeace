@@ -32,7 +32,7 @@ function createImage(event) {
         method: 'POST',
         url: "/api/image_mp/",
         data: $form,
-        traditional: true;
+        traditional: true,
         success: function(result) {
             console.log('success');
             window.location.replace("/");
