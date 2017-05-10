@@ -41,29 +41,30 @@
             <input id='masterpeace_id' type='text' name='masterpeace_id' value={{mp.id}} style='display:none'>
           </form>
           <div class='feedback'>
+            <img src="{% static 'base_images/feedback/feedback.png' %}" height=20px>
             <table class='feedback_bar'>
               <td>
-                <a class='text_feedback_button' id='1'><i class="fa fa-quora" aria-hidden="true"></i>
+                <a class='text_feedback_button' id='1'><img src="{% static 'base_images/feedback/thumbs_up.png' %}" height=20px>
                   <div class='counter' id='1'>{{mp.feedback1}}</div>
                 </a>
               </td>
               <td>
-                <a class='text_feedback_button' id='2'><i class="fa fa-meetup" aria-hidden="true"></i>
+                <a class='text_feedback_button' id='2'><img src="{% static 'base_images/feedback/laugh_crying.png' %}" height=20px>
                   <div class='counter' id='2'>{{mp.feedback2}}</div>
                 </a>
               </td>
               <td>
-                <a class='text_feedback_button' id='3'><i class="fa fa-superpowers" aria-hidden="true"></i>
+                <a class='text_feedback_button' id='3'><img src="{% static 'base_images/feedback/heart.png' %}" height=20px>
                   <div class='counter' id='3'>{{mp.feedback3}}</div>
                 </a>
               </td>
               <td>
-                <a class='text_feedback_button' id='4'><i class="fa fa-microchip" aria-hidden="true"></i>
+                <a class='text_feedback_button' id='4'><img src="{% static 'base_images/feedback/grinning_face.png' %}" height=20px>
                   <div class='counter' id='4'>{{mp.feedback4}}</div>
                 </a>
               </td>
               <td>
-                <a class='text_feedback_button' id='5'><i class="fa fa-anchor" aria-hidden="true"></i>
+                <a class='text_feedback_button' id='5'><img src="{% static 'base_images/feedback/fire.png' %}" height=20px>
                   <div class='counter' id='5'>{{mp.feedback5}}</div>
                 </a>
               </td>
@@ -104,29 +105,30 @@
               <input id='masterpeace_id' type='text' name='masterpeace_id' value={{mp.id}} style='display:none'>
             </form>
             <div class='feedback'>
+              <img src="{% static 'base_images/feedback/feedback.png' %}" height=20px>
               <table class='feedback_bar'>
                 <td>
-                  <a class='image_feedback_button' id='1'><i class="fa fa-quora" aria-hidden="true"></i>
+                  <a class='image_feedback_button' id='1'><img src="{% static 'base_images/feedback/thumbs_up.png' %}" height=20px>
                     <div class='counter' id='1'>{{mp.feedback1}}</div>
                   </a>
                 </td>
                 <td>
-                  <a class='image_feedback_button' id='2'><i class="fa fa-meetup" aria-hidden="true"></i>
+                  <a class='image_feedback_button' id='2'><img src="{% static 'base_images/feedback/laugh_crying.png' %}" height=20px>
                     <div class='counter' id='2'>{{mp.feedback2}}</div>
                   </a>
                 </td>
                 <td>
-                  <a class='image_feedback_button' id='3'><i class="fa fa-superpowers" aria-hidden="true"></i>
+                  <a class='image_feedback_button' id='3'><img src="{% static 'base_images/feedback/heart.png' %}" height=20px>
                     <div class='counter' id='3'>{{mp.feedback3}}</div>
                   </a>
                 </td>
                 <td>
-                  <a class='image_feedback_button' id='4'><i class="fa fa-microchip" aria-hidden="true"></i>
+                  <a class='image_feedback_button' id='4'><img src="{% static 'base_images/feedback/grinning_face.png' %}" height=20px>
                     <div class='counter' id='4'>{{mp.feedback4}}</div>
                   </a>
                 </td>
                 <td>
-                  <a class='image_feedback_button' id='5'><i class="fa fa-anchor" aria-hidden="true"></i>
+                  <a class='image_feedback_button' id='5'><img src="{% static 'base_images/feedback/fire.png' %}" height=20px>
                     <div class='counter' id='5'>{{mp.feedback5}}</div>
                   </a>
                 </td>
@@ -155,6 +157,6 @@
 {% endblock %}
 {% block javascript %}
 <script src='{% static "js/feedback.js" %}'></script>
-<script src='{% static "js/deleteText.js" %}'></script> 
+<script src='{% static "js/deleteText.js" %}'></script>
 <script src='{% static "js/bin-ascii.js" %}'></script>
 {% endblock %}
