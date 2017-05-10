@@ -1,12 +1,6 @@
 //js file to report abusive users, increases report count in models, and
 //notifies an administrator.
 
-function errorMessage() {
-    $error = $('div');
-    $error.addClass('error');
-    $error.append('Something went wrong :/ Reload and try again!');
-    console.log($error);
-}
 function reportImageAbuse(e) {
     console.log("hi");
     let post_id = $(this).attr('id');
@@ -26,7 +20,7 @@ function reportImageAbuse(e) {
         },
         error: function(result) {
             $('#post_' + post_id).append("<p id='error-msg' Something went wrong, please try again!");
-            $('#error-msg').delay(1100).fadeOut();
+            $('#error-msg').hide(1100).fadeOut();
         },
     })
 }
