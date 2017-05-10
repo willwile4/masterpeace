@@ -23,7 +23,9 @@
   <div class='profile_info'>
     @<span class='username'>{{profile.user.username}}</span>
     </br>
-    <span class='bio'>{{profile.bio}}</span></br>
+    {% if profile.bio %}
+      <span class='bio'>{{profile.bio}}</span></br>
+    {% endif %}
 
     {% if user.is_authenticated and profile.user_id == user.id %}
     {% csrf_token %}
