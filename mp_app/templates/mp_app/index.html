@@ -31,7 +31,6 @@
         {% else %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
            <a href='#'><span class='report-text' user={{user.id}} id={{mp.id}} name="text_{{mp.id}}"><i class="fa fa-flag fa-lg" aria-hidden="true"></i></span></a></p>
-        {% endif %}
 
         {% if mp.allow_feedback %}
           <form name='feedbackData' id='feedbackData' method='post'>
@@ -71,6 +70,7 @@
             </table>
           </div>
         {% endif %}
+        {% endif %}
       </div>
       <!-- End text mp div -->
     {% elif mp.image %}
@@ -95,10 +95,8 @@
             <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
             <a href='#'><span class='report-image' id='{{mp.id}}' user='{{user.id}}' name="image_mp{{mp.id}}"><i class="fa fa-flag fa-lg" aria-hidden="true"></i></span></a>
           </br>
-          {% endif %}
-          </br>
           {% if mp.allow_feedback %}
-
+          </br>
             <form name='feedbackData' id='feedbackData' method='post'>
               {% csrf_token %}
               <input id='critic_id' type='text' name='critic_id' value={{user.id}} style='display:none'>
@@ -135,6 +133,7 @@
                 </td>
               </table>
             </div>
+          {% endif %}
           {% endif %}
         </div>
       </div>
