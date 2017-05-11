@@ -73,6 +73,8 @@ def profile(request, user_id):
         user = User.objects.get(id=user_id)
         return render(request, 'mp_app/create_profile.html', {'user': user})
 
+def about(request):
+    return render(request, 'mp_app/about.html')
 
 def edit_profile(request):
     user = request.user

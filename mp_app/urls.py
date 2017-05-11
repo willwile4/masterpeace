@@ -19,4 +19,5 @@ urlpatterns = [
         views.filter_image_tags, name='filter_image_tags'),
     url(r'^blob_test', views.blob_test, name='blob_test'),
     url(r'^create_image', views.create_image, name='create_image'),
+    url(r'^about', views.about, name='about'),
 ]
