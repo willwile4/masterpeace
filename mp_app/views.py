@@ -8,13 +8,14 @@ from django.contrib.auth.models import User
 from .models import (Message, UserProfile, ImageMP,
                      TextMP, ImageFeedback, TextFeedback,
                      ImageTag, TextTag, Artform, AbusiveImageReport,
-                      AbusiveTextReport)
+                     AbusiveTextReport)
 from .serializers import (UserSerializer, MessageSerializer,
                           UserProfileSerializer,
                           ImageMPSerializer, TextMPSerializer,
                           ImageFeedbackSerializer, TextFeedbackSerializer,
                           ImageTagSerializer, TextTagSerializer,
-                          ArtformSerializer, AbusiveImageReportSerializer, AbusiveTextReportSerializer)
+                          ArtformSerializer, AbusiveImageReportSerializer,
+                          AbusiveTextReportSerializer)
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.parsers import FormParser, MultiPartParser
 from django.db.models import Q
@@ -252,12 +253,14 @@ def blob_test(request):
 
 
 def create_image(request):
+    messages = Message.objects.filter(to_user_id=request.user.id, read=False)
+    u_m = len(messages)
     tag_qs = ImageTag.objects.all()
     tags = [tag for tag in tag_qs]
     af_qs = Artform.objects.all()
     artform = [af for af in af_qs]
-    return render(request, 'mp_app/create_image.html', {'tags': tags,
-                                                        'artform': artform})
+    context = {'tags': tags, 'artform': artform, 'unread_messages': u_m}
+    return render(request, 'mp_app/create_image.html', context)
 
 
 class UserViewSet(viewsets.ModelViewSet):
