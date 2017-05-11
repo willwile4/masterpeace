@@ -325,4 +325,4 @@ class AbusiveImageReportViewSet(viewsets.ModelViewSet):
 class AbusiveTextReportViewSet(viewsets.ModelViewSet):
     queryset = AbusiveTextReport.objects.all()
     serializer_class = AbusiveTextReportSerializer
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
