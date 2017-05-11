@@ -26,14 +26,12 @@
 
         {% if user.is_authenticated and mp.owner_id == user.id %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>You</a>, {{mp.created}}</p>
-          <p><span class='edit_text'><a href='/edit_text/{{mp.id}}'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
-          <a href='#'><span class='delete_text' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a>
+          <p><span class='edit_text'><a href='/edit_text/{{mp.id}}'><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a></span>
+          <a href='#'><span class='delete_text' id='{{mp.id}}'><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></span></a>
         {% else %}
           <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
-           <a href='#'><span class='report-text' id={{mp.id}} name="text_{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a></p>
+           <a href='#'><span class='report-text' id={{mp.id}} name="text_{{mp.id}}"><i class="fa fa-flag fa-lg" aria-hidden="true"></i></span></a></p>
         {% endif %}
-
-        </br></br>
 
         {% if mp.allow_feedback %}
           <form name='feedbackData' id='feedbackData' method='post'>
@@ -42,7 +40,7 @@
             <input id='masterpeace_id' type='text' name='masterpeace_id' value={{mp.id}} style='display:none'>
           </form>
           <div class='feedback'>
-            👍
+            <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>
             <!-- <img src="{% static 'base_images/feedback/feedback.png' %}" height=20px> -->
             <table class='feedback_bar'>
               <td>
@@ -91,15 +89,14 @@
 
           {% if user.is_authenticated and mp.owner_id == user.id %}
             <p>Posted by: <a href='/profile/{{mp.owner_id}}'>You</a>, {{mp.created}}</p>
-            <p><span class='edit_image'><a href='/edit_image/{{mp.id}}'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
-            <a href='#'><span class='delete_image' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a></p>
+            <p><span class='edit_image'><a href='/edit_image/{{mp.id}}'><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a></span>
+            <a href='#'><span class='delete_image' id='{{mp.id}}'><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></span></a></p>
           {% else %}
             <p>Posted by: <a href='/profile/{{mp.owner_id}}'>{{mp.owner}}</a>, {{mp.created}}</p>
-            <a href='#'><span class='report-image' id='{{mp.id}}' user='{{user.id}}' name="image_mp{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a>
+            <a href='#'><span class='report-image' id='{{mp.id}}' user='{{user.id}}' name="image_mp{{mp.id}}"><i class="fa fa-flag fa-lg" aria-hidden="true"></i></span></a>
+          </br>
           {% endif %}
-
-          </br></br>
-
+          </br>
           {% if mp.allow_feedback %}
 
             <form name='feedbackData' id='feedbackData' method='post'>
@@ -108,7 +105,7 @@
               <input id='masterpeace_id' type='text' name='masterpeace_id' value={{mp.id}} style='display:none'>
             </form>
             <div class='feedback'>
-              👍
+              <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>
               <!-- <img src="{% static 'base_images/feedback/feedback.png' %}" height=20px> -->
               <table class='feedback_bar'>
                 <td>

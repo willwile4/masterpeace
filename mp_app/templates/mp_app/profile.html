@@ -22,6 +22,15 @@
 
   <div class='profile_info'>
     @<span class='username'>{{profile.user.username}}</span>
+    {% if profile.fb_link %}
+      <a href='{{profile.fb_link}}'><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+    {% endif %}
+    {% if profile.insta_link %}
+      <a href='{{profile.fb_link}}'><i class="fa fa-instagram" aria-hidden="true"></i></a>
+    {% endif %}
+    {% if profile.twitter_link %}
+      <a href='{{profile.fb_link}}'><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+    {% endif %}
     </br>
     {% if profile.bio %}
       <span class='bio'>{{profile.bio}}</span></br>
@@ -29,7 +38,7 @@
 
     {% if user.is_authenticated and profile.user_id == user.id %}
     {% csrf_token %}
-      <span class='edit_profile'><a href='/edit_profile'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
+      <span class='edit_profile'><a href='/edit_profile'><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a></span>
     {% else %}
       {% if profile.allow_messages %}
       <a href='/messages/{{profile.user_id}}'><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a>
@@ -51,8 +60,8 @@
 
         {% if user.is_authenticated and profile.user_id == user.id %}
         <div class='edit_delete'>
-          <span class='edit_image'><a href='/edit_image/{{mp.id}}'><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
-          <a href='#'><span class='delete_image' id='{{mp.id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></span></a>
+          <span class='edit_image'><a href='/edit_image/{{mp.id}}'><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a></span>
+          <a href='#'><span class='delete_image' id='{{mp.id}}'><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></span></a>
       </div>
           {% else %}
           <a href='#'><span class='report_post' id="image_mp{{mp.id}}"><i class="fa fa-flag" aria-hidden="true"></i></span></a>
