@@ -3,16 +3,6 @@
 function createProfile(e) {
     e.preventDefault();
     var isChecked = $("#checkbox").prop("checked");
-    console.log('hi mom');
-    console.log(e);
-    var isChecked = $("#checkbox").prop("checked");
-    let filename = $('#form-image').val()
-    for(var i = 0; i < filename.length; i++) {
-        if (filename[i] === '.') {
-            fileType = filename.slice([i+1]);
-        }
-    }
-
     let $form = {
         "user": $('[name="user_id"]').val(),
         'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val(),
