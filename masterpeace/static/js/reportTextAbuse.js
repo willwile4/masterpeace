@@ -13,6 +13,7 @@ function reportTextAbuse(e) {
         url: 'api/abusive_text_report/',
         data: $form,
         success: function(result) {
+            console.log('success');
             $('#success-msg').empty();
             $('#post_'+ post_id).append('<p id="success-msg">Post Reported! Thank you!</p>');
             $('#success-msg').delay(1000).fadeOut();

@@ -1,6 +1,8 @@
 //js file to report abusive users, increases report count in models, and
 //notifies an administrator.
 
+
+//notify admin by sending a message
 function reportImageAbuse(e) {
     let post_id = $(this).attr('id');
     let reporting_user = $(this).attr('user');
