@@ -1,0 +1,29 @@
+{% extends 'mp_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block extra_head_content %}
+<link rel='stylesheet' type="text/css" href="{% static 'css/profile.css' %}"/>
+
+{% endblock %}
+{% block content %}
+{% include 'mp_app/menubar.html' %}
+
+<div class='about'>
+  <h2>Masterpeace</h2>
+  Masterpeace is a social network for artists.
+  The site mimics the art gallery experience by using a side scroll display, and fosters a collaborative and supportive environment.
+  We limit user feedback to only positive reactions, and allow artists control over how users react to their individual ‘peaces’.
+  Users also can send messages to each other and flag inappropriate content.</br>
+  We ask everyone simply do one thing: treat others like you want to be treated.</br></br>
+  Click on a dev's name to see their portfolio!
+  </br></br>
+  <div class='dev'>
+    <img class='dev_pic' src='{% static "base_images/nadz.jpg" %}'><a href='https://nmounzih.github.io'>Nadia Mounzih</a>
+    <img class='dev_pic'src='{% static "base_images/will.jpg" %}'><a href='https://willwile4.github.io'>Will Warren</a>
+    <img class='dev_pic'src='{% static "base_images/ryan.jpg" %}'><a href='https://github.com/ryan-semmler'>Ryan Semmler</a>
+    <img class='dev_pic' src='{% static "base_images/meh.jpg" %}'><a href='https://phist210.github.io'>Josh Friese</a>
+  </div>
+</div>
+
+{% endblock %}
