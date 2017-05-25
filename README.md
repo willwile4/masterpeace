@@ -24,7 +24,7 @@ Add additional notes about how to deploy this on a live system
 * [Django](http://www.djangoproject.com/) - The web framework used
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [jQuery FancyBox](http://fancybox.net/) - Used to show detail view of a gallery item
-* [Heroku](https://heroku.com) - Used to host/deply our app
+* [Heroku](https://heroku.com) - Used to host/deploy our app
 
 
 ## Privacy Policy
@@ -36,4 +36,4 @@ Please read our Privacy Policy [here](https://masterpeace.herokuapp.com/privacy_
 * **Josh Friese** - [Portfolio](https://phist210.github.io) [LinkedIn](https://www.linkedin.com/in/joshua-friese-1aa13990/)
 * **Nadia Mounzih** - [Portfolio](https://nmounzih.github.io) [LinkedIn](https://www.linkedin.com/in/nadia-mounzih-4736b1b2/)
 * **Ryan Semmler** - [Portfolio] [LinkedIn](https://www.linkedin.com/in/ryan-semmler-04770a141/)
-* **Will Warren** - [PurpleBooth](https://willwile4.github.io) [LinkedIn](https://www.linkedin.com/in/wmwarreniv/)
+* **Will Warren** - [Portfolio](https://willwile4.github.io) [LinkedIn](https://www.linkedin.com/in/wmwarreniv/)
