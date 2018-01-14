@@ -21,7 +21,13 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from django.db.models import Q
 from rest_framework.decorators import api_view
 
+# seems like we have both views and the api, we only need to use one.
 
+# don't need to set length unless using many times
+
+# we might as well just replace all this with an angluar front end.
+
+# we
 def mp_jumblr():
     '''
     Combines posts into one queryset to render on templates.
@@ -62,7 +68,7 @@ def index(request):
 def profile(request, user_id):
     if UserProfile.objects.filter(user_id=user_id).exists():
         messages = Message.objects.filter(to_user_id=request.user.id, read=False)
-        u_m = len(messages)
+        u_m = len(messages) # why set this then use once?
         user_profile = UserProfile.objects.get(user_id=user_id)
         user = User.objects.get(id=user_id)
         all_mps = mp_jumblr()
@@ -264,6 +270,8 @@ def create_image(request):
     context = {'tags': tags, 'artform': artform, 'unread_messages': u_m}
     return render(request, 'mp_app/create_image.html', context)
 
+
+# do these work? 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
