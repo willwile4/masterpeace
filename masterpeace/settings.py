@@ -146,9 +146,9 @@ WSGI_APPLICATION = 'masterpeace.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'MasterPeace',
-        'USER': '',
-        'PASSWORD': '',
+        'NAME': 'Masterpeace',
+        'USER': 'postgres',
+        'PASSWORD': 'kimchi44',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
