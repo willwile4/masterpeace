@@ -97,6 +97,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth',)
 
 INSTALLED_APPS = [
+    'corsheaders',
     "mp_app.apps.MpAppConfig",
     'django.contrib.admin',
     'django.contrib.auth',
